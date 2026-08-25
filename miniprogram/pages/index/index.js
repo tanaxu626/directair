@@ -2,7 +2,7 @@
 Page({
   data: {
     // 永久公网 HTTPS 生产地址 (支持全球任意 5G/4G 移动蜂窝网络及任何 Wi-Fi 访问)
-    directAirUrl: 'https://brendanxu.github.io/directair/'
+    directAirUrl: 'https://tanaxu626.github.io/directair/'
   },
 
   onLoad(options) {
