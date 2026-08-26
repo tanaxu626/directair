@@ -1,5 +1,5 @@
 <!-- pages/index/index.wxml -->
-<!-- 直航 DirectAir 100% 原生全交互体验版 (v1.2.0) -->
+<!-- 直航 DirectAir 100% 原生架构 · 内容重组与输入搜索结合版 (v1.3.0) -->
 <view class="container">
 
   <!-- ==================== 1. TOP BRAND NAVBAR ==================== -->
@@ -19,24 +19,24 @@
     </view>
 
     <!-- Face ID Security Badge -->
-    <view class="face-id-pill">
+    <view class="face-id-pill" bindtap="showSecurityVaultInfo">
       <text class="lock-icon">🔒</text>
-      <text class="face-id-text">Face ID 保险箱</text>
+      <text class="face-id-text">端侧隐私保险箱</text>
     </view>
   </view>
 
   <!-- ==================== VIEW A: FLIGHT SEARCH RESULTS (搜索结果列表) ==================== -->
   <view class="flight-results-view" wx:if="{{currentView === 'flight_results'}}">
     
-    <!-- Top Return & Filter Bar -->
+    <!-- Top Return & Summary Bar -->
     <view class="results-header-bar">
       <view class="back-btn" bindtap="backToHome">
         <text class="back-arrow">←</text>
-        <text class="back-text">重新搜索</text>
+        <text class="back-text">修改搜索</text>
       </view>
       <view class="route-summary">
         <text class="route-summary-text">{{originCode}} {{originCity}} ✈ {{destCode}} {{destCity}}</text>
-        <text class="route-date-summary">{{departDate}} · 共 4 个官方航班</text>
+        <text class="route-date-summary">{{departDate}} · {{tripType === 'ONE_WAY' ? '单程' : (tripType === 'ROUND_TRIP' ? '往返' : '当日往返')}} · 共 {{filteredFlights.length}} 班官方航班</text>
       </view>
     </view>
 
@@ -53,7 +53,7 @@
     <!-- Transparent Price Moat Notice -->
     <view class="transparency-notice">
       <text class="notice-icon">🛡️</text>
-      <text class="notice-text">直航承诺：100% 航司官方原价直通，机建¥50燃油¥0已全包，0捆绑保险、0加价退改！</text>
+      <text class="notice-text">直航官方承诺：100% 航司裸票价，机建¥50燃油¥0已全包，0隐形加价、0违规退改！</text>
     </view>
 
     <!-- Flight Offers Cards List -->
@@ -61,7 +61,7 @@
       <block wx:for="{{filteredFlights}}" wx:key="id">
         <view class="flight-card" bindtap="openFlightDetail" data-flight="{{item}}">
           
-          <!-- Card Top: Airline & Aircraft Model -->
+          <!-- Card Top -->
           <view class="f-card-top">
             <view class="airline-row">
               <view class="airline-badge {{item.airlineCode === 'MU' ? 'badge-mu' : (item.airlineCode === 'CA' ? 'badge-ca' : (item.airlineCode === 'CZ' ? 'badge-cz' : 'badge-hu'))}}">
@@ -73,15 +73,13 @@
             <view class="punctuality-tag">准点率 {{item.punctuality}}</view>
           </view>
 
-          <!-- Card Mid: Departure - Trajectory - Arrival -->
+          <!-- Card Mid -->
           <view class="f-card-mid">
-            <!-- Departure -->
             <view class="f-leg f-leg-left">
               <text class="f-time">{{item.depTime}}</text>
               <text class="f-airport">{{item.depAirport}} {{item.depTerminal}}</text>
             </view>
 
-            <!-- Middle Duration & Line -->
             <view class="f-mid-path">
               <text class="f-duration">{{item.duration}}</text>
               <view class="f-path-line">
@@ -94,29 +92,28 @@
               <text class="f-direct-tag">直飞</text>
             </view>
 
-            <!-- Arrival -->
             <view class="f-leg f-leg-right">
               <text class="f-time">{{item.arrTime}}</text>
               <text class="f-airport">{{item.arrAirport}} {{item.arrTerminal}}</text>
             </view>
           </view>
 
-          <!-- Card Bottom: Transparent Prices Row -->
+          <!-- Card Bottom -->
           <view class="f-card-bottom">
             <view class="price-tags-left">
               <view class="cab-pill cab-eco">
-                <text class="cab-name">经济舱</text>
+                <text class="cab-name">经济舱 (含20kg行李)</text>
                 <text class="cab-price">¥{{item.ecoPrice}}</text>
               </view>
               <view class="cab-pill cab-bus">
-                <text class="cab-name">公务舱</text>
+                <text class="cab-name">公务舱 (平躺/贵宾厅)</text>
                 <text class="cab-price">¥{{item.busPrice}}</text>
               </view>
             </view>
 
             <view class="direct-booking-cta">
               <text class="cta-price-total">¥{{item.ecoPrice + 50}}</text>
-              <text class="cta-price-note">含¥50机建</text>
+              <text class="cta-price-note">全包价</text>
               <view class="cta-btn-mini">直达订票 ></view>
             </view>
           </view>
@@ -127,13 +124,13 @@
 
   </view>
 
-  <!-- ==================== VIEW B: 4 MAIN TABS (首页 / 雷达 / 行程 / 卡包) ==================== -->
+  <!-- ==================== VIEW B: 4 MAIN TABS ==================== -->
   <view wx:if="{{currentView === 'home'}}">
 
     <!-- ---------------- TAB 1: 首页 (HOME) ---------------- -->
     <view class="tab-content" wx:if="{{activeTab === 'home'}}">
       
-      <!-- A. Compact Live Flight Countdown Capsule (Height ~72px, 0 Overflow) -->
+      <!-- A. Compact Live Flight Countdown Capsule -->
       <view class="countdown-capsule" bindtap="switchToTrips">
         <view class="capsule-inner">
           <view class="capsule-left">
@@ -168,7 +165,7 @@
         </view>
       </view>
 
-      <!-- B. DirectAir Smart Search Capsule (官网全包查票胶囊) -->
+      <!-- B. DirectAir Smart Search Capsule -->
       <view class="card search-card">
         <view class="card-header-row">
           <view class="header-left">
@@ -185,10 +182,10 @@
           <view class="seg-btn {{tripType === 'DAY_RETURN' ? 'seg-active-gold' : ''}}" bindtap="setTripType" data-type="DAY_RETURN">当日往返</view>
         </view>
 
-        <!-- City Pair Capsule (可点击选择出发/到达城市) -->
+        <!-- City Pair Capsule (点击唤起支持搜索+输入的城市选择弹窗) -->
         <view class="city-pair-box">
           <view class="city-col city-left" bindtap="openCityPicker" data-type="origin">
-            <text class="city-hint-label">出发地 (点击切换)</text>
+            <text class="city-hint-label">出发城市 (可输入/选择)</text>
             <text class="airport-code">{{originCode}}</text>
             <text class="city-name">{{originCity}} · {{originAirport}}</text>
           </view>
@@ -199,13 +196,13 @@
           </view>
 
           <view class="city-col city-right" bindtap="openCityPicker" data-type="dest">
-            <text class="city-hint-label">目的地 (点击切换)</text>
+            <text class="city-hint-label">到达城市 (可输入/选择)</text>
             <text class="airport-code">{{destCode}}</text>
             <text class="city-name">{{destCity}} · {{destAirport}}</text>
           </view>
         </view>
 
-        <!-- Date Row (带微信原生日期选择器) -->
+        <!-- Date Row -->
         <view class="date-picker-row">
           <picker class="date-picker-col" mode="date" value="{{departDate}}" start="2026-08-25" end="2027-12-31" bindchange="onDateChange">
             <view class="date-col">
@@ -228,7 +225,7 @@
           <view class="cabin-btn {{selectedCabin === 'FIRST' ? 'cabin-active' : ''}}" bindtap="selectCabin" data-cabin="FIRST">头等舱</view>
         </view>
 
-        <!-- Search CTA Button (一键进入搜索结果页) -->
+        <!-- Search CTA Button -->
         <button class="search-cta-btn" bindtap="performSearch">
           <text class="cta-icon">🔍</text>
           <text class="cta-text">查询航司官方全量报价 ({{originCode}} ✈ {{destCode}})</text>
@@ -256,7 +253,13 @@
         </view>
       </view>
 
-      <!-- D. Quick Anti-OTA Tools Strip (均可点击展开详细交互) -->
+      <!-- D. Anti-OTA Rights Quick Moat Toolkit -->
+      <view class="section-title-row">
+        <text class="sec-badge-icon">🛡️</text>
+        <text class="sec-title-text">航旅避坑与维权中心</text>
+        <text class="sec-title-sub" bindtap="switchToWallet">查看全部 5 项服务 ></text>
+      </view>
+
       <view class="quick-tools-grid">
         <view class="tool-btn" bindtap="openNameCorrectionModal">
           <view class="tool-title-row">
@@ -274,6 +277,25 @@
           <text class="tool-desc">直开航司官方延误公章</text>
         </view>
       </view>
+
+      <view class="quick-tools-grid">
+        <view class="tool-btn" bindtap="openTicketVerifierModal">
+          <view class="tool-title-row">
+            <text class="tool-icon">🔍</text>
+            <text class="tool-name">中航信客票验真</text>
+          </view>
+          <text class="tool-desc">输入 13 位票号验真伪防假票</text>
+        </view>
+
+        <view class="tool-btn" bindtap="openSpecialServicesModal">
+          <view class="tool-title-row">
+            <text class="tool-icon">♿</text>
+            <text class="tool-name">特殊旅客官方直申</text>
+          </view>
+          <text class="tool-desc">婴儿摇篮/轮椅/宠物进客舱</text>
+        </view>
+      </view>
+
     </view>
 
     <!-- ---------------- TAB 2: 愿望雷达 (WISHLIST) ---------------- -->
@@ -288,36 +310,38 @@
         </view>
         <text class="sub-hint">专治“航司次卡热门航线秒光”痛点，放票自动推送通知秒级唤起官方 App 抢兑。</text>
         
-        <button class="add-monitor-btn" bindtap="addNewMonitorRule">
+        <button class="add-monitor-btn" bindtap="openAddWishlistModal">
           <text>+ 添加新的航线监控雷达</text>
         </button>
       </view>
 
-      <!-- Active Matched Card -->
-      <view class="card matched-radar-card">
-        <view class="radar-status-badge">
-          <view class="live-dot"></view>
-          <text>监控中 · 发现 2 个可兑换座位</text>
+      <!-- Wishlist Monitored Items List -->
+      <block wx:for="{{wishlistItems}}" wx:key="id">
+        <view class="card matched-radar-card">
+          <view class="radar-status-badge">
+            <view class="live-dot"></view>
+            <text>{{item.statusText}}</text>
+          </view>
+          <view class="matched-route">
+            <text class="m-city">{{item.origin}}</text>
+            <text class="m-plane">✈</text>
+            <text class="m-city">{{item.dest}}</text>
+          </view>
+          <view class="matched-meta">
+            <text>{{item.flightInfo}} · {{item.date}}</text>
+            <text class="matched-fixed-price">{{item.priceNote}}</text>
+          </view>
+          <button class="cta-direct-app-btn" bindtap="openAirlineDirectApp" data-app="{{item.airlineApp}}">
+            一键直通{{item.airlineName}} App 抢兑
+          </button>
         </view>
-        <view class="matched-route">
-          <text class="m-city">PEK (北京首都)</text>
-          <text class="m-plane">✈</text>
-          <text class="m-city">SHA (上海虹桥)</text>
-        </view>
-        <view class="matched-meta">
-          <text>中国东航 MU5101 · 2026-10-01 08:00</text>
-          <text class="matched-fixed-price">次卡固定成本 ¥399/段</text>
-        </view>
-        <button class="cta-direct-app-btn" bindtap="openAirlineDirectApp">
-          一键直通航司官方 App 抢兑
-        </button>
-      </view>
+      </block>
     </view>
 
     <!-- ---------------- TAB 3: 我的行程 (TRIPS HUB) ---------------- -->
     <view class="tab-content" wx:if="{{activeTab === 'trips'}}">
       
-      <!-- Hero Golden VIP Boarding Pass (点击可放大条形码/电子登机牌) -->
+      <!-- Hero Golden VIP Boarding Pass -->
       <view class="golden-boarding-pass" bindtap="openBoardingPassModal">
         <view class="pass-top-row">
           <view>
@@ -330,7 +354,6 @@
           </view>
         </view>
 
-        <!-- Route Row -->
         <view class="pass-route-row">
           <view class="pass-time-col">
             <text class="pass-time">08:00</text>
@@ -355,7 +378,6 @@
           </view>
         </view>
 
-        <!-- Details Grid -->
         <view class="pass-details-grid">
           <view class="detail-box">
             <text class="d-label">登机口</text>
@@ -371,11 +393,10 @@
           </view>
           <view class="detail-box">
             <text class="d-label">客票号</text>
-            <text class="d-val font-mono">781-249...</text>
+            <text class="d-val font-mono">781-2491823901</text>
           </view>
         </view>
 
-        <!-- Barcode -->
         <view class="barcode-row">
           <view class="simulated-barcode"></view>
           <text class="barcode-number">PNR: J8KQ2M · ZHANG/SAN</text>
@@ -398,6 +419,20 @@
           </view>
           <text class="inbound-desc">前序航段【广州白云 ✈ 北京首都 MU5302】已于 06:45 提前着陆，飞机已就位停靠 C42 登机口，绝无连环延误风险。</text>
         </view>
+      </view>
+
+      <!-- Import Trip Ticket Button -->
+      <view class="card import-trip-card">
+        <view class="card-header-row">
+          <view class="header-left">
+            <text class="header-icon">➕</text>
+            <text class="card-title">导入我的新机票行程</text>
+          </view>
+          <text class="future-badge">2.0 OCR升级中</text>
+        </view>
+        <button class="import-trip-btn" bindtap="openImportTripModal">
+          <text>输入 13 位票号 / 航司短信导入</text>
+        </button>
       </view>
 
       <!-- Lifetime Stats -->
@@ -423,156 +458,288 @@
       </view>
     </view>
 
-    <!-- ---------------- TAB 4: 卡包与工具箱 (WALLET & TOOLS) ---------------- -->
+    <!-- ---------------- TAB 4: 卡包与服务工具箱 (WALLET & SERVICES) ---------------- -->
     <view class="tab-content" wx:if="{{activeTab === 'wallet'}}">
       
-      <!-- Credit Cards Vault Module -->
-      <view class="card">
-        <view class="card-header-row">
-          <view class="header-left">
-            <text class="header-icon">💳</text>
-            <text class="card-title">高端信用卡航旅权益金库</text>
-          </view>
-          <text class="verified-tag">已激活 3 张大白金</text>
-        </view>
-        <text class="sub-hint">点击卡片切换自动匹配官方免费延误险 · 贵宾厅点数管理 · 一键理赔包生成</text>
+      <!-- Sub-Tab Switcher -->
+      <view class="wallet-subtab-bar">
+        <view class="w-subtab {{walletSubTab === 'credit_cards' ? 'w-subtab-active' : ''}}" bindtap="setWalletSubTab" data-sub="credit_cards">💳 信用卡权益</view>
+        <view class="w-subtab {{walletSubTab === 'loyalty_cards' ? 'w-subtab-active' : ''}}" bindtap="setWalletSubTab" data-sub="loyalty_cards">🪪 常旅客会员</view>
+        <view class="w-subtab {{walletSubTab === 'rights_center' ? 'w-subtab-active-gold' : ''}}" bindtap="setWalletSubTab" data-sub="rights_center">🛡️ 避坑维权中心</view>
+      </view>
 
-        <!-- Horizontal Cards Deck Swiper -->
-        <scroll-view class="cards-deck-scroll" scroll-x="true">
-          <view class="deck-row">
-            <view class="cc-card {{selectedCard === 'cmb' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="cmb">
-              <view class="cc-top">
-                <text class="cc-bank">招商银行</text>
-                <text class="cc-tier">经典白</text>
+      <!-- SUBTAB 1: 信用卡权益金库 -->
+      <view wx:if="{{walletSubTab === 'credit_cards'}}">
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">💳</text>
+              <text class="card-title">高端信用卡航旅权益金库</text>
+            </view>
+            <text class="verified-tag">已激活 4 张大白金</text>
+          </view>
+          <text class="sub-hint">点击卡片切换自动匹配官方免费延误险 · 贵宾厅点数管理 · 一键理赔包生成</text>
+
+          <!-- Horizontal Cards Deck -->
+          <scroll-view class="cards-deck-scroll" scroll-x="true">
+            <view class="deck-row">
+              <view class="cc-card {{selectedCard === 'cmb' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="cmb">
+                <view class="cc-top">
+                  <text class="cc-bank">招商银行</text>
+                  <text class="cc-tier">经典白</text>
+                </view>
+                <text class="cc-name">经典白金信用卡</text>
+                <text class="cc-num">•••• 8821 (今日承保中)</text>
               </view>
-              <text class="cc-name">经典白金信用卡</text>
-              <text class="cc-num">•••• 8821 (今日承保中)</text>
-            </view>
 
-            <view class="cc-card cc-blue {{selectedCard === 'ccb' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="ccb">
-              <view class="cc-top">
-                <text class="cc-bank">建设银行</text>
-                <text class="cc-tier">大山白</text>
+              <view class="cc-card cc-blue {{selectedCard === 'ccb' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="ccb">
+                <view class="cc-top">
+                  <text class="cc-bank">建设银行</text>
+                  <text class="cc-tier">大山白</text>
+                </view>
+                <text class="cc-name">尊享白金卡</text>
+                <text class="cc-num">•••• 4902</text>
               </view>
-              <text class="cc-name">尊享白金卡</text>
-              <text class="cc-num">•••• 4902</text>
-            </view>
 
-            <view class="cc-card cc-green {{selectedCard === 'bocom' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="bocom">
-              <view class="cc-top">
-                <text class="cc-bank">交通银行</text>
-                <text class="cc-tier">白麒麟</text>
+              <view class="cc-card cc-green {{selectedCard === 'bocom' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="bocom">
+                <view class="cc-top">
+                  <text class="cc-bank">交通银行</text>
+                  <text class="cc-tier">白麒麟</text>
+                </view>
+                <text class="cc-name">标准白金卡</text>
+                <text class="cc-num">•••• 1109</text>
               </view>
-              <text class="cc-name">标准白金卡</text>
-              <text class="cc-num">•••• 1109</text>
+
+              <view class="cc-card cc-red {{selectedCard === 'boc' ? 'cc-active' : ''}}" bindtap="selectCard" data-card="boc">
+                <view class="cc-top">
+                  <text class="cc-bank">中国银行</text>
+                  <text class="cc-tier">鼎致白</text>
+                </view>
+                <text class="cc-name">长城鼎致白金卡</text>
+                <text class="cc-num">•••• 6201</text>
+              </view>
+            </view>
+          </scroll-view>
+
+          <!-- Selected Card Benefits Box -->
+          <view class="card-benefit-box">
+            <view class="benefit-header">
+              <text class="b-shield">🛡️</text>
+              <text class="b-title" wx:if="{{selectedCard === 'cmb'}}">招商银行经典白金卡 · 免费延误险</text>
+              <text class="b-title" wx:if="{{selectedCard === 'ccb'}}">建设银行大山白 · 免费延误险</text>
+              <text class="b-title" wx:if="{{selectedCard === 'bocom'}}">交通银行白麒麟 · 免费延误险</text>
+              <text class="b-title" wx:if="{{selectedCard === 'boc'}}">中国银行长城鼎致白 · 免费延误险</text>
+            </view>
+
+            <view class="b-grid" wx:if="{{selectedCard === 'cmb'}}">
+              <view class="b-item">
+                <text class="b-lbl">起延标准</text>
+                <text class="b-val gold-bright">满 3 小时定额赔 ¥600</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">年度限额</text>
+                <text class="b-val">最高赔付 ¥4,000</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">机场贵宾厅 (CIP)</text>
+                <view class="counter-row">
+                  <text class="b-val">剩余 {{loungePoints}} / 6 次</text>
+                  <view class="mini-btn-use" bindtap="useLoungePoint">-1次</view>
+                </view>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">里程兑换</text>
+                <text class="b-val">1500积分=1000东航里程</text>
+              </view>
+            </view>
+
+            <view class="b-grid" wx:if="{{selectedCard === 'ccb'}}">
+              <view class="b-item">
+                <text class="b-lbl">起延标准</text>
+                <text class="b-val gold-bright">满 4 小时最高赔 ¥1,000</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">触发条件</text>
+                <text class="b-val">持卡自动生效 (免购票)</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">贵宾厅/接送机</text>
+                <text class="b-val">5次龙腾 + 3次接送机</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">里程兑换</text>
+                <text class="b-val">综合积分兑换三大航</text>
+              </view>
+            </view>
+
+            <view class="b-grid" wx:if="{{selectedCard === 'bocom'}}">
+              <view class="b-item">
+                <text class="b-lbl">起延标准</text>
+                <text class="b-val gold-bright">满 2 小时赔付 ¥500</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">年度限额</text>
+                <text class="b-val">每年最高 ¥4,000</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">贵宾厅</text>
+                <text class="b-val">6次沃德 + 6次龙腾</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">里程比例</text>
+                <text class="b-val">18积分 = 1里程</text>
+              </view>
+            </view>
+
+            <view class="b-grid" wx:if="{{selectedCard === 'boc'}}">
+              <view class="b-item">
+                <text class="b-lbl">起延标准</text>
+                <text class="b-val gold-bright">满 2 小时定额赔 ¥300</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">满 4 小时</text>
+                <text class="b-val">定额赔付 ¥1,000</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">贵宾厅/接送机</text>
+                <text class="b-val">6次龙腾 + 2次接送机</text>
+              </view>
+              <view class="b-item">
+                <text class="b-lbl">年费政策</text>
+                <text class="b-val">年费积分可抵扣</text>
+              </view>
+            </view>
+
+            <!-- 1-Click Generate Claim Pack Button -->
+            <button class="claim-pack-btn" bindtap="generateClaimPack">
+              <text class="sparkle-icon">✨</text>
+              <text>一键生成官方延误理赔材料包 (免开延误证明)</text>
+            </button>
+
+            <view class="claim-toast" wx:if="{{claimToast}}">
+              <text>✓ 已自动为您打包【13位客票电子收据 + 航司准点验真证明】，支持一键发送至保险公司报案！</text>
             </view>
           </view>
-        </scroll-view>
 
-        <!-- Selected Card Benefits Box -->
-        <view class="card-benefit-box">
-          <view class="benefit-header">
-            <text class="b-shield">🛡️</text>
-            <text class="b-title" wx:if="{{selectedCard === 'cmb'}}">招商银行经典白金卡 · 免费延误险</text>
-            <text class="b-title" wx:if="{{selectedCard === 'ccb'}}">建设银行大山白 · 免费延误险</text>
-            <text class="b-title" wx:if="{{selectedCard === 'bocom'}}">交通银行白麒麟 · 免费延误险</text>
-          </view>
-
-          <view class="b-grid" wx:if="{{selectedCard === 'cmb'}}">
-            <view class="b-item">
-              <text class="b-lbl">起延标准</text>
-              <text class="b-val gold-bright">满 3 小时定额赔 ¥600</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">年度限额</text>
-              <text class="b-val">最高赔付 ¥4,000</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">机场贵宾厅 (CIP)</text>
-              <text class="b-val">剩余 {{loungePoints}} / 每年 6 次</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">里程兑换</text>
-              <text class="b-val">1500积分=1000东航里程</text>
-            </view>
-          </view>
-
-          <view class="b-grid" wx:if="{{selectedCard === 'ccb'}}">
-            <view class="b-item">
-              <text class="b-lbl">起延标准</text>
-              <text class="b-val gold-bright">满 4 小时最高赔 ¥1,000</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">触发条件</text>
-              <text class="b-val">持卡自动生效 (免购票)</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">贵宾厅/接送机</text>
-              <text class="b-val">5次龙腾 + 3次接送机</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">里程兑换</text>
-              <text class="b-val">综合积分兑换三大航</text>
-            </view>
-          </view>
-
-          <view class="b-grid" wx:if="{{selectedCard === 'bocom'}}">
-            <view class="b-item">
-              <text class="b-lbl">起延标准</text>
-              <text class="b-val gold-bright">满 2 小时赔付 ¥500</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">年度限额</text>
-              <text class="b-val">每年最高 ¥4,000</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">贵宾厅</text>
-              <text class="b-val">6次沃德 + 6次龙腾</text>
-            </view>
-            <view class="b-item">
-              <text class="b-lbl">里程比例</text>
-              <text class="b-val">18积分 = 1里程</text>
-            </view>
-          </view>
-
-          <!-- 1-Click Generate Claim Pack Button -->
-          <button class="claim-pack-btn" bindtap="generateClaimPack">
-            <text class="sparkle-icon">✨</text>
-            <text>一键生成官方延误理赔材料包 (免开延误证明)</text>
+          <!-- Add New Card Feature -->
+          <button class="add-new-card-btn" bindtap="showUpcomingFeature" data-title="自定义添加信用卡" data-version="2.0">
+            <text>+ 添加新卡片 (支持浦发AE白/平安大白金) <text class="future-tag">🛠️ 2.0开放</text></text>
           </button>
-
-          <view class="claim-toast" wx:if="{{claimToast}}">
-            <text>✓ 已自动为您打包【13位客票电子收据 + 航司准点验真证明】，支持一键发送至保险公司报案！</text>
-          </view>
         </view>
       </view>
 
-      <!-- Frequent Flyer Cards Deck -->
-      <view class="card">
-        <view class="card-header-row">
-          <view class="header-left">
-            <text class="header-icon">🪪</text>
-            <text class="card-title">航司常旅客会员卡包</text>
+      <!-- SUBTAB 2: 常旅客会员卡包 -->
+      <view wx:if="{{walletSubTab === 'loyalty_cards'}}">
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">🪪</text>
+              <text class="card-title">航司常旅客会员卡包</text>
+            </view>
+            <text class="verified-tag">已绑定 2 个航司</text>
           </view>
-          <text class="verified-tag">已绑定 2 个航司</text>
-        </view>
 
-        <view class="loyalty-card-item card-mu">
-          <view class="loyalty-top">
-            <text class="loyalty-airline">中国东方航空 · 东方万里行</text>
-            <text class="loyalty-tier-badge">金卡会员 (SKYTEAM ELITE PLUS)</text>
+          <view class="loyalty-card-item card-mu" bindtap="showLoyaltyCardDetail" data-airline="东航">
+            <view class="loyalty-top">
+              <text class="loyalty-airline">中国东方航空 · 东方万里行</text>
+              <text class="loyalty-tier-badge">金卡 (SKYTEAM ELITE PLUS)</text>
+            </view>
+            <text class="loyalty-balance">48,500 积分</text>
+            <text class="loyalty-num">卡号：6102 •••• •••• 4612</text>
+            <text class="loyalty-hint">享头等舱贵宾休息室 · 额外20kg行李 · 优先安检登机</text>
           </view>
-          <text class="loyalty-balance">48,500 积分</text>
-          <text class="loyalty-num">卡号：6102 •••• •••• 4612</text>
-        </view>
 
-        <view class="loyalty-card-item card-ca">
-          <view class="loyalty-top">
-            <text class="loyalty-airline">中国国际航空 · 凤凰知音</text>
-            <text class="loyalty-tier-badge">银卡会员 (STAR ALLIANCE)</text>
+          <view class="loyalty-card-item card-ca" bindtap="showLoyaltyCardDetail" data-airline="国航">
+            <view class="loyalty-top">
+              <text class="loyalty-airline">中国国际航空 · 凤凰知音</text>
+              <text class="loyalty-tier-badge">银卡 (STAR ALLIANCE)</text>
+            </view>
+            <text class="loyalty-balance">23,200 里程</text>
+            <text class="loyalty-num">卡号：9928 •••• •••• 3812</text>
+            <text class="loyalty-hint">享商务舱值机柜台 · 额外免费行李 · 优先候补</text>
           </view>
-          <text class="loyalty-balance">23,200 里程</text>
-          <text class="loyalty-num">卡号：9928 •••• •••• 3812</text>
+
+          <button class="add-new-card-btn" bindtap="showUpcomingFeature" data-title="中航信航司卡包自动同步" data-version="2.0">
+            <text>+ 同步南航/海航/厦航会员卡 <text class="future-tag">🛠️ 2.0开放</text></text>
+          </button>
+        </view>
+      </view>
+
+      <!-- SUBTAB 3: 航旅避坑与维权中心 -->
+      <view wx:if="{{walletSubTab === 'rights_center'}}">
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">🛡️</text>
+              <text class="card-title">航旅避坑与官方直通维权中心</text>
+            </view>
+            <text class="verified-tag">民航局法定义务</text>
+          </view>
+          <text class="sub-hint">直接调取航司官方标准与中航信底层指令，粉碎 OTA 中介一切隐形加价与违规退改套路！</text>
+
+          <view class="rights-tools-vertical-list">
+            
+            <!-- 1. 姓名改错计算器 -->
+            <view class="rights-tool-card" bindtap="openNameCorrectionModal">
+              <view class="rtc-header">
+                <text class="rtc-icon">📝</text>
+                <view class="rtc-title-col">
+                  <text class="rtc-title">航司姓名改错官方费率计算器</text>
+                  <text class="rtc-sub">国泰仅收 $60 / 东航南航同音错字 100% 免费修正</text>
+                </view>
+                <text class="rtc-arrow">></text>
+              </view>
+            </view>
+
+            <!-- 2. 中航信客票验真 -->
+            <view class="rights-tool-card" bindtap="openTicketVerifierModal">
+              <view class="rtc-header">
+                <text class="rtc-icon">🔍</text>
+                <view class="rtc-title-col">
+                  <text class="rtc-title">中航信 13 位客票验真工具</text>
+                  <text class="rtc-sub">直连中航信电子客票库，防范 OTA 虚假票号与盗打行程单</text>
+                </view>
+                <text class="rtc-arrow">></text>
+              </view>
+            </view>
+
+            <!-- 3. 航变 100% 无损退改证明 -->
+            <view class="rights-tool-card" bindtap="openDisruptionModal">
+              <view class="rtc-header">
+                <text class="rtc-icon">🔄</text>
+                <view class="rtc-title-col">
+                  <text class="rtc-title">航变 100% 无损退改维权指南</text>
+                  <text class="rtc-sub">延误超 15 分钟即可全额退款，直开航司官方公章证明</text>
+                </view>
+                <text class="rtc-arrow">></text>
+              </view>
+            </view>
+
+            <!-- 4. 特殊旅客官方直申 -->
+            <view class="rights-tool-card" bindtap="openSpecialServicesModal">
+              <view class="rtc-header">
+                <text class="rtc-icon">♿</text>
+                <view class="rtc-title-col">
+                  <text class="rtc-title">特殊旅客官方直申通道</text>
+                  <text class="rtc-sub">婴儿摇篮、无成人陪伴儿童、轮椅出行、宠物进客舱直通</text>
+                </view>
+                <text class="rtc-arrow">></text>
+              </view>
+            </view>
+
+            <!-- 5. 退改阶梯费率对照 -->
+            <view class="rights-tool-card" bindtap="showRefundLadderModal">
+              <view class="rtc-header">
+                <text class="rtc-icon">⚖️</text>
+                <view class="rtc-title-col">
+                  <text class="rtc-title">航司官方退改费率阶梯标准表</text>
+                  <text class="rtc-sub">对齐民航局 4 级阶梯退改标准，杜绝 OTA 违规截留退票费</text>
+                </view>
+                <text class="rtc-arrow">></text>
+              </view>
+            </view>
+
+          </view>
         </view>
       </view>
 
@@ -580,29 +747,51 @@
 
   </view>
 
-  <!-- ==================== 5. CITY / AIRPORT PICKER MODAL (城市选择器弹窗) ==================== -->
+  <!-- ==================== 5. SEARCHABLE CITY / AIRPORT PICKER MODAL (支持自由搜索输入与快速点选) ==================== -->
   <view class="modal-mask" wx:if="{{showCityModal}}" bindtap="closeCityModal">
-    <view class="modal-sheet" catchtap="preventDumb">
+    <view class="modal-sheet modal-city-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
-        <text class="modal-sheet-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}机场 / 城市</text>
+        <text class="modal-sheet-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}城市 / 机场</text>
         <view class="modal-close-btn" bindtap="closeCityModal">✕</view>
       </view>
 
-      <view class="city-grid-section">
-        <text class="city-group-title">🔥 热门商务大都会枢纽</text>
-        <view class="city-pills-grid">
-          <block wx:for="{{cityList}}" wx:key="code">
-            <view class="city-pill {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'city-pill-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
-              <text class="cp-code">{{item.code}}</text>
-              <text class="cp-name">{{item.city}} · {{item.airport}}</text>
-            </view>
-          </block>
-        </view>
+      <!-- Search Input Box (支持输入搜索) -->
+      <view class="city-search-box">
+        <text class="cs-icon">🔍</text>
+        <input class="cs-input" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA / 成都)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{showCityModal}}" confirm-type="search" />
       </view>
+
+      <!-- Scrollable Cities List -->
+      <scroll-view class="city-list-scroll" scroll-y="true">
+        <view class="city-grid-section">
+          <view class="city-section-header">
+            <text class="city-group-title">{{citySearchQuery ? '🎯 搜索匹配机场' : '🔥 热门商务大都会枢纽'}}</text>
+            <text class="city-count-hint">共 {{filteredCityList.length}} 个可用航点</text>
+          </view>
+          
+          <view class="city-pills-grid">
+            <block wx:for="{{filteredCityList}}" wx:key="code">
+              <view class="city-pill {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'city-pill-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
+                <view class="cp-top">
+                  <text class="cp-code">{{item.code}}</text>
+                  <text class="cp-city">{{item.city}}</text>
+                </view>
+                <text class="cp-airport">{{item.airport}}</text>
+              </view>
+            </block>
+          </view>
+
+          <!-- Custom Query Fallback -->
+          <view class="custom-query-box" wx:if="{{citySearchQuery && filteredCityList.length === 0}}" bindtap="applyCustomSearchCity">
+            <text class="cq-text">直接使用输入：“{{citySearchQuery}}”</text>
+            <text class="cq-btn">确定应用 ></text>
+          </view>
+        </view>
+      </scroll-view>
     </view>
   </view>
 
-  <!-- ==================== 6. FLIGHT DETAIL MODAL (航班退改与舱位明细) ==================== -->
+  <!-- ==================== 6. FLIGHT DETAIL MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showFlightModal}}" bindtap="closeFlightModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -614,7 +803,6 @@
       </view>
 
       <view class="flight-detail-body">
-        <!-- Schedule Box -->
         <view class="modal-schedule-box">
           <view class="ms-col">
             <text class="ms-time">{{selectedFlight.depTime}}</text>
@@ -630,7 +818,6 @@
           </view>
         </view>
 
-        <!-- Baggage & Meal -->
         <view class="modal-section">
           <text class="sec-title">🧳 免费行李额与客舱服务</text>
           <view class="sec-box">
@@ -640,7 +827,6 @@
           </view>
         </view>
 
-        <!-- Official Transparent Pricing Table -->
         <view class="modal-section">
           <text class="sec-title">💰 航司官方全透明报价 (0隐形收费)</text>
           <view class="price-breakdown-box">
@@ -663,17 +849,6 @@
           </view>
         </view>
 
-        <!-- Refund Policy Notice -->
-        <view class="modal-section">
-          <text class="sec-title">🔄 退改签规则 (遵循中国民航局官方标准)</text>
-          <view class="sec-box">
-            <text class="sec-item">• 起飞前 7 天以上：免费自愿改签 / 退票费 5%</text>
-            <text class="sec-item">• 起飞前 7 天至 4 小时：改签 10% / 退票 20%</text>
-            <text class="sec-item">• 发生延误超 15 分钟：享 100% 官方全额无损退款！</text>
-          </view>
-        </view>
-
-        <!-- Handoff Action -->
         <button class="handoff-cta-btn" bindtap="handleOfficialBooking">
           一键直达航司官方直营渠道出票 (¥{{selectedFlight.ecoPrice + 50}})
         </button>
@@ -681,7 +856,7 @@
     </view>
   </view>
 
-  <!-- ==================== 7. NAME CORRECTION CALCULATOR MODAL (姓名改错计算器) ==================== -->
+  <!-- ==================== 7. NAME CORRECTION CALCULATOR MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showNameCorrectionModal}}" bindtap="closeNameCorrectionModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -693,7 +868,6 @@
       </view>
 
       <view class="modal-body-scroll">
-        <!-- Airline Selector Tabs -->
         <view class="airline-switch-grid">
           <view class="as-btn {{correctionAirline === 'CX' ? 'as-active' : ''}}" bindtap="selectCorrectionAirline" data-code="CX">国泰航空</view>
           <view class="as-btn {{correctionAirline === 'MU' ? 'as-active' : ''}}" bindtap="selectCorrectionAirline" data-code="MU">中国东航</view>
@@ -729,7 +903,7 @@
     </view>
   </view>
 
-  <!-- ==================== 8. FLIGHT DISRUPTION REFUND MODAL (航变无损退改) ==================== -->
+  <!-- ==================== 8. FLIGHT DISRUPTION REFUND MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showDisruptionModal}}" bindtap="closeDisruptionModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -753,11 +927,105 @@
     </view>
   </view>
 
-  <!-- ==================== 9. BOARDING PASS ENLARGED MODAL (电子登机牌大图) ==================== -->
+  <!-- ==================== 9. TICKET VERIFIER MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showTicketVerifierModal}}" bindtap="closeTicketVerifierModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">🔍 中航信 13 位电子客票验真</text>
+          <text class="modal-sheet-sub">直连中航信电子客票库，杜绝假行程单与幽灵票</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeTicketVerifierModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        <view class="ticket-input-box">
+          <text class="tib-lbl">电子客票号 (13位)</text>
+          <input class="tib-input" type="number" placeholder="例如：781-2491823901 (东航)" value="{{verifyTicketNo}}" bindinput="onTicketNoInput" />
+        </view>
+
+        <button class="verify-action-btn" bindtap="handleVerifyTicket">
+          立即验真
+        </button>
+
+        <view class="verify-result-box" wx:if="{{verifyResult}}">
+          <text class="vr-title">✓ 客票状态：中航信官方已开票 (OK)</text>
+          <text class="vr-desc">承运航司：中国东方航空 · 舱位：J 舱 (公务舱)</text>
+          <text class="vr-desc">行程：北京首都 PEK ✈ 上海虹桥 SHA · MU5101</text>
+          <text class="vr-safe-tag">100% 官方正规客票，绝非加价中介票！</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 10. SPECIAL SERVICES MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showSpecialServicesModal}}" bindtap="closeSpecialServicesModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">♿ 特殊旅客官方直申指南</text>
+          <text class="modal-sheet-sub">跳过中介代办收费，航司官方通道 100% 免费申请</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeSpecialServicesModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        <view class="special-service-item">
+          <text class="ss-title">👶 婴儿摇篮 / 婴儿餐 (免费)</text>
+          <text class="ss-desc">起飞前 48 小时拨打航司官方电话或在官方 App 直申，免费安排第一排大空间婴儿摇篮位。</text>
+        </view>
+
+        <view class="special-service-item">
+          <text class="ss-title">🧑‍🦽 轮椅旅客出行保障 (免费)</text>
+          <text class="ss-desc">支持机舱客梯轮椅与窄体登机轮椅全程陪护，安检走专用 CIP 绿色通道。</text>
+        </view>
+
+        <view class="special-service-item">
+          <text class="ss-title">🐕 宠物进客舱 (官方合规申请)</text>
+          <text class="ss-desc">海航、川航支持符合尺寸的小型犬猫随同进入客舱，官方收费仅 ¥1399/只，需起飞前 24h 申请。</text>
+        </view>
+
+        <button class="confirm-modal-btn" bindtap="closeSpecialServicesModal">我知道了</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 11. ADD WISHLIST RADAR MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showAddWishlistModal}}" bindtap="closeAddWishlistModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <text class="modal-sheet-title">✨ 添加新的 24h 放票监控雷达</text>
+        <view class="modal-close-btn" bindtap="closeAddWishlistModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        <view class="add-wish-box">
+          <text class="aw-lbl">选择监控航线</text>
+          <view class="aw-route-pills">
+            <view class="aw-pill {{selectedNewRoute === 'PEK_SHA' ? 'aw-pill-active' : ''}}" bindtap="selectNewRoute" data-route="PEK_SHA">北京 ⇄ 上海</view>
+            <view class="aw-pill {{selectedNewRoute === 'SZX_PEK' ? 'aw-pill-active' : ''}}" bindtap="selectNewRoute" data-route="SZX_PEK">深圳 ⇄ 北京</view>
+            <view class="aw-pill {{selectedNewRoute === 'CAN_SHA' ? 'aw-pill-active' : ''}}" bindtap="selectNewRoute" data-route="CAN_SHA">广州 ⇄ 上海</view>
+          </view>
+
+          <text class="aw-lbl">监控模式</text>
+          <view class="aw-route-pills">
+            <view class="aw-pill {{selectedNewMode === 'PASS' ? 'aw-pill-active' : ''}}" bindtap="selectNewMode" data-mode="PASS">次卡/随心飞放票</view>
+            <view class="aw-pill {{selectedNewMode === 'PRICE' ? 'aw-pill-active' : ''}}" bindtap="selectNewMode" data-mode="PRICE">低价拦截</view>
+          </view>
+        </view>
+
+        <button class="handoff-cta-btn" bindtap="confirmAddWishlist">
+          立即开启 24h 毫秒级雷达监控
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 12. BOARDING PASS ENLARGED MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showBoardingPassModal}}" bindtap="closeBoardingPassModal">
     <view class="modal-sheet modal-pass-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
-        <text class="modal-sheet-title">🎫 官方电子登机牌 (VIP通行)</text>
+        <text class="modal-sheet-title">🎫 官方电子登机牌 (VIP快速安检)</text>
         <view class="modal-close-btn" bindtap="closeBoardingPassModal">✕</view>
       </view>
 
@@ -788,7 +1056,7 @@
     </view>
   </view>
 
-  <!-- ==================== 10. FIXED BOTTOM TAB BAR (4-TAB SWITCHER) ==================== -->
+  <!-- ==================== 13. FIXED BOTTOM TAB BAR ==================== -->
   <view class="bottom-tab-bar" wx:if="{{currentView === 'home'}}">
     <view class="tab-item {{activeTab === 'home' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="home">
       <text class="tab-icon">🏠</text>
@@ -807,7 +1075,7 @@
 
     <view class="tab-item {{activeTab === 'wallet' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="wallet">
       <text class="tab-icon">🪪</text>
-      <text class="tab-label">卡包与工具</text>
+      <text class="tab-label">卡包与维权</text>
     </view>
   </view>
 
