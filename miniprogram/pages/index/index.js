@@ -500,6 +500,52 @@ const MOCK_FLIGHT_LIST = [
   }
 ];
 
+// 全国各大主流航空公司微信官方小程序 AppID 路由注册表
+const AIRLINE_MINIPROGRAMS = {
+  'MU': {
+    name: '中国东方航空',
+    appId: 'wxa13efcae54dfb141', // 中国东航官方微信小程序
+    hotline: '95530',
+    path: 'pages/index/index'
+  },
+  'CA': {
+    name: '中国国际航空',
+    appId: 'wx233481ec57171d3e', // 中国国航官方微信小程序
+    hotline: '95583',
+    path: 'pages/index/index'
+  },
+  'CZ': {
+    name: '中国南方航空',
+    appId: 'wx04c356b7bb88f343', // 南方航空官方微信小程序
+    hotline: '95539',
+    path: 'pages/index/index'
+  },
+  'HU': {
+    name: '海南航空',
+    appId: 'wx16bb1c251410884d', // 海南航空官方微信小程序
+    hotline: '95339',
+    path: 'pages/index/index'
+  },
+  'HO': {
+    name: '吉祥航空',
+    appId: 'wxb850a7f1a30faad9', // 吉祥航空官方小程序
+    hotline: '95520',
+    path: 'pages/index/index'
+  },
+  '9C': {
+    name: '春秋航空',
+    appId: 'wxdd7333bfec9bf156', // 春秋航空官方小程序
+    hotline: '95524',
+    path: 'pages/index/index'
+  },
+  'UMETRIP': {
+    name: '航旅纵横',
+    appId: 'wxaae3c4284d720b08', // 航旅纵横官方小程序
+    hotline: '400-811-2308',
+    path: 'pages/index/index'
+  }
+};
+
 Page({
   data: {
     // Navigation Views
@@ -927,12 +973,76 @@ Page({
   },
 
   handleOfficialBooking() {
+    const flight = this.data.selectedFlight;
     this.closeFlightModal();
+    const airlineConfig = AIRLINE_MINIPROGRAMS[flight.airlineCode] || AIRLINE_MINIPROGRAMS['MU'];
+    
     wx.showModal({
-      title: '航司官方通道出票',
-      content: `已为您直通【${this.data.selectedFlight.airlineName}】官方直营渠道，本次购票享 100% 官方电子客票与退改保障，0 任何中介捆绑！`,
-      showCancel: false,
-      confirmText: '完成官方直通'
+      title: `直通【${airlineConfig.name}】官方出票`,
+      content: `即将通过微信安全通道唤起【${airlineConfig.name}】官方小程序。\n\n享受 100% 航司直营裸票价与官方退改保障，0 中介加价与套路！\n\n航司官方服务专线：${airlineConfig.hotline}`,
+      confirmText: '立即直通航司',
+      cancelText: '返回',
+      confirmColor: '#2563EB',
+      success: (res) => {
+        if (res.confirm) {
+          wx.navigateToMiniProgram({
+            appId: airlineConfig.appId,
+            path: airlineConfig.path,
+            extraData: {
+              from: 'DirectAir',
+              dep: this.data.originCode,
+              arr: this.data.destCode,
+              date: this.data.departDate,
+              flightNo: flight.flightNo
+            },
+            envVersion: 'release',
+            success(navRes) {
+              console.log('成功直通航司小程序', navRes);
+            },
+            fail(err) {
+              console.log('跳转取消或环境受限', err);
+              wx.showModal({
+                title: `${airlineConfig.name}官方直通保障`,
+                content: `您已复制航班号【${flight.flightNo}】！可直接在微信中搜索打开【${airlineConfig.name}】小程序或拨打官方服务专线 ${airlineConfig.hotline}，官方全包价 ¥${flight.ecoPrice + 50} 即可完成出票。`,
+                showCancel: true,
+                cancelText: '知道了',
+                confirmText: '复制官方热线',
+                success: (r) => {
+                  if (r.confirm) {
+                    wx.setClipboardData({ data: airlineConfig.hotline });
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+    });
+  },
+
+  openAirlineDirectApp(e) {
+    const app = e.currentTarget.dataset.app || 'ceair';
+    const appCode = (app === 'ceair' ? 'MU' : (app === 'airchina' ? 'CA' : 'CZ'));
+    const airlineConfig = AIRLINE_MINIPROGRAMS[appCode] || AIRLINE_MINIPROGRAMS['MU'];
+    
+    wx.showModal({
+      title: `⚡ 直通【${airlineConfig.name}】放票抢兑`,
+      content: `雷达已为您捕获可兑换放票席位！即将跳转【${airlineConfig.name}】官方微信小程序进行随心飞/次卡/特价票抢兑。\n\n官方服务热线：${airlineConfig.hotline}`,
+      confirmText: '立即直通抢兑',
+      cancelText: '稍后',
+      confirmColor: '#059669',
+      success: (res) => {
+        if (res.confirm) {
+          wx.navigateToMiniProgram({
+            appId: airlineConfig.appId,
+            path: airlineConfig.path,
+            envVersion: 'release',
+            fail(err) {
+              wx.showToast({ title: `已复制 ${airlineConfig.name} 抢兑指令`, icon: 'none' });
+            }
+          });
+        }
+      }
     });
   },
 
