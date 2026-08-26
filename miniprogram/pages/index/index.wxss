@@ -1,9 +1,10 @@
 /** pages/index/index.wxss **/
-/* DirectAir Champagne Obsidian Luxury Style (100% Native v1.38 - 中式高端商务微调版) */
+/* DirectAir Morning Sky Azure & Pearlescent White Style (100% Native v1.39 - 航旅晨曦天青国内主流版) */
 
 page {
-  background-color: #0A0D14;
-  color: #F8FAFC;
+  background: linear-gradient(180deg, #EBF3FC 0%, #F1F5F9 100%);
+  background-attachment: fixed;
+  color: #0F172A;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
   padding-bottom: 160rpx;
 }
@@ -20,7 +21,7 @@ page {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0A0D14;
+  background: linear-gradient(180deg, #EBF3FC 0%, #F8FAFC 100%);
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -38,9 +39,9 @@ page {
 .top-spotlight-bar {
   display: flex;
   flex-direction: column;
-  background: #0A0D14;
+  background: transparent;
   padding-bottom: 16rpx;
-  border-bottom: 1px solid rgba(229, 184, 105, 0.12);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.6);
   flex-shrink: 0;
 }
 
@@ -54,14 +55,15 @@ page {
 .fs-back-btn {
   display: flex;
   align-items: center;
-  background: #141A26;
-  padding: 8rpx 18rpx;
+  background: #FFFFFF;
+  padding: 8rpx 20rpx;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.04);
 }
 
 .fs-back-arrow {
-  color: #E5B869;
+  color: #2563EB;
   font-size: 28rpx;
   margin-right: 6rpx;
 }
@@ -69,19 +71,19 @@ page {
 .fs-back-text {
   font-size: 22rpx;
   font-weight: 700;
-  color: #F8FAFC;
+  color: #1E293B;
 }
 
 .fs-nav-title {
   font-size: 28rpx;
   font-weight: 900;
-  color: #E5B869;
+  color: #1E40AF;
   letter-spacing: 1rpx;
 }
 
 .fs-cancel-text {
   font-size: 24rpx;
-  color: #38BDF8;
+  color: #2563EB;
   font-weight: 800;
   padding: 8rpx 16rpx;
 }
@@ -89,23 +91,23 @@ page {
 .fs-search-box-top {
   display: flex;
   align-items: center;
-  background: #131824;
-  border: 1.5px solid #E5B869;
+  background: #FFFFFF;
+  border: 1.5px solid #2563EB;
   border-radius: 24rpx;
   padding: 16rpx 24rpx;
-  box-shadow: 0 8rpx 24rpx rgba(229, 184, 105, 0.18);
+  box-shadow: 0 8rpx 24rpx rgba(37, 99, 235, 0.12);
 }
 
 .fs-search-icon {
   font-size: 28rpx;
-  color: #E5B869;
+  color: #2563EB;
   margin-right: 14rpx;
 }
 
 .fs-input-top {
   flex: 1;
   font-size: 28rpx;
-  color: #FFFFFF;
+  color: #0F172A;
   height: 52rpx;
 }
 
@@ -113,8 +115,8 @@ page {
   width: 44rpx;
   height: 44rpx;
   border-radius: 50%;
-  background: #1E2638;
-  color: #94A3B8;
+  background: #E2E8F0;
+  color: #64748B;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,7 +146,7 @@ page {
 .top-group-label {
   font-size: 24rpx;
   font-weight: 800;
-  color: #38BDF8;
+  color: #1E40AF;
 }
 
 .top-hint-label {
@@ -159,23 +161,23 @@ page {
 }
 
 .top-match-row {
-  background: #131824;
-  border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 18rpx 22rpx;
+  background: #FFFFFF;
+  border-radius: 22rpx;
+  border: 1px solid #E2E8F0;
+  padding: 20rpx 24rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4rpx 14rpx rgba(15, 23, 42, 0.04);
 }
 
 .tm-badge {
   width: 80rpx;
   height: 80rpx;
   border-radius: 20rpx;
-  background: linear-gradient(135deg, #1C2333, #131824);
-  border: 1px solid rgba(229, 184, 105, 0.35);
-  color: #E5B869;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
   font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
@@ -197,58 +199,60 @@ page {
 }
 
 .tm-city {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #0F172A;
   margin-right: 12rpx;
 }
 
 .tm-airport {
   font-size: 22rpx;
   font-weight: 700;
-  color: #CBD5E1;
+  color: #475569;
 }
 
 .tm-note {
-  font-size: 18rpx;
-  color: #94A3B8;
+  font-size: 19rpx;
+  color: #64748B;
   margin-top: 4rpx;
 }
 
 .tm-cta {
-  background: #0284C7;
+  background: #2563EB;
   color: #FFFFFF;
-  font-size: 20rpx;
+  font-size: 22rpx;
   font-weight: 800;
-  padding: 10rpx 20rpx;
+  padding: 12rpx 22rpx;
   border-radius: 16rpx;
   margin-left: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(37, 99, 235, 0.25);
 }
 
 .tm-cta-gold {
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #D97706, #B45309);
+  color: #FFFFFF;
 }
 
 /* ==================== NO-AIRPORT NEARBY TRANSIT STYLES ==================== */
 .no-airport-transit-box {
   display: flex;
   flex-direction: column;
-  gap: 18rpx;
+  gap: 20rpx;
   animation: fadeIn 0.2s ease-in-out;
 }
 
 .transit-banner-header {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(229, 184, 105, 0.2), #131824);
-  border: 1.5px solid rgba(229, 184, 105, 0.45);
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  border: 1.5px solid #93C5FD;
   border-radius: 24rpx;
-  padding: 20rpx 24rpx;
+  padding: 22rpx 24rpx;
+  box-shadow: 0 6rpx 18rpx rgba(37, 99, 235, 0.08);
 }
 
 .transit-icon-badge {
-  font-size: 38rpx;
+  font-size: 40rpx;
   margin-right: 18rpx;
 }
 
@@ -261,43 +265,44 @@ page {
 .transit-main-title {
   font-size: 26rpx;
   font-weight: 900;
-  color: #FEF3C7;
+  color: #1E3A8A;
 }
 
 .transit-sub-title {
-  font-size: 20rpx;
-  color: #E5B869;
+  font-size: 21rpx;
+  color: #2563EB;
   font-weight: 700;
   margin-top: 4rpx;
 }
 
 .transit-reason-card {
-  background: #131824;
-  border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 18rpx 22rpx;
+  background: #FFFFFF;
+  border-radius: 22rpx;
+  border: 1px solid #E2E8F0;
+  padding: 20rpx 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.03);
 }
 
 .tr-reason-text {
   font-size: 22rpx;
-  color: #CBD5E1;
-  line-height: 1.5;
+  color: #334155;
+  line-height: 1.55;
 }
 
 .nearby-hubs-list {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
+  gap: 22rpx;
 }
 
 .nearby-hub-card-rich {
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 28rpx;
-  border: 1.5px solid rgba(229, 184, 105, 0.35);
+  border: 1.5px solid #BFDBFE;
   padding: 24rpx;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8rpx 24rpx rgba(15, 23, 42, 0.06);
   position: relative;
 }
 
@@ -307,15 +312,15 @@ page {
   justify-content: space-between;
   margin-bottom: 16rpx;
   padding-bottom: 12rpx;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid #F1F5F9;
 }
 
 .nhr-tag-badge {
   font-size: 20rpx;
   font-weight: 900;
-  color: #FEF3C7;
-  background: linear-gradient(90deg, rgba(229, 184, 105, 0.35), rgba(200, 155, 60, 0.15));
-  border: 1px solid rgba(229, 184, 105, 0.5);
+  color: #92400E;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
   padding: 4rpx 14rpx;
   border-radius: 14rpx;
 }
@@ -323,7 +328,7 @@ page {
 .nhr-score {
   font-size: 20rpx;
   font-weight: 800;
-  color: #34D399;
+  color: #059669;
 }
 
 .nhr-main-row {
@@ -337,9 +342,9 @@ page {
   width: 84rpx;
   height: 84rpx;
   border-radius: 22rpx;
-  background: linear-gradient(135deg, #1C2333, #131824);
-  border: 1px solid rgba(229, 184, 105, 0.4);
-  color: #E5B869;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
   font-size: 30rpx;
   font-weight: 900;
   font-family: monospace;
@@ -361,41 +366,41 @@ page {
 }
 
 .nh-city {
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #0F172A;
   margin-right: 12rpx;
 }
 
 .nh-port {
   font-size: 24rpx;
   font-weight: 700;
-  color: #E5B869;
+  color: #2563EB;
 }
 
 .nh-dist-badge {
   font-size: 20rpx;
   font-weight: 700;
-  color: #94A3B8;
+  color: #64748B;
   margin-top: 4rpx;
 }
 
 .nh-cta-btn {
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-size: 22rpx;
-  font-weight: 900;
+  font-weight: 800;
   padding: 14rpx 24rpx;
   border-radius: 20rpx;
   margin-left: 12rpx;
-  box-shadow: 0 4rpx 14rpx rgba(229, 184, 105, 0.3);
+  box-shadow: 0 6rpx 16rpx rgba(37, 99, 235, 0.3);
 }
 
 .nhr-specs-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 16rpx 20rpx;
+  border: 1px solid #E2E8F0;
+  padding: 18rpx 20rpx;
   display: flex;
   flex-direction: column;
   gap: 12rpx;
@@ -404,9 +409,9 @@ page {
 .nhr-spec-item {
   display: flex;
   align-items: flex-start;
-  font-size: 20rpx;
-  line-height: 1.45;
-  color: #CBD5E1;
+  font-size: 21rpx;
+  line-height: 1.5;
+  color: #334155;
 }
 
 .nhr-spec-icon {
@@ -421,25 +426,25 @@ page {
 
 .spec-strong {
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .nhr-spec-highlight {
-  background: rgba(6, 78, 59, 0.4);
-  border-radius: 12rpx;
-  padding: 10rpx 14rpx;
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #6EE7B7;
+  background: #ECFDF5;
+  border-radius: 14rpx;
+  padding: 12rpx 16rpx;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
 }
 
 .nhr-spec-highlight .spec-strong {
-  color: #34D399;
+  color: #047857;
 }
 
 .top-custom-row {
-  background: #131824;
-  border: 1.5px dashed #E5B869;
-  border-radius: 20rpx;
+  background: #FFFFFF;
+  border: 1.5px dashed #2563EB;
+  border-radius: 22rpx;
   padding: 24rpx;
   display: flex;
   align-items: center;
@@ -461,13 +466,13 @@ page {
 .top-block-title {
   font-size: 24rpx;
   font-weight: 800;
-  color: #E5B869;
+  color: #1E40AF;
   margin-bottom: 14rpx;
   display: block;
 }
 
 .top-block-sub {
-  font-size: 18rpx;
+  font-size: 19rpx;
   color: #64748B;
 }
 
@@ -480,27 +485,28 @@ page {
 .top-pill-loc {
   display: flex;
   align-items: center;
-  background: rgba(6, 78, 59, 0.7);
-  border: 1px solid rgba(16, 185, 129, 0.5);
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
   border-radius: 20rpx;
-  padding: 12rpx 20rpx;
+  padding: 12rpx 22rpx;
 }
 
-.loc-dot { color: #34D399; font-size: 20rpx; margin-right: 6rpx; }
-.loc-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 8rpx; }
-.loc-name { font-size: 22rpx; font-weight: 700; color: #FFFFFF; }
+.loc-dot { color: #059669; font-size: 20rpx; margin-right: 6rpx; }
+.loc-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #047857; margin-right: 8rpx; }
+.loc-name { font-size: 22rpx; font-weight: 700; color: #065F46; }
 
 .top-pill-hist {
   display: flex;
   align-items: baseline;
-  background: #141A26;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 18rpx;
-  padding: 12rpx 18rpx;
+  padding: 12rpx 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.04);
 }
 
-.hist-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #E5B869; margin-right: 6rpx; }
-.hist-name { font-size: 22rpx; color: #CBD5E1; }
+.hist-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #2563EB; margin-right: 6rpx; }
+.hist-name { font-size: 22rpx; color: #334155; }
 
 .top-grid-3col {
   display: grid;
@@ -509,41 +515,41 @@ page {
 }
 
 .top-hub-pill {
-  background: #131824;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20rpx;
-  padding: 18rpx 14rpx;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 22rpx;
+  padding: 20rpx 14rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.04);
 }
 
 .top-hub-active {
-  background: #0284C7;
-  border-color: #38BDF8;
+  background: #EFF6FF;
+  border: 1.5px solid #2563EB;
 }
 
 .thp-code {
   font-size: 30rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #E5B869;
+  color: #1D4ED8;
 }
 
-.top-hub-active .thp-code { color: #FFFFFF; }
+.top-hub-active .thp-code { color: #1E40AF; }
 
 .thp-city {
   font-size: 24rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
   margin-top: 4rpx;
 }
 
 .thp-port {
-  font-size: 16rpx;
-  color: #94A3B8;
+  font-size: 17rpx;
+  color: #64748B;
   margin-top: 4rpx;
   white-space: nowrap;
   overflow: hidden;
@@ -551,7 +557,7 @@ page {
   max-width: 100%;
 }
 
-.top-hub-active .thp-port { color: #E0F2FE; }
+.top-hub-active .thp-port { color: #2563EB; }
 
 /* ==================== 2. BRAND BAR & GENERAL STYLES ==================== */
 .brand-bar {
@@ -567,11 +573,11 @@ page {
 }
 
 .gold-wing-icon {
-  width: 56rpx;
-  height: 56rpx;
-  border-radius: 16rpx;
-  background: linear-gradient(135deg, rgba(229, 184, 105, 0.25), rgba(200, 155, 60, 0.08));
-  border: 1px solid rgba(229, 184, 105, 0.45);
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(135deg, #1E40AF, #2563EB);
+  box-shadow: 0 4rpx 12rpx rgba(37, 99, 235, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -579,7 +585,7 @@ page {
 }
 
 .wing-glyph {
-  color: #E5B869;
+  color: #FFFFFF;
   font-size: 32rpx;
   transform: rotate(45deg);
 }
@@ -595,9 +601,9 @@ page {
 }
 
 .brand-zh {
-  font-size: 34rpx;
+  font-size: 36rpx;
   font-weight: 900;
-  color: #E5B869;
+  color: #0F172A;
   margin-right: 8rpx;
   letter-spacing: 2rpx;
 }
@@ -605,33 +611,35 @@ page {
 .brand-en {
   font-size: 30rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #1E40AF;
   letter-spacing: 1rpx;
 }
 
 .brand-badge {
   font-size: 18rpx;
   font-weight: 900;
-  color: #1A1000;
-  background: linear-gradient(135deg, #FDE68A, #E5B869);
-  padding: 2rpx 10rpx;
+  color: #92400E;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  padding: 2rpx 12rpx;
   border-radius: 20rpx;
   margin-left: 10rpx;
 }
 
 .brand-sub {
-  font-size: 18rpx;
-  color: #94A3B8;
+  font-size: 19rpx;
+  color: #64748B;
   margin-top: 2rpx;
 }
 
 .face-id-pill {
   display: flex;
   align-items: center;
-  padding: 8rpx 18rpx;
+  padding: 10rpx 20rpx;
   border-radius: 30rpx;
-  background: #131824;
-  border: 1px solid rgba(229, 184, 105, 0.25);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.04);
 }
 
 .lock-icon {
@@ -642,17 +650,17 @@ page {
 .face-id-text {
   font-size: 20rpx;
   font-weight: 700;
-  color: #CBD5E1;
+  color: #1E293B;
 }
 
 /* 3. Common Card Style */
 .card {
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 32rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 28rpx;
   margin-bottom: 24rpx;
-  box-shadow: 0 16rpx 36rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10rpx 30rpx rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
 }
 
@@ -676,15 +684,15 @@ page {
 .card-title {
   font-size: 28rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .verified-tag {
   font-size: 20rpx;
   font-weight: 700;
-  color: #34D399;
-  background: rgba(6, 78, 59, 0.6);
-  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #047857;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
   padding: 4rpx 14rpx;
   border-radius: 20rpx;
 }
@@ -692,16 +700,16 @@ page {
 .future-badge {
   font-size: 18rpx;
   font-weight: 700;
-  color: #FBBF24;
-  background: rgba(217, 119, 6, 0.2);
-  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #92400E;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
   padding: 4rpx 12rpx;
   border-radius: 16rpx;
 }
 
 .sub-hint {
   font-size: 22rpx;
-  color: #94A3B8;
+  color: #64748B;
   line-height: 1.5;
   margin-bottom: 20rpx;
   display: block;
@@ -724,26 +732,26 @@ page {
 .sec-title-text {
   font-size: 26rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
   flex: 1;
 }
 
 .sec-title-sub {
   font-size: 20rpx;
-  color: #E5B869;
+  color: #2563EB;
   font-weight: 700;
 }
 
-/* 5. Live Countdown Capsule */
+/* 5. Live Countdown Capsule (晨曦天青航空票卡) */
 .countdown-capsule {
-  background: linear-gradient(135deg, #182030, #0E131E);
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
   border-radius: 28rpx;
-  border: 1px solid rgba(229, 184, 105, 0.4);
+  border: 1.5px solid #BFDBFE;
   padding: 22rpx 26rpx;
   margin-bottom: 24rpx;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 12rpx 30rpx rgba(0, 0, 0, 0.6), 0 0 20rpx rgba(229, 184, 105, 0.12);
+  box-shadow: 0 10rpx 28rpx rgba(37, 99, 235, 0.08);
 }
 
 .capsule-inner {
@@ -761,7 +769,7 @@ page {
   display: flex;
   align-items: center;
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #475569;
   margin-bottom: 8rpx;
 }
 
@@ -769,27 +777,27 @@ page {
   width: 12rpx;
   height: 12rpx;
   border-radius: 50%;
-  background-color: #E5B869;
+  background-color: #2563EB;
   margin-right: 8rpx;
 }
 
 .airline-flight {
-  color: #FEF3C7;
-  font-weight: 700;
+  color: #1E3A8A;
+  font-weight: 800;
 }
 
 .dot-divider {
   margin: 0 6rpx;
-  color: #475569;
+  color: #94A3B8;
 }
 
 .gold-bold {
-  color: #E5B869;
+  color: #1E40AF;
   font-weight: 800;
 }
 
 .white-bold {
-  color: #FFFFFF;
+  color: #0F172A;
   font-weight: 800;
 }
 
@@ -801,21 +809,21 @@ page {
 .route-city {
   font-size: 38rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .route-plane {
   font-size: 24rpx;
-  color: #E5B869;
+  color: #2563EB;
   margin: 0 12rpx;
 }
 
 .ontime-badge {
   font-size: 18rpx;
-  font-weight: 700;
-  color: #34D399;
-  background: rgba(6, 78, 59, 0.7);
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  font-weight: 800;
+  color: #065F46;
+  background: #D1FAE5;
+  border: 1px solid #A7F3D0;
   padding: 2rpx 10rpx;
   border-radius: 12rpx;
   margin-left: 12rpx;
@@ -834,14 +842,14 @@ page {
 
 .countdown-label {
   font-size: 18rpx;
-  font-weight: 700;
-  color: #E5B869;
+  font-weight: 800;
+  color: #1D4ED8;
   letter-spacing: 1rpx;
 }
 
 .arrow-right {
   font-size: 18rpx;
-  color: #E5B869;
+  color: #1D4ED8;
   margin-left: 4rpx;
 }
 
@@ -849,10 +857,9 @@ page {
   font-size: 38rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #FEF3C7;
+  color: #1E3A8A;
   letter-spacing: 2rpx;
   margin: 4rpx 0;
-  text-shadow: 0 0 12rpx rgba(229, 184, 105, 0.4);
 }
 
 .countdown-legend {
@@ -867,22 +874,22 @@ page {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 4rpx;
-  background: #0B0E16;
+  height: 6rpx;
+  background: #BFDBFE;
 }
 
 .capsule-progress-active {
   height: 100%;
-  background: linear-gradient(90deg, #C89B3C, #E5B869, #FDE68A);
-  box-shadow: 0 0 8rpx rgba(229, 184, 105, 0.8);
+  background: linear-gradient(90deg, #2563EB, #1D4ED8);
+  box-shadow: 0 0 8rpx rgba(37, 99, 235, 0.4);
 }
 
 /* ==================== 6. CHINESE-CENTRIC CITY PAIR CAPSULE (中文大字主导) ==================== */
 .segmented-control {
   display: flex;
-  background: #0B0E16;
+  background: #F1F5F9;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 6rpx;
   margin-bottom: 24rpx;
 }
@@ -894,25 +901,27 @@ page {
   font-weight: 700;
   padding: 12rpx 0;
   border-radius: 16rpx;
-  color: #94A3B8;
+  color: #64748B;
 }
 
 .seg-active {
-  background: #0284C7;
-  color: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(2, 132, 199, 0.4);
+  background: #FFFFFF;
+  color: #2563EB;
+  font-weight: 800;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.08);
 }
 
 .seg-active-gold {
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
-  box-shadow: 0 4rpx 12rpx rgba(229, 184, 105, 0.3);
+  background: #FFFFFF;
+  color: #D97706;
+  font-weight: 800;
+  box-shadow: 0 4rpx 12rpx rgba(217, 119, 6, 0.12);
 }
 
 .city-pair-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 24rpx;
-  border: 1px solid rgba(229, 184, 105, 0.2);
+  border: 1px solid #E2E8F0;
   padding: 24rpx 28rpx;
   display: flex;
   align-items: center;
@@ -930,16 +939,15 @@ page {
 
 .city-hint-label {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #64748B;
   font-weight: 700;
   margin-bottom: 6rpx;
 }
 
-/* Chinese City is PRIMARY & BOLD */
 .city-name-huge {
-  font-size: 42rpx;
+  font-size: 44rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #0F172A;
   line-height: 1.1;
 }
 
@@ -954,16 +962,16 @@ page {
   font-size: 20rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #E5B869;
-  background: rgba(229, 184, 105, 0.12);
-  border: 1px solid rgba(229, 184, 105, 0.3);
+  color: #1D4ED8;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
   padding: 2rpx 8rpx;
   border-radius: 8rpx;
 }
 
 .airport-name-text {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #475569;
   font-weight: 600;
 }
 
@@ -977,14 +985,14 @@ page {
   width: 68rpx;
   height: 68rpx;
   border-radius: 50%;
-  background: #141A26;
-  border: 1px solid rgba(229, 184, 105, 0.4);
-  color: #E5B869;
+  background: #FFFFFF;
+  border: 1px solid #BFDBFE;
+  color: #2563EB;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32rpx;
-  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4rpx 12rpx rgba(37, 99, 235, 0.15);
 }
 
 .swap-rotating {
@@ -1008,29 +1016,29 @@ page {
 
 .date-col {
   flex: 1;
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 18rpx 22rpx;
   box-sizing: border-box;
 }
 
 .date-label {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #64748B;
   display: block;
   margin-bottom: 4rpx;
 }
 
 .date-value {
   font-size: 24rpx;
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: 800;
+  color: #0F172A;
 }
 
 .cabin-grid {
   display: flex;
-  background: #0B0E16;
+  background: #F1F5F9;
   border-radius: 20rpx;
   padding: 6rpx;
   margin-bottom: 24rpx;
@@ -1044,27 +1052,28 @@ page {
   font-weight: 700;
   padding: 12rpx 0;
   border-radius: 14rpx;
-  color: #94A3B8;
+  color: #64748B;
 }
 
 .cabin-active {
-  background: #1C2333;
-  color: #FFFFFF;
-  border: 1px solid rgba(229, 184, 105, 0.35);
+  background: #FFFFFF;
+  color: #2563EB;
+  font-weight: 800;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.08);
 }
 
 .search-cta-btn {
   width: 100%;
   height: 92rpx;
   border-radius: 24rpx;
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-size: 28rpx;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10rpx 24rpx rgba(229, 184, 105, 0.3);
+  box-shadow: 0 10rpx 24rpx rgba(37, 99, 235, 0.3);
   border: none;
 }
 
@@ -1074,8 +1083,8 @@ page {
 
 /* 7. Radar Alert Card */
 .radar-alert-card {
-  background: linear-gradient(90deg, rgba(6, 78, 59, 0.7), #131824);
-  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  border: 1.5px solid #A7F3D0;
 }
 
 .radar-top-row {
@@ -1094,19 +1103,19 @@ page {
   width: 14rpx;
   height: 14rpx;
   border-radius: 50%;
-  background: #34D399;
+  background: #059669;
   margin-right: 12rpx;
 }
 
 .radar-alert-title {
   font-size: 24rpx;
   font-weight: 800;
-  color: #6EE7B7;
+  color: #065F46;
 }
 
 .radar-time {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #047857;
 }
 
 .radar-detail-row {
@@ -1118,13 +1127,13 @@ page {
 .radar-flight-pair {
   font-size: 28rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #064E3B;
   display: block;
 }
 
 .radar-airline-hint {
   font-size: 22rpx;
-  color: #94A3B8;
+  color: #047857;
   margin-top: 4rpx;
   display: block;
 }
@@ -1137,14 +1146,14 @@ page {
   font-size: 36rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #34D399;
+  color: #059669;
   display: block;
 }
 
 .radar-seats {
   font-size: 20rpx;
   font-weight: 700;
-  color: #10B981;
+  color: #047857;
   display: block;
 }
 
@@ -1157,10 +1166,11 @@ page {
 
 .tool-btn {
   flex: 1;
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 22rpx;
+  box-shadow: 0 4rpx 14rpx rgba(15, 23, 42, 0.04);
 }
 
 .tool-title-row {
@@ -1176,13 +1186,13 @@ page {
 
 .tool-name {
   font-size: 24rpx;
-  font-weight: 700;
-  color: #38BDF8;
+  font-weight: 800;
+  color: #1E40AF;
 }
 
 .tool-desc {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   line-height: 1.4;
   display: block;
 }
@@ -1196,24 +1206,25 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
   padding: 20rpx 24rpx;
   margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 14rpx rgba(15, 23, 42, 0.04);
 }
 
 .back-btn {
   display: flex;
   align-items: center;
-  background: #1C2333;
+  background: #F1F5F9;
   padding: 8rpx 18rpx;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid #E2E8F0;
 }
 
 .back-arrow {
-  color: #E5B869;
+  color: #2563EB;
   font-size: 28rpx;
   margin-right: 6rpx;
 }
@@ -1221,7 +1232,7 @@ page {
 .back-text {
   font-size: 22rpx;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #1E293B;
 }
 
 .route-summary {
@@ -1233,12 +1244,12 @@ page {
 .route-summary-text {
   font-size: 26rpx;
   font-weight: 800;
-  color: #E5B869;
+  color: #1E40AF;
 }
 
 .route-date-summary {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-top: 4rpx;
 }
 
@@ -1256,26 +1267,27 @@ page {
 .chip {
   padding: 12rpx 26rpx;
   border-radius: 30rpx;
-  background: #131824;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #94A3B8;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
   font-size: 22rpx;
   font-weight: 700;
   display: inline-block;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.03);
 }
 
 .chip-active {
-  background: #0284C7;
-  border-color: #38BDF8;
+  background: #2563EB;
+  border-color: #1D4ED8;
   color: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(2, 132, 199, 0.4);
+  box-shadow: 0 4rpx 16rpx rgba(37, 99, 235, 0.3);
 }
 
 .transparency-notice {
   display: flex;
   align-items: center;
-  background: rgba(6, 78, 59, 0.4);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
   border-radius: 20rpx;
   padding: 14rpx 20rpx;
   margin-bottom: 20rpx;
@@ -1288,7 +1300,7 @@ page {
 
 .notice-text {
   font-size: 20rpx;
-  color: #6EE7B7;
+  color: #065F46;
   line-height: 1.4;
 }
 
@@ -1299,11 +1311,11 @@ page {
 }
 
 .flight-card {
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 28rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 24rpx;
-  box-shadow: 0 12rpx 28rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8rpx 24rpx rgba(15, 23, 42, 0.06);
 }
 
 .f-card-top {
@@ -1334,20 +1346,21 @@ page {
 .f-airline-name {
   font-size: 26rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .f-plane-model {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-left: 12rpx;
 }
 
 .punctuality-tag {
   font-size: 18rpx;
   font-weight: 700;
-  color: #34D399;
-  background: rgba(6, 78, 59, 0.6);
+  color: #047857;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
   padding: 2rpx 10rpx;
   border-radius: 10rpx;
 }
@@ -1357,7 +1370,7 @@ page {
   align-items: center;
   justify-content: space-between;
   padding: 12rpx 0 18rpx;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid #F1F5F9;
 }
 
 .f-leg {
@@ -1369,16 +1382,16 @@ page {
 .f-leg-right { align-items: flex-end; }
 
 .f-time {
-  font-size: 46rpx;
+  font-size: 48rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #FFFFFF;
+  color: #0F172A;
   line-height: 1;
 }
 
 .f-airport {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #334155;
   margin-top: 8rpx;
 }
 
@@ -1390,7 +1403,7 @@ page {
 
 .f-duration {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #64748B;
 }
 
 .f-path-line {
@@ -1403,25 +1416,25 @@ page {
   width: 6rpx;
   height: 6rpx;
   border-radius: 50%;
-  background: #E5B869;
+  background: #2563EB;
 }
 
 .f-line {
   width: 32rpx;
   height: 2rpx;
-  background: rgba(229, 184, 105, 0.4);
+  background: #93C5FD;
 }
 
 .f-plane-icon {
   font-size: 20rpx;
-  color: #E5B869;
+  color: #2563EB;
   margin: 0 4rpx;
 }
 
 .f-direct-tag {
   font-size: 18rpx;
   font-weight: 700;
-  color: #E5B869;
+  color: #2563EB;
 }
 
 .f-card-bottom {
@@ -1444,33 +1457,33 @@ page {
 }
 
 .cab-eco {
-  background: #1C2333;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
 }
 
 .cab-bus {
-  background: rgba(229, 184, 105, 0.15);
-  border: 1px solid rgba(229, 184, 105, 0.35);
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
 }
 
 .cab-name {
   font-size: 16rpx;
-  color: #94A3B8;
+  color: #64748B;
 }
 
 .cab-bus .cab-name {
-  color: #FDE68A;
+  color: #1E40AF;
 }
 
 .cab-price {
   font-size: 22rpx;
   font-weight: 800;
   font-family: monospace;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .cab-bus .cab-price {
-  color: #E5B869;
+  color: #1D4ED8;
 }
 
 .direct-booking-cta {
@@ -1483,7 +1496,7 @@ page {
   font-size: 38rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #34D399;
+  color: #059669;
 }
 
 .cta-price-note {
@@ -1492,22 +1505,23 @@ page {
 }
 
 .cta-btn-mini {
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-size: 20rpx;
   font-weight: 900;
   padding: 10rpx 18rpx;
   border-radius: 16rpx;
   margin-left: 8rpx;
+  box-shadow: 0 4rpx 12rpx rgba(37, 99, 235, 0.25);
 }
 
 /* 9. Trips Hub: Golden VIP Boarding Pass */
 .golden-boarding-pass {
-  background: linear-gradient(145deg, #F5D77F, #E5B869, #BF8B23);
+  background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #2563EB 100%);
   border-radius: 36rpx;
   padding: 32rpx;
-  color: #2D1800;
-  box-shadow: 0 20rpx 50rpx rgba(0, 0, 0, 0.7), 0 0 30rpx rgba(229, 184, 105, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 20rpx 50rpx rgba(30, 58, 138, 0.3);
   margin-bottom: 24rpx;
 }
 
@@ -1521,7 +1535,7 @@ page {
 .pass-airline-meta {
   font-size: 20rpx;
   font-weight: 700;
-  opacity: 0.85;
+  opacity: 0.9;
   display: block;
 }
 
@@ -1541,8 +1555,8 @@ page {
 .pass-class-badge {
   font-size: 20rpx;
   font-weight: 900;
-  background: rgba(45, 24, 0, 0.15);
-  border: 1px solid rgba(45, 24, 0, 0.25);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 4rpx 14rpx;
   border-radius: 20rpx;
   display: inline-block;
@@ -1561,8 +1575,8 @@ page {
   align-items: center;
   justify-content: space-between;
   padding: 16rpx 0;
-  border-top: 1px dashed rgba(45, 24, 0, 0.25);
-  border-bottom: 1px dashed rgba(45, 24, 0, 0.25);
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
 .pass-time-col {
@@ -1585,7 +1599,7 @@ page {
 
 .pass-code {
   font-size: 20rpx;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 .pass-mid-trajectory {
@@ -1596,7 +1610,7 @@ page {
 
 .flight-duration {
   font-size: 18rpx;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 .trajectory-line {
@@ -1609,13 +1623,13 @@ page {
   width: 8rpx;
   height: 8rpx;
   border-radius: 50%;
-  background: #2D1800;
+  background: #FFFFFF;
 }
 
 .line {
   width: 36rpx;
   height: 2rpx;
-  background: rgba(45, 24, 0, 0.4);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .mid-plane {
@@ -1641,7 +1655,7 @@ page {
 
 .d-label {
   font-size: 18rpx;
-  opacity: 0.75;
+  opacity: 0.8;
   margin-bottom: 4rpx;
 }
 
@@ -1651,14 +1665,14 @@ page {
 }
 
 .gold-bright {
-  color: #FFFFFF;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+  color: #FEF08A;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2);
 }
 
 .barcode-row {
   margin-top: 20rpx;
   padding-top: 16rpx;
-  border-top: 1px dashed rgba(45, 24, 0, 0.25);
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1667,7 +1681,7 @@ page {
 .simulated-barcode {
   width: 90%;
   height: 32rpx;
-  background: repeating-linear-gradient(90deg, #2D1800, #2D1800 4rpx, transparent 4rpx, transparent 8rpx, #2D1800 8rpx, #2D1800 14rpx, transparent 14rpx, transparent 18rpx);
+  background: repeating-linear-gradient(90deg, #FFFFFF, #FFFFFF 4rpx, transparent 4rpx, transparent 8rpx, #FFFFFF 8rpx, #FFFFFF 14rpx, transparent 14rpx, transparent 18rpx);
   opacity: 0.85;
 }
 
@@ -1681,8 +1695,8 @@ page {
 
 /* 10. Inbound Tracking Card */
 .inbound-card {
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), #131824);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: #FFFFFF;
+  border: 1.5px solid #BFDBFE;
 }
 
 .inbound-plane-badge {
@@ -1695,26 +1709,26 @@ page {
 .tail-no {
   font-size: 26rpx;
   font-weight: 800;
-  color: #38BDF8;
+  color: #2563EB;
 }
 
 .plane-model {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #334155;
 }
 
 .inbound-desc {
   font-size: 22rpx;
-  color: #94A3B8;
+  color: #64748B;
   line-height: 1.5;
 }
 
 .import-trip-btn {
   width: 100%;
   height: 76rpx;
-  background: #141A26;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  color: #CBD5E1;
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  color: #334155;
   font-size: 22rpx;
   font-weight: 700;
   border-radius: 18rpx;
@@ -1728,7 +1742,7 @@ page {
   justify-content: space-around;
   margin-top: 16rpx;
   padding-top: 16rpx;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid #F1F5F9;
 }
 
 .stat-col {
@@ -1740,23 +1754,24 @@ page {
 .stat-num {
   font-size: 32rpx;
   font-weight: 900;
-  color: #E5B869;
+  color: #2563EB;
 }
 
 .stat-label {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-top: 4rpx;
 }
 
 /* ==================== 11. WALLET SUB-TABS & RIGHTS CENTER ==================== */
 .wallet-subtab-bar {
   display: flex;
-  background: #131824;
+  background: #FFFFFF;
   border-radius: 24rpx;
   padding: 8rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.04);
 }
 
 .w-subtab {
@@ -1765,21 +1780,21 @@ page {
   padding: 14rpx 0;
   font-size: 22rpx;
   font-weight: 700;
-  color: #94A3B8;
+  color: #64748B;
   border-radius: 18rpx;
 }
 
 .w-subtab-active {
-  background: #1C2333;
-  color: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.4);
+  background: #EFF6FF;
+  color: #1E40AF;
+  font-weight: 800;
 }
 
 .w-subtab-active-gold {
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-weight: 800;
-  box-shadow: 0 4rpx 12rpx rgba(229, 184, 105, 0.3);
+  box-shadow: 0 4rpx 12rpx rgba(37, 99, 235, 0.25);
 }
 
 .cards-deck-scroll {
@@ -1798,23 +1813,23 @@ page {
   height: 200rpx;
   border-radius: 28rpx;
   padding: 24rpx;
-  background: linear-gradient(135deg, #8A151B, #590C10);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #991B1B, #7F1D1D);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 .cc-blue { background: linear-gradient(135deg, #1E3A8A, #0F172A); }
 .cc-green { background: linear-gradient(135deg, #065F46, #064E3B); }
-.cc-red { background: linear-gradient(135deg, #7F1D1D, #360B0B); }
+.cc-red { background: linear-gradient(135deg, #991B1B, #7F1D1D); }
 
 .cc-active {
   opacity: 1;
-  border: 2px solid #E5B869;
-  box-shadow: 0 10rpx 28rpx rgba(229, 184, 105, 0.25);
+  border: 2px solid #F59E0B;
+  box-shadow: 0 10rpx 28rpx rgba(245, 158, 11, 0.35);
 }
 
 .cc-top {
@@ -1851,10 +1866,11 @@ page {
 }
 
 .card-benefit-box {
-  background: #0B0E16;
+  background: #FFFFFF;
   border-radius: 24rpx;
-  border: 1px solid rgba(229, 184, 105, 0.25);
+  border: 1px solid #E2E8F0;
   padding: 24rpx;
+  box-shadow: 0 6rpx 18rpx rgba(15, 23, 42, 0.04);
 }
 
 .benefit-header {
@@ -1871,7 +1887,7 @@ page {
 .b-title {
   font-size: 26rpx;
   font-weight: 800;
-  color: #E5B869;
+  color: #1E40AF;
 }
 
 .b-grid {
@@ -1888,14 +1904,14 @@ page {
 
 .b-lbl {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-bottom: 4rpx;
 }
 
 .b-val {
   font-size: 22rpx;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .counter-row {
@@ -1905,26 +1921,27 @@ page {
 }
 
 .mini-btn-use {
-  background: #141A26;
-  color: #38BDF8;
+  background: #EFF6FF;
+  color: #2563EB;
   font-size: 18rpx;
   padding: 2rpx 8rpx;
   border-radius: 8rpx;
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  border: 1px solid #BFDBFE;
 }
 
 .claim-pack-btn {
   width: 100%;
   height: 80rpx;
   border-radius: 20rpx;
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-size: 22rpx;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
+  box-shadow: 0 6rpx 16rpx rgba(37, 99, 235, 0.25);
 }
 
 .sparkle-icon {
@@ -1934,20 +1951,20 @@ page {
 .claim-toast {
   margin-top: 16rpx;
   padding: 16rpx;
-  background: rgba(6, 78, 59, 0.9);
+  background: #ECFDF5;
   border: 1px solid #10B981;
   border-radius: 16rpx;
   font-size: 20rpx;
-  color: #6EE7B7;
+  color: #065F46;
   line-height: 1.4;
 }
 
 .add-new-card-btn {
   width: 100%;
   height: 76rpx;
-  background: #141A26;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  color: #CBD5E1;
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  color: #334155;
   font-size: 22rpx;
   font-weight: 700;
   border-radius: 18rpx;
@@ -1958,7 +1975,7 @@ page {
 }
 
 .future-tag {
-  color: #FBBF24;
+  color: #D97706;
   font-size: 18rpx;
   margin-left: 8rpx;
 }
@@ -1970,12 +1987,12 @@ page {
 }
 
 .card-mu {
-  background: linear-gradient(135deg, #7F1D1D, #450A0A);
+  background: linear-gradient(135deg, #991B1B, #7F1D1D);
   border: 1px solid rgba(220, 38, 38, 0.3);
 }
 
 .card-ca {
-  background: linear-gradient(135deg, #1C2333, #0F172A);
+  background: linear-gradient(135deg, #1E3A8A, #0F172A);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -2005,13 +2022,13 @@ page {
   font-size: 38rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #E5B869;
+  color: #FEF08A;
   display: block;
 }
 
 .loyalty-num {
   font-size: 20rpx;
-  color: #CBD5E1;
+  color: #E2E8F0;
   font-family: monospace;
   margin-top: 4rpx;
   display: block;
@@ -2019,7 +2036,7 @@ page {
 
 .loyalty-hint {
   font-size: 18rpx;
-  color: #94A3B8;
+  color: #CBD5E1;
   margin-top: 8rpx;
   display: block;
 }
@@ -2032,10 +2049,11 @@ page {
 }
 
 .rights-tool-card {
-  background: #0B0E16;
+  background: #FFFFFF;
   border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.04);
 }
 
 .rtc-header {
@@ -2055,19 +2073,19 @@ page {
 .rtc-title {
   font-size: 26rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
   display: block;
 }
 
 .rtc-sub {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-top: 4rpx;
   display: block;
 }
 
 .rtc-arrow {
-  color: #64748B;
+  color: #94A3B8;
   font-size: 26rpx;
 }
 
@@ -2078,8 +2096,8 @@ page {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -2087,10 +2105,9 @@ page {
 }
 
 .modal-sheet {
-  background: #131824;
+  background: #FFFFFF;
   border-top-left-radius: 40rpx;
   border-top-right-radius: 40rpx;
-  border-top: 1px solid rgba(229, 184, 105, 0.4);
   padding: 32rpx;
   max-height: 85vh;
   box-sizing: border-box;
@@ -2101,19 +2118,19 @@ page {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24rpx;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #F1F5F9;
   margin-bottom: 24rpx;
 }
 
 .modal-sheet-title {
   font-size: 30rpx;
   font-weight: 900;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .modal-sheet-sub {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   display: block;
   margin-top: 4rpx;
 }
@@ -2122,8 +2139,8 @@ page {
   width: 56rpx;
   height: 56rpx;
   border-radius: 50%;
-  background: #1C2333;
-  color: #94A3B8;
+  background: #F1F5F9;
+  color: #64748B;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2131,9 +2148,9 @@ page {
 }
 
 .modal-schedule-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
   padding: 24rpx;
   display: flex;
   justify-content: space-between;
@@ -2142,11 +2159,11 @@ page {
 }
 
 .ms-col { display: flex; flex-direction: column; }
-.ms-time { font-size: 44rpx; font-weight: 900; font-family: monospace; }
-.ms-port { font-size: 22rpx; color: #CBD5E1; margin-top: 6rpx; }
+.ms-time { font-size: 46rpx; font-weight: 900; font-family: monospace; color: #0F172A; }
+.ms-port { font-size: 22rpx; color: #334155; margin-top: 6rpx; }
 .ms-mid { display: flex; flex-direction: column; align-items: center; }
-.ms-dur { font-size: 18rpx; color: #94A3B8; }
-.ms-plane { font-size: 24rpx; color: #E5B869; margin-top: 4rpx; }
+.ms-dur { font-size: 18rpx; color: #64748B; }
+.ms-plane { font-size: 24rpx; color: #2563EB; margin-top: 4rpx; }
 
 .modal-section {
   margin-bottom: 24rpx;
@@ -2155,43 +2172,43 @@ page {
 .sec-title {
   font-size: 24rpx;
   font-weight: 800;
-  color: #E5B869;
+  color: #1E40AF;
   margin-bottom: 12rpx;
   display: block;
 }
 
 .sec-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
   padding: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
 }
 
 .sec-item {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #334155;
   line-height: 1.5;
   display: block;
   margin-bottom: 8rpx;
 }
 
 .price-breakdown-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
   padding: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
 }
 
 .pb-row {
   display: flex;
   justify-content: space-between;
   font-size: 22rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-bottom: 12rpx;
 }
 
 .pb-total {
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-top: 1px dashed #CBD5E1;
   padding-top: 14rpx;
   margin-bottom: 0;
 }
@@ -2199,7 +2216,7 @@ page {
 .pb-lbl-bold {
   font-size: 26rpx;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #0F172A;
 }
 
 .pb-val-bold {
@@ -2211,8 +2228,8 @@ page {
 .handoff-cta-btn {
   width: 100%;
   height: 92rpx;
-  background: linear-gradient(135deg, #E5B869, #C89B3C);
-  color: #1A1000;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
   font-size: 26rpx;
   font-weight: 900;
   border-radius: 24rpx;
@@ -2221,6 +2238,7 @@ page {
   justify-content: center;
   border: none;
   margin-top: 24rpx;
+  box-shadow: 0 8rpx 20rpx rgba(37, 99, 235, 0.3);
 }
 
 .airline-switch-grid {
@@ -2236,38 +2254,38 @@ page {
   font-size: 22rpx;
   font-weight: 700;
   border-radius: 16rpx;
-  background: #0B0E16;
-  color: #94A3B8;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #F1F5F9;
+  color: #64748B;
+  border: 1px solid #E2E8F0;
 }
 
 .as-active {
-  background: #0284C7;
+  background: #2563EB;
   color: #FFFFFF;
-  border-color: #38BDF8;
+  border-color: #1D4ED8;
 }
 
 .correction-policy-card {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 24rpx;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  border: 1px solid #BFDBFE;
   padding: 24rpx;
   margin-bottom: 24rpx;
 }
 
 .cp-header { margin-bottom: 12rpx; }
-.cp-airline-title { font-size: 24rpx; font-weight: 800; color: #38BDF8; }
+.cp-airline-title { font-size: 24rpx; font-weight: 800; color: #1E40AF; }
 
 .cp-fee-banner {
-  background: rgba(2, 132, 199, 0.2);
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
   border-radius: 16rpx;
   padding: 16rpx;
   margin-bottom: 16rpx;
 }
 
-.cp-fee-label { font-size: 20rpx; color: #94A3B8; }
-.cp-fee-amount { font-size: 24rpx; font-weight: 800; color: #38BDF8; display: block; margin-top: 4rpx; }
+.cp-fee-label { font-size: 20rpx; color: #64748B; }
+.cp-fee-amount { font-size: 24rpx; font-weight: 800; color: #2563EB; display: block; margin-top: 4rpx; }
 
 .cp-steps-box {
   display: flex;
@@ -2277,28 +2295,28 @@ page {
 
 .cp-step-item {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #334155;
   line-height: 1.4;
 }
 
 .confirm-modal-btn {
   width: 100%;
   height: 84rpx;
-  background: #1C2333;
-  color: #FFFFFF;
+  background: #F1F5F9;
+  color: #1E293B;
   font-size: 26rpx;
   font-weight: 800;
   border-radius: 20rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid #E2E8F0;
 }
 
 .disruption-rule-box {
-  background: #0B0E16;
+  background: #ECFDF5;
   border-radius: 24rpx;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid #A7F3D0;
   padding: 24rpx;
   margin-bottom: 24rpx;
 }
@@ -2306,34 +2324,34 @@ page {
 .dr-title {
   font-size: 26rpx;
   font-weight: 800;
-  color: #34D399;
+  color: #065F46;
   margin-bottom: 12rpx;
   display: block;
 }
 
 .dr-p {
   font-size: 22rpx;
-  color: #CBD5E1;
+  color: #047857;
   line-height: 1.6;
   display: block;
   margin-bottom: 12rpx;
 }
 
 .ticket-input-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
   padding: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
   margin-bottom: 20rpx;
 }
 
-.tib-lbl { font-size: 20rpx; color: #94A3B8; margin-bottom: 8rpx; display: block; }
-.tib-input { font-size: 26rpx; color: #FFFFFF; height: 60rpx; }
+.tib-lbl { font-size: 20rpx; color: #64748B; margin-bottom: 8rpx; display: block; }
+.tib-input { font-size: 26rpx; color: #0F172A; height: 60rpx; }
 
 .verify-action-btn {
   width: 100%;
   height: 84rpx;
-  background: linear-gradient(90deg, #0284C7, #0369A1);
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
   color: #FFFFFF;
   font-size: 26rpx;
   font-weight: 800;
@@ -2346,39 +2364,39 @@ page {
 }
 
 .verify-result-box {
-  background: rgba(6, 78, 59, 0.8);
+  background: #ECFDF5;
   border: 1px solid #10B981;
   border-radius: 20rpx;
   padding: 20rpx;
   margin-bottom: 20rpx;
 }
 
-.vr-title { font-size: 24rpx; font-weight: 800; color: #6EE7B7; display: block; margin-bottom: 8rpx; }
-.vr-desc { font-size: 20rpx; color: #CBD5E1; display: block; margin-bottom: 4rpx; }
-.vr-safe-tag { font-size: 20rpx; font-weight: 700; color: #34D399; display: block; margin-top: 8rpx; }
+.vr-title { font-size: 24rpx; font-weight: 800; color: #065F46; display: block; margin-bottom: 8rpx; }
+.vr-desc { font-size: 20rpx; color: #047857; display: block; margin-bottom: 4rpx; }
+.vr-safe-tag { font-size: 20rpx; font-weight: 700; color: #059669; display: block; margin-top: 8rpx; }
 
 .special-service-item {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
   padding: 20rpx;
   margin-bottom: 16rpx;
 }
 
-.ss-title { font-size: 24rpx; font-weight: 800; color: #38BDF8; display: block; margin-bottom: 6rpx; }
-.ss-desc { font-size: 20rpx; color: #CBD5E1; line-height: 1.4; display: block; }
+.ss-title { font-size: 24rpx; font-weight: 800; color: #1E40AF; display: block; margin-bottom: 6rpx; }
+.ss-desc { font-size: 20rpx; color: #334155; line-height: 1.4; display: block; }
 
 .add-wish-box {
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
   padding: 20rpx;
   margin-bottom: 20rpx;
 }
 
-.aw-lbl { font-size: 22rpx; color: #94A3B8; margin-bottom: 12rpx; display: block; }
+.aw-lbl { font-size: 22rpx; color: #64748B; margin-bottom: 12rpx; display: block; }
 .aw-route-pills { display: flex; gap: 12rpx; margin-bottom: 20rpx; }
-.aw-pill { flex: 1; text-align: center; padding: 12rpx 0; font-size: 20rpx; font-weight: 700; background: #141A26; border-radius: 16rpx; color: #94A3B8; }
-.aw-pill-active { background: #0284C7; color: #FFFFFF; border: 1px solid #38BDF8; }
+.aw-pill { flex: 1; text-align: center; padding: 12rpx 0; font-size: 20rpx; font-weight: 700; background: #FFFFFF; border-radius: 16rpx; color: #64748B; border: 1px solid #E2E8F0; }
+.aw-pill-active { background: #2563EB; color: #FFFFFF; border: 1px solid #1D4ED8; }
 
 .modal-pass-sheet {
   padding-bottom: 60rpx;
@@ -2393,7 +2411,7 @@ page {
 .pass-barcode-big {
   width: 100%;
   height: 90rpx;
-  background: repeating-linear-gradient(90deg, #FFFFFF, #FFFFFF 6rpx, transparent 6rpx, transparent 12rpx, #FFFFFF 12rpx, #FFFFFF 20rpx, transparent 20rpx, transparent 26rpx);
+  background: repeating-linear-gradient(90deg, #0F172A, #0F172A 6rpx, transparent 6rpx, transparent 12rpx, #0F172A 12rpx, #0F172A 20rpx, transparent 20rpx, transparent 26rpx);
   margin-bottom: 16rpx;
 }
 
@@ -2401,12 +2419,12 @@ page {
   font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #E5B869;
+  color: #1E40AF;
 }
 
 .pass-scan-hint {
   font-size: 20rpx;
-  color: #94A3B8;
+  color: #64748B;
   margin-top: 8rpx;
   margin-bottom: 24rpx;
 }
@@ -2416,10 +2434,10 @@ page {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 12rpx;
-  background: #0B0E16;
+  background: #F8FAFC;
   border-radius: 20rpx;
   padding: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
 }
 
 .pqi-box {
@@ -2428,24 +2446,25 @@ page {
   align-items: center;
 }
 
-.pqi-lbl { font-size: 18rpx; color: #94A3B8; margin-bottom: 4rpx; }
-.pqi-val { font-size: 24rpx; font-weight: 800; color: #FFFFFF; }
+.pqi-lbl { font-size: 18rpx; color: #64748B; margin-bottom: 4rpx; }
+.pqi-val { font-size: 24rpx; font-weight: 800; color: #0F172A; }
 
-/* 12. Bottom Floating TabBar */
+/* 12. Bottom Floating TabBar (天青白底高斯模糊) */
 .bottom-tab-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   height: 120rpx;
-  background: rgba(11, 14, 22, 0.96);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(229, 184, 105, 0.15);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding-bottom: env(safe-area-inset-bottom);
   z-index: 100;
+  box-shadow: 0 -4rpx 20rpx rgba(15, 23, 42, 0.04);
 }
 
 .tab-item {
@@ -2469,5 +2488,5 @@ page {
 }
 
 .tab-active {
-  color: #E5B869;
+  color: #2563EB;
 }
