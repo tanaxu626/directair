@@ -1,10 +1,10 @@
 /** pages/index/index.wxss **/
-/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.33 - Fullscreen Responsive Layout) */
+/* DirectAir Champagne Obsidian Luxury Style (100% Native v1.38 - 中式高端商务微调版) */
 
 page {
-  background-color: #07090E;
-  color: #FFFFFF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #0A0D14;
+  color: #F8FAFC;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
   padding-bottom: 160rpx;
 }
 
@@ -13,14 +13,14 @@ page {
   box-sizing: border-box;
 }
 
-/* ==================== 1. FULLSCREEN RESPONSIVE CITY SEARCH (v1.33 全屏沉浸式检索) ==================== */
+/* ==================== 1. FULLSCREEN RESPONSIVE CITY SEARCH ==================== */
 .fullscreen-city-view {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #07090E;
+  background-color: #0A0D14;
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -38,9 +38,9 @@ page {
 .top-spotlight-bar {
   display: flex;
   flex-direction: column;
-  background: #07090E;
+  background: #0A0D14;
   padding-bottom: 16rpx;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(229, 184, 105, 0.12);
   flex-shrink: 0;
 }
 
@@ -54,14 +54,14 @@ page {
 .fs-back-btn {
   display: flex;
   align-items: center;
-  background: #1E293B;
+  background: #141A26;
   padding: 8rpx 18rpx;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .fs-back-arrow {
-  color: #38BDF8;
+  color: #E5B869;
   font-size: 28rpx;
   margin-right: 6rpx;
 }
@@ -69,13 +69,13 @@ page {
 .fs-back-text {
   font-size: 22rpx;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #F8FAFC;
 }
 
 .fs-nav-title {
   font-size: 28rpx;
   font-weight: 900;
-  color: #DFA938;
+  color: #E5B869;
   letter-spacing: 1rpx;
 }
 
@@ -89,16 +89,16 @@ page {
 .fs-search-box-top {
   display: flex;
   align-items: center;
-  background: #0F131C;
-  border: 1.5px solid #DFA938;
+  background: #131824;
+  border: 1.5px solid #E5B869;
   border-radius: 24rpx;
   padding: 16rpx 24rpx;
-  box-shadow: 0 8rpx 24rpx rgba(223, 169, 56, 0.25);
+  box-shadow: 0 8rpx 24rpx rgba(229, 184, 105, 0.18);
 }
 
 .fs-search-icon {
   font-size: 28rpx;
-  color: #DFA938;
+  color: #E5B869;
   margin-right: 14rpx;
 }
 
@@ -113,7 +113,7 @@ page {
   width: 44rpx;
   height: 44rpx;
   border-radius: 50%;
-  background: #1E293B;
+  background: #1E2638;
   color: #94A3B8;
   display: flex;
   align-items: center;
@@ -121,7 +121,6 @@ page {
   font-size: 22rpx;
 }
 
-/* Scroll Container stretches 100% to fill the full mobile screen */
 .fs-top-scroll-container {
   flex: 1;
   height: 0;
@@ -160,23 +159,23 @@ page {
 }
 
 .top-match-row {
-  background: #0F131C;
+  background: #131824;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 18rpx 22rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.5);
 }
 
 .tm-badge {
   width: 80rpx;
   height: 80rpx;
   border-radius: 20rpx;
-  background: linear-gradient(135deg, #1E293B, #0F172A);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  color: #38BDF8;
+  background: linear-gradient(135deg, #1C2333, #131824);
+  border: 1px solid rgba(229, 184, 105, 0.35);
+  color: #E5B869;
   font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
@@ -227,22 +226,23 @@ page {
 }
 
 .tm-cta-gold {
-  background: #D97706;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
 }
 
-/* ==================== NO-AIRPORT NEARBY TRANSIT STYLES (v1.35 智能周边接驳) ==================== */
+/* ==================== NO-AIRPORT NEARBY TRANSIT STYLES ==================== */
 .no-airport-transit-box {
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: 18rpx;
   animation: fadeIn 0.2s ease-in-out;
 }
 
 .transit-banner-header {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.25), #0F131C);
-  border: 1.5px solid rgba(245, 158, 11, 0.45);
+  background: linear-gradient(135deg, rgba(229, 184, 105, 0.2), #131824);
+  border: 1.5px solid rgba(229, 184, 105, 0.45);
   border-radius: 24rpx;
   padding: 20rpx 24rpx;
 }
@@ -266,13 +266,13 @@ page {
 
 .transit-sub-title {
   font-size: 20rpx;
-  color: #DFA938;
+  color: #E5B869;
   font-weight: 700;
   margin-top: 4rpx;
 }
 
 .transit-reason-card {
-  background: #0F131C;
+  background: #131824;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 18rpx 22rpx;
@@ -291,13 +291,13 @@ page {
 }
 
 .nearby-hub-card-rich {
-  background: #0F131C;
+  background: #131824;
   border-radius: 28rpx;
-  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  border: 1.5px solid rgba(229, 184, 105, 0.35);
   padding: 24rpx;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.5);
   position: relative;
 }
 
@@ -313,9 +313,9 @@ page {
 .nhr-tag-badge {
   font-size: 20rpx;
   font-weight: 900;
-  color: #FDE68A;
-  background: linear-gradient(90deg, rgba(217, 119, 6, 0.35), rgba(180, 83, 9, 0.15));
-  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #FEF3C7;
+  background: linear-gradient(90deg, rgba(229, 184, 105, 0.35), rgba(200, 155, 60, 0.15));
+  border: 1px solid rgba(229, 184, 105, 0.5);
   padding: 4rpx 14rpx;
   border-radius: 14rpx;
 }
@@ -337,9 +337,9 @@ page {
   width: 84rpx;
   height: 84rpx;
   border-radius: 22rpx;
-  background: linear-gradient(135deg, #1E293B, #0F172A);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  color: #38BDF8;
+  background: linear-gradient(135deg, #1C2333, #131824);
+  border: 1px solid rgba(229, 184, 105, 0.4);
+  color: #E5B869;
   font-size: 30rpx;
   font-weight: 900;
   font-family: monospace;
@@ -370,30 +370,29 @@ page {
 .nh-port {
   font-size: 24rpx;
   font-weight: 700;
-  color: #38BDF8;
+  color: #E5B869;
 }
 
 .nh-dist-badge {
   font-size: 20rpx;
   font-weight: 700;
-  color: #DFA938;
+  color: #94A3B8;
   margin-top: 4rpx;
 }
 
 .nh-cta-btn {
-  background: linear-gradient(90deg, #0284C7, #0369A1);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
   font-size: 22rpx;
-  font-weight: 800;
+  font-weight: 900;
   padding: 14rpx 24rpx;
   border-radius: 20rpx;
   margin-left: 12rpx;
-  box-shadow: 0 4rpx 14rpx rgba(2, 132, 199, 0.5);
+  box-shadow: 0 4rpx 14rpx rgba(229, 184, 105, 0.3);
 }
 
-/* Specs Container */
 .nhr-specs-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 16rpx 20rpx;
@@ -438,8 +437,8 @@ page {
 }
 
 .top-custom-row {
-  background: #0F131C;
-  border: 1.5px dashed #DFA938;
+  background: #131824;
+  border: 1.5px dashed #E5B869;
   border-radius: 20rpx;
   padding: 24rpx;
   display: flex;
@@ -462,7 +461,7 @@ page {
 .top-block-title {
   font-size: 24rpx;
   font-weight: 800;
-  color: #DFA938;
+  color: #E5B869;
   margin-bottom: 14rpx;
   display: block;
 }
@@ -494,13 +493,13 @@ page {
 .top-pill-hist {
   display: flex;
   align-items: baseline;
-  background: #1E293B;
+  background: #141A26;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18rpx;
   padding: 12rpx 18rpx;
 }
 
-.hist-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 6rpx; }
+.hist-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #E5B869; margin-right: 6rpx; }
 .hist-name { font-size: 22rpx; color: #CBD5E1; }
 
 .top-grid-3col {
@@ -510,7 +509,7 @@ page {
 }
 
 .top-hub-pill {
-  background: #0F131C;
+  background: #131824;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20rpx;
   padding: 18rpx 14rpx;
@@ -530,7 +529,7 @@ page {
   font-size: 30rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .top-hub-active .thp-code { color: #FFFFFF; }
@@ -571,8 +570,8 @@ page {
   width: 56rpx;
   height: 56rpx;
   border-radius: 16rpx;
-  background: linear-gradient(135deg, rgba(223, 169, 56, 0.25), rgba(243, 206, 114, 0.05));
-  border: 1px solid rgba(223, 169, 56, 0.5);
+  background: linear-gradient(135deg, rgba(229, 184, 105, 0.25), rgba(200, 155, 60, 0.08));
+  border: 1px solid rgba(229, 184, 105, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -580,7 +579,7 @@ page {
 }
 
 .wing-glyph {
-  color: #DFA938;
+  color: #E5B869;
   font-size: 32rpx;
   transform: rotate(45deg);
 }
@@ -598,13 +597,13 @@ page {
 .brand-zh {
   font-size: 34rpx;
   font-weight: 900;
-  color: #DFA938;
+  color: #E5B869;
   margin-right: 8rpx;
   letter-spacing: 2rpx;
 }
 
 .brand-en {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: 800;
   color: #FFFFFF;
   letter-spacing: 1rpx;
@@ -613,9 +612,8 @@ page {
 .brand-badge {
   font-size: 18rpx;
   font-weight: 900;
-  color: #F3CE72;
-  background: rgba(223, 169, 56, 0.18);
-  border: 1px solid rgba(223, 169, 56, 0.4);
+  color: #1A1000;
+  background: linear-gradient(135deg, #FDE68A, #E5B869);
   padding: 2rpx 10rpx;
   border-radius: 20rpx;
   margin-left: 10rpx;
@@ -632,8 +630,8 @@ page {
   align-items: center;
   padding: 8rpx 18rpx;
   border-radius: 30rpx;
-  background: rgba(15, 19, 28, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #131824;
+  border: 1px solid rgba(229, 184, 105, 0.25);
 }
 
 .lock-icon {
@@ -649,12 +647,12 @@ page {
 
 /* 3. Common Card Style */
 .card {
-  background: #0F131C;
+  background: #131824;
   border-radius: 32rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 28rpx;
   margin-bottom: 24rpx;
-  box-shadow: 0 16rpx 36rpx rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16rpx 36rpx rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
 }
 
@@ -732,20 +730,20 @@ page {
 
 .sec-title-sub {
   font-size: 20rpx;
-  color: #DFA938;
+  color: #E5B869;
   font-weight: 700;
 }
 
 /* 5. Live Countdown Capsule */
 .countdown-capsule {
-  background: linear-gradient(135deg, #131722, #0A0D14);
+  background: linear-gradient(135deg, #182030, #0E131E);
   border-radius: 28rpx;
-  border: 1px solid rgba(223, 169, 56, 0.45);
+  border: 1px solid rgba(229, 184, 105, 0.4);
   padding: 22rpx 26rpx;
   margin-bottom: 24rpx;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 12rpx 30rpx rgba(0, 0, 0, 0.7), 0 0 20rpx rgba(223, 169, 56, 0.15);
+  box-shadow: 0 12rpx 30rpx rgba(0, 0, 0, 0.6), 0 0 20rpx rgba(229, 184, 105, 0.12);
 }
 
 .capsule-inner {
@@ -771,12 +769,12 @@ page {
   width: 12rpx;
   height: 12rpx;
   border-radius: 50%;
-  background-color: #DFA938;
+  background-color: #E5B869;
   margin-right: 8rpx;
 }
 
 .airline-flight {
-  color: #F3CE72;
+  color: #FEF3C7;
   font-weight: 700;
 }
 
@@ -786,7 +784,7 @@ page {
 }
 
 .gold-bold {
-  color: #DFA938;
+  color: #E5B869;
   font-weight: 800;
 }
 
@@ -803,13 +801,12 @@ page {
 .route-city {
   font-size: 38rpx;
   font-weight: 900;
-  font-family: monospace;
   color: #FFFFFF;
 }
 
 .route-plane {
   font-size: 24rpx;
-  color: #DFA938;
+  color: #E5B869;
   margin: 0 12rpx;
 }
 
@@ -838,13 +835,13 @@ page {
 .countdown-label {
   font-size: 18rpx;
   font-weight: 700;
-  color: #DFA938;
+  color: #E5B869;
   letter-spacing: 1rpx;
 }
 
 .arrow-right {
   font-size: 18rpx;
-  color: #DFA938;
+  color: #E5B869;
   margin-left: 4rpx;
 }
 
@@ -855,7 +852,7 @@ page {
   color: #FEF3C7;
   letter-spacing: 2rpx;
   margin: 4rpx 0;
-  text-shadow: 0 0 12rpx rgba(243, 206, 114, 0.6);
+  text-shadow: 0 0 12rpx rgba(229, 184, 105, 0.4);
 }
 
 .countdown-legend {
@@ -871,21 +868,21 @@ page {
   left: 0;
   right: 0;
   height: 4rpx;
-  background: #020617;
+  background: #0B0E16;
 }
 
 .capsule-progress-active {
   height: 100%;
-  background: linear-gradient(90deg, #D97706, #FBBF24, #FDE68A);
-  box-shadow: 0 0 8rpx rgba(223, 169, 56, 0.9);
+  background: linear-gradient(90deg, #C89B3C, #E5B869, #FDE68A);
+  box-shadow: 0 0 8rpx rgba(229, 184, 105, 0.8);
 }
 
-/* 6. Search Capsule */
+/* ==================== 6. CHINESE-CENTRIC CITY PAIR CAPSULE (中文大字主导) ==================== */
 .segmented-control {
   display: flex;
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 6rpx;
   margin-bottom: 24rpx;
 }
@@ -907,15 +904,15 @@ page {
 }
 
 .seg-active-gold {
-  background: #D97706;
-  color: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(217, 119, 6, 0.4);
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
+  box-shadow: 0 4rpx 12rpx rgba(229, 184, 105, 0.3);
 }
 
 .city-pair-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(229, 184, 105, 0.2);
   padding: 24rpx 28rpx;
   display: flex;
   align-items: center;
@@ -933,24 +930,41 @@ page {
 
 .city-hint-label {
   font-size: 18rpx;
-  color: #38BDF8;
+  color: #94A3B8;
   font-weight: 700;
-  margin-bottom: 4rpx;
+  margin-bottom: 6rpx;
 }
 
-.airport-code {
-  font-size: 52rpx;
+/* Chinese City is PRIMARY & BOLD */
+.city-name-huge {
+  font-size: 42rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.1;
+}
+
+.city-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 6rpx;
+}
+
+.airport-code-badge {
+  font-size: 20rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #FFFFFF;
-  line-height: 1;
+  color: #E5B869;
+  background: rgba(229, 184, 105, 0.12);
+  border: 1px solid rgba(229, 184, 105, 0.3);
+  padding: 2rpx 8rpx;
+  border-radius: 8rpx;
 }
 
-.city-name {
+.airport-name-text {
   font-size: 22rpx;
   color: #CBD5E1;
   font-weight: 600;
-  margin-top: 8rpx;
 }
 
 .swap-btn-wrap {
@@ -963,14 +977,14 @@ page {
   width: 68rpx;
   height: 68rpx;
   border-radius: 50%;
-  background: #1E293B;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  color: #38BDF8;
+  background: #141A26;
+  border: 1px solid rgba(229, 184, 105, 0.4);
+  color: #E5B869;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32rpx;
-  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
 }
 
 .swap-rotating {
@@ -994,7 +1008,7 @@ page {
 
 .date-col {
   flex: 1;
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 18rpx 22rpx;
@@ -1012,12 +1026,11 @@ page {
   font-size: 24rpx;
   font-weight: 700;
   color: #FFFFFF;
-  font-family: monospace;
 }
 
 .cabin-grid {
   display: flex;
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 6rpx;
   margin-bottom: 24rpx;
@@ -1035,23 +1048,23 @@ page {
 }
 
 .cabin-active {
-  background: #1E293B;
+  background: #1C2333;
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(229, 184, 105, 0.35);
 }
 
 .search-cta-btn {
   width: 100%;
   height: 92rpx;
   border-radius: 24rpx;
-  background: linear-gradient(90deg, #0284C7, #0369A1);
-  color: #FFFFFF;
-  font-size: 26rpx;
-  font-weight: 800;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
+  font-size: 28rpx;
+  font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10rpx 24rpx rgba(2, 132, 199, 0.4);
+  box-shadow: 0 10rpx 24rpx rgba(229, 184, 105, 0.3);
   border: none;
 }
 
@@ -1061,7 +1074,7 @@ page {
 
 /* 7. Radar Alert Card */
 .radar-alert-card {
-  background: linear-gradient(90deg, rgba(6, 78, 59, 0.7), #0F131C);
+  background: linear-gradient(90deg, rgba(6, 78, 59, 0.7), #131824);
   border: 1px solid rgba(16, 185, 129, 0.45);
 }
 
@@ -1144,7 +1157,7 @@ page {
 
 .tool-btn {
   flex: 1;
-  background: #0F131C;
+  background: #131824;
   border-radius: 24rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 22rpx;
@@ -1183,7 +1196,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #0F131C;
+  background: #131824;
   border-radius: 24rpx;
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 20rpx 24rpx;
@@ -1193,14 +1206,14 @@ page {
 .back-btn {
   display: flex;
   align-items: center;
-  background: #1E293B;
+  background: #1C2333;
   padding: 8rpx 18rpx;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .back-arrow {
-  color: #38BDF8;
+  color: #E5B869;
   font-size: 28rpx;
   margin-right: 6rpx;
 }
@@ -1220,7 +1233,7 @@ page {
 .route-summary-text {
   font-size: 26rpx;
   font-weight: 800;
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .route-date-summary {
@@ -1243,7 +1256,7 @@ page {
 .chip {
   padding: 12rpx 26rpx;
   border-radius: 30rpx;
-  background: #0F131C;
+  background: #131824;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94A3B8;
   font-size: 22rpx;
@@ -1286,11 +1299,11 @@ page {
 }
 
 .flight-card {
-  background: #0F131C;
+  background: #131824;
   border-radius: 28rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 24rpx;
-  box-shadow: 0 12rpx 28rpx rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12rpx 28rpx rgba(0, 0, 0, 0.5);
 }
 
 .f-card-top {
@@ -1390,25 +1403,25 @@ page {
   width: 6rpx;
   height: 6rpx;
   border-radius: 50%;
-  background: #38BDF8;
+  background: #E5B869;
 }
 
 .f-line {
   width: 32rpx;
   height: 2rpx;
-  background: rgba(56, 189, 248, 0.4);
+  background: rgba(229, 184, 105, 0.4);
 }
 
 .f-plane-icon {
   font-size: 20rpx;
-  color: #38BDF8;
+  color: #E5B869;
   margin: 0 4rpx;
 }
 
 .f-direct-tag {
   font-size: 18rpx;
   font-weight: 700;
-  color: #38BDF8;
+  color: #E5B869;
 }
 
 .f-card-bottom {
@@ -1431,13 +1444,13 @@ page {
 }
 
 .cab-eco {
-  background: #1E293B;
+  background: #1C2333;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cab-bus {
-  background: rgba(223, 169, 56, 0.15);
-  border: 1px solid rgba(223, 169, 56, 0.35);
+  background: rgba(229, 184, 105, 0.15);
+  border: 1px solid rgba(229, 184, 105, 0.35);
 }
 
 .cab-name {
@@ -1457,7 +1470,7 @@ page {
 }
 
 .cab-bus .cab-price {
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .direct-booking-cta {
@@ -1479,10 +1492,10 @@ page {
 }
 
 .cta-btn-mini {
-  background: linear-gradient(90deg, #0284C7, #0369A1);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
   font-size: 20rpx;
-  font-weight: 800;
+  font-weight: 900;
   padding: 10rpx 18rpx;
   border-radius: 16rpx;
   margin-left: 8rpx;
@@ -1490,11 +1503,11 @@ page {
 
 /* 9. Trips Hub: Golden VIP Boarding Pass */
 .golden-boarding-pass {
-  background: linear-gradient(145deg, #F5D77F, #DFA938, #BF8B23);
+  background: linear-gradient(145deg, #F5D77F, #E5B869, #BF8B23);
   border-radius: 36rpx;
   padding: 32rpx;
-  color: #3D2200;
-  box-shadow: 0 20rpx 50rpx rgba(0, 0, 0, 0.8), 0 0 30rpx rgba(223, 169, 56, 0.3);
+  color: #2D1800;
+  box-shadow: 0 20rpx 50rpx rgba(0, 0, 0, 0.7), 0 0 30rpx rgba(229, 184, 105, 0.25);
   margin-bottom: 24rpx;
 }
 
@@ -1528,8 +1541,8 @@ page {
 .pass-class-badge {
   font-size: 20rpx;
   font-weight: 900;
-  background: rgba(61, 34, 0, 0.15);
-  border: 1px solid rgba(61, 34, 0, 0.25);
+  background: rgba(45, 24, 0, 0.15);
+  border: 1px solid rgba(45, 24, 0, 0.25);
   padding: 4rpx 14rpx;
   border-radius: 20rpx;
   display: inline-block;
@@ -1548,8 +1561,8 @@ page {
   align-items: center;
   justify-content: space-between;
   padding: 16rpx 0;
-  border-top: 1px dashed rgba(61, 34, 0, 0.25);
-  border-bottom: 1px dashed rgba(61, 34, 0, 0.25);
+  border-top: 1px dashed rgba(45, 24, 0, 0.25);
+  border-bottom: 1px dashed rgba(45, 24, 0, 0.25);
 }
 
 .pass-time-col {
@@ -1596,13 +1609,13 @@ page {
   width: 8rpx;
   height: 8rpx;
   border-radius: 50%;
-  background: #3D2200;
+  background: #2D1800;
 }
 
 .line {
   width: 36rpx;
   height: 2rpx;
-  background: rgba(61, 34, 0, 0.4);
+  background: rgba(45, 24, 0, 0.4);
 }
 
 .mid-plane {
@@ -1645,7 +1658,7 @@ page {
 .barcode-row {
   margin-top: 20rpx;
   padding-top: 16rpx;
-  border-top: 1px dashed rgba(61, 34, 0, 0.25);
+  border-top: 1px dashed rgba(45, 24, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1654,7 +1667,7 @@ page {
 .simulated-barcode {
   width: 90%;
   height: 32rpx;
-  background: repeating-linear-gradient(90deg, #3D2200, #3D2200 4rpx, transparent 4rpx, transparent 8rpx, #3D2200 8rpx, #3D2200 14rpx, transparent 14rpx, transparent 18rpx);
+  background: repeating-linear-gradient(90deg, #2D1800, #2D1800 4rpx, transparent 4rpx, transparent 8rpx, #2D1800 8rpx, #2D1800 14rpx, transparent 14rpx, transparent 18rpx);
   opacity: 0.85;
 }
 
@@ -1668,7 +1681,7 @@ page {
 
 /* 10. Inbound Tracking Card */
 .inbound-card {
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), #0F131C);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), #131824);
   border: 1px solid rgba(56, 189, 248, 0.35);
 }
 
@@ -1699,7 +1712,7 @@ page {
 .import-trip-btn {
   width: 100%;
   height: 76rpx;
-  background: #1E293B;
+  background: #141A26;
   border: 1px dashed rgba(255, 255, 255, 0.2);
   color: #CBD5E1;
   font-size: 22rpx;
@@ -1727,7 +1740,7 @@ page {
 .stat-num {
   font-size: 32rpx;
   font-weight: 900;
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .stat-label {
@@ -1739,10 +1752,10 @@ page {
 /* ==================== 11. WALLET SUB-TABS & RIGHTS CENTER ==================== */
 .wallet-subtab-bar {
   display: flex;
-  background: #0F131C;
+  background: #131824;
   border-radius: 24rpx;
   padding: 8rpx;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 24rpx;
 }
 
@@ -1757,15 +1770,16 @@ page {
 }
 
 .w-subtab-active {
-  background: #1E293B;
+  background: #1C2333;
   color: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.4);
 }
 
 .w-subtab-active-gold {
-  background: linear-gradient(90deg, #D97706, #B45309);
-  color: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(217, 119, 6, 0.4);
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
+  font-weight: 800;
+  box-shadow: 0 4rpx 12rpx rgba(229, 184, 105, 0.3);
 }
 
 .cards-deck-scroll {
@@ -1799,8 +1813,8 @@ page {
 
 .cc-active {
   opacity: 1;
-  border: 2px solid #DFA938;
-  box-shadow: 0 10rpx 28rpx rgba(223, 169, 56, 0.3);
+  border: 2px solid #E5B869;
+  box-shadow: 0 10rpx 28rpx rgba(229, 184, 105, 0.25);
 }
 
 .cc-top {
@@ -1818,7 +1832,7 @@ page {
 .cc-tier {
   font-size: 18rpx;
   font-weight: 800;
-  color: #FDE68A;
+  color: #FEF3C7;
   background: rgba(0, 0, 0, 0.4);
   padding: 2rpx 10rpx;
   border-radius: 10rpx;
@@ -1837,9 +1851,9 @@ page {
 }
 
 .card-benefit-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
-  border: 1px solid rgba(223, 169, 56, 0.3);
+  border: 1px solid rgba(229, 184, 105, 0.25);
   padding: 24rpx;
 }
 
@@ -1857,7 +1871,7 @@ page {
 .b-title {
   font-size: 26rpx;
   font-weight: 800;
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .b-grid {
@@ -1891,7 +1905,7 @@ page {
 }
 
 .mini-btn-use {
-  background: #1E293B;
+  background: #141A26;
   color: #38BDF8;
   font-size: 18rpx;
   padding: 2rpx 8rpx;
@@ -1903,8 +1917,8 @@ page {
   width: 100%;
   height: 80rpx;
   border-radius: 20rpx;
-  background: linear-gradient(90deg, #D97706, #F59E0B);
-  color: #3D2200;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
   font-size: 22rpx;
   font-weight: 900;
   display: flex;
@@ -1931,7 +1945,7 @@ page {
 .add-new-card-btn {
   width: 100%;
   height: 76rpx;
-  background: #1E293B;
+  background: #141A26;
   border: 1px dashed rgba(255, 255, 255, 0.2);
   color: #CBD5E1;
   font-size: 22rpx;
@@ -1961,7 +1975,7 @@ page {
 }
 
 .card-ca {
-  background: linear-gradient(135deg, #1E293B, #0F172A);
+  background: linear-gradient(135deg, #1C2333, #0F172A);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -1991,7 +2005,7 @@ page {
   font-size: 38rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #DFA938;
+  color: #E5B869;
   display: block;
 }
 
@@ -2018,7 +2032,7 @@ page {
 }
 
 .rights-tool-card {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 24rpx;
@@ -2073,10 +2087,10 @@ page {
 }
 
 .modal-sheet {
-  background: #0F131C;
+  background: #131824;
   border-top-left-radius: 40rpx;
   border-top-right-radius: 40rpx;
-  border-top: 1px solid rgba(223, 169, 56, 0.4);
+  border-top: 1px solid rgba(229, 184, 105, 0.4);
   padding: 32rpx;
   max-height: 85vh;
   box-sizing: border-box;
@@ -2108,7 +2122,7 @@ page {
   width: 56rpx;
   height: 56rpx;
   border-radius: 50%;
-  background: #1E293B;
+  background: #1C2333;
   color: #94A3B8;
   display: flex;
   align-items: center;
@@ -2117,7 +2131,7 @@ page {
 }
 
 .modal-schedule-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 24rpx;
@@ -2132,7 +2146,7 @@ page {
 .ms-port { font-size: 22rpx; color: #CBD5E1; margin-top: 6rpx; }
 .ms-mid { display: flex; flex-direction: column; align-items: center; }
 .ms-dur { font-size: 18rpx; color: #94A3B8; }
-.ms-plane { font-size: 24rpx; color: #38BDF8; margin-top: 4rpx; }
+.ms-plane { font-size: 24rpx; color: #E5B869; margin-top: 4rpx; }
 
 .modal-section {
   margin-bottom: 24rpx;
@@ -2141,13 +2155,13 @@ page {
 .sec-title {
   font-size: 24rpx;
   font-weight: 800;
-  color: #DFA938;
+  color: #E5B869;
   margin-bottom: 12rpx;
   display: block;
 }
 
 .sec-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -2162,7 +2176,7 @@ page {
 }
 
 .price-breakdown-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -2197,8 +2211,8 @@ page {
 .handoff-cta-btn {
   width: 100%;
   height: 92rpx;
-  background: linear-gradient(90deg, #D97706, #F59E0B);
-  color: #3D2200;
+  background: linear-gradient(135deg, #E5B869, #C89B3C);
+  color: #1A1000;
   font-size: 26rpx;
   font-weight: 900;
   border-radius: 24rpx;
@@ -2222,7 +2236,7 @@ page {
   font-size: 22rpx;
   font-weight: 700;
   border-radius: 16rpx;
-  background: #07090E;
+  background: #0B0E16;
   color: #94A3B8;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -2234,7 +2248,7 @@ page {
 }
 
 .correction-policy-card {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
   border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 24rpx;
@@ -2270,7 +2284,7 @@ page {
 .confirm-modal-btn {
   width: 100%;
   height: 84rpx;
-  background: #1E293B;
+  background: #1C2333;
   color: #FFFFFF;
   font-size: 26rpx;
   font-weight: 800;
@@ -2282,7 +2296,7 @@ page {
 }
 
 .disruption-rule-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 24rpx;
   border: 1px solid rgba(16, 185, 129, 0.3);
   padding: 24rpx;
@@ -2306,7 +2320,7 @@ page {
 }
 
 .ticket-input-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2344,7 +2358,7 @@ page {
 .vr-safe-tag { font-size: 20rpx; font-weight: 700; color: #34D399; display: block; margin-top: 8rpx; }
 
 .special-service-item {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 20rpx;
@@ -2355,7 +2369,7 @@ page {
 .ss-desc { font-size: 20rpx; color: #CBD5E1; line-height: 1.4; display: block; }
 
 .add-wish-box {
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 20rpx;
   margin-bottom: 20rpx;
@@ -2363,7 +2377,7 @@ page {
 
 .aw-lbl { font-size: 22rpx; color: #94A3B8; margin-bottom: 12rpx; display: block; }
 .aw-route-pills { display: flex; gap: 12rpx; margin-bottom: 20rpx; }
-.aw-pill { flex: 1; text-align: center; padding: 12rpx 0; font-size: 20rpx; font-weight: 700; background: #1E293B; border-radius: 16rpx; color: #94A3B8; }
+.aw-pill { flex: 1; text-align: center; padding: 12rpx 0; font-size: 20rpx; font-weight: 700; background: #141A26; border-radius: 16rpx; color: #94A3B8; }
 .aw-pill-active { background: #0284C7; color: #FFFFFF; border: 1px solid #38BDF8; }
 
 .modal-pass-sheet {
@@ -2387,7 +2401,7 @@ page {
   font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #DFA938;
+  color: #E5B869;
 }
 
 .pass-scan-hint {
@@ -2402,7 +2416,7 @@ page {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 12rpx;
-  background: #07090E;
+  background: #0B0E16;
   border-radius: 20rpx;
   padding: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2424,9 +2438,9 @@ page {
   left: 0;
   right: 0;
   height: 120rpx;
-  background: rgba(7, 9, 14, 0.95);
+  background: rgba(11, 14, 22, 0.96);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(229, 184, 105, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -2455,5 +2469,5 @@ page {
 }
 
 .tab-active {
-  color: #DFA938;
+  color: #E5B869;
 }

@@ -329,9 +329,9 @@
               <text class="seat-text">座位 <text class="white-bold">{{currentFlight.seat}}</text></text>
             </view>
             <view class="capsule-route-row">
-              <text class="route-city">{{currentFlight.originCode}}</text>
+              <text class="route-city">{{originCity}}</text>
               <text class="route-plane">✈</text>
-              <text class="route-city">{{currentFlight.destCode}}</text>
+              <text class="route-city">{{destCity}}</text>
               <text class="ontime-badge">准点</text>
             </view>
           </view>
@@ -356,9 +356,9 @@
         <view class="card-header-row">
           <view class="header-left">
             <text class="header-icon">🔍</text>
-            <text class="card-title">官网全包查票</text>
+            <text class="card-title">官网直通查票</text>
           </view>
-          <text class="verified-tag">100% 航司官方直通</text>
+          <text class="verified-tag">🛡️ 100% 航司官方直连</text>
         </view>
 
         <!-- Trip Type Segmented Control -->
@@ -368,12 +368,15 @@
           <view class="seg-btn {{tripType === 'DAY_RETURN' ? 'seg-active-gold' : ''}}" bindtap="setTripType" data-type="DAY_RETURN">当日往返</view>
         </view>
 
-        <!-- City Pair Capsule (点击唤起全屏聚光灯搜索) -->
+        <!-- City Pair Capsule (中文大字主导 · 暖调香槟代码标) -->
         <view class="city-pair-box">
           <view class="city-col city-left" bindtap="openCityPicker" data-type="origin">
-            <text class="city-hint-label">出发城市 (可输入/选择)</text>
-            <text class="airport-code">{{originCode}}</text>
-            <text class="city-name">{{originCity}} · {{originAirport}}</text>
+            <text class="city-hint-label">出发地 (输入/选择)</text>
+            <text class="city-name-huge">{{originCity}}</text>
+            <view class="city-sub-row">
+              <text class="airport-code-badge">{{originCode}}</text>
+              <text class="airport-name-text">{{originAirport}}</text>
+            </view>
           </view>
 
           <view class="swap-btn-wrap" bindtap="swapAirports">
@@ -382,9 +385,12 @@
           </view>
 
           <view class="city-col city-right" bindtap="openCityPicker" data-type="dest">
-            <text class="city-hint-label">到达城市 (可输入/选择)</text>
-            <text class="airport-code">{{destCode}}</text>
-            <text class="city-name">{{destCity}} · {{destAirport}}</text>
+            <text class="city-hint-label">目的地 (输入/选择)</text>
+            <text class="city-name-huge">{{destCity}}</text>
+            <view class="city-sub-row">
+              <text class="airport-code-badge">{{destCode}}</text>
+              <text class="airport-name-text">{{destAirport}}</text>
+            </view>
           </view>
         </view>
 
@@ -393,7 +399,7 @@
           <picker class="date-picker-col" mode="date" value="{{departDate}}" start="2026-08-25" end="2027-12-31" bindchange="onDateChange">
             <view class="date-col">
               <text class="date-label">出发日期 (点击修改)</text>
-              <text class="date-value">{{departDate}} 📅</text>
+              <text class="date-value">{{departDate}} · 黄金周 📅</text>
             </view>
           </picker>
 
