@@ -4,10 +4,10 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#07090E",
+    "navigationBarBackgroundColor": "#EBF3FC",
     "navigationBarTitleText": "直航 DirectAir",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#07090E"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#EBF3FC"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
