@@ -1,5 +1,5 @@
 /** pages/index/index.wxss **/
-/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.32 - Top Spotlight Architecture) */
+/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.33 - Fullscreen Responsive Layout) */
 
 page {
   background-color: #07090E;
@@ -13,7 +13,7 @@ page {
   box-sizing: border-box;
 }
 
-/* ==================== 1. TOP SPOTLIGHT CITY SEARCH (v1.32 顶部聚光灯架构) ==================== */
+/* ==================== 1. FULLSCREEN RESPONSIVE CITY SEARCH (v1.33 全屏沉浸式检索) ==================== */
 .fullscreen-city-view {
   position: fixed;
   top: 0;
@@ -24,14 +24,15 @@ page {
   z-index: 99999;
   display: flex;
   flex-direction: column;
-  padding: env(safe-area-inset-top) 24rpx 0;
+  padding: env(safe-area-inset-top) 24rpx env(safe-area-inset-bottom);
   box-sizing: border-box;
-  animation: fadeInDown 0.2s ease-out;
+  height: 100vh;
+  animation: fadeIn 0.2s ease-out;
 }
 
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20rpx); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .top-spotlight-bar {
@@ -40,6 +41,7 @@ page {
   background: #07090E;
   padding-bottom: 16rpx;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 }
 
 .fs-nav-top-row {
@@ -119,12 +121,12 @@ page {
   font-size: 22rpx;
 }
 
-/* Scroll Container is restricted to the upper 48% of screen, 100% immune to keyboard occlusion! */
+/* Scroll Container stretches 100% to fill the full mobile screen */
 .fs-top-scroll-container {
-  max-height: 48vh;
-  height: 48vh;
+  flex: 1;
+  height: 0;
   box-sizing: border-box;
-  padding-top: 16rpx;
+  padding: 20rpx 0 60rpx;
 }
 
 .top-match-group {
@@ -136,7 +138,7 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 14rpx;
+  margin-bottom: 16rpx;
   padding: 0 4rpx;
 }
 
@@ -154,14 +156,14 @@ page {
 .top-compact-list {
   display: flex;
   flex-direction: column;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .top-match-row {
   background: #0F131C;
   border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 16rpx 20rpx;
+  padding: 18rpx 22rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -169,9 +171,9 @@ page {
 }
 
 .tm-badge {
-  width: 76rpx;
-  height: 76rpx;
-  border-radius: 18rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
   background: linear-gradient(135deg, #1E293B, #0F172A);
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #38BDF8;
@@ -196,10 +198,10 @@ page {
 }
 
 .tm-city {
-  font-size: 26rpx;
+  font-size: 28rpx;
   font-weight: 900;
   color: #FFFFFF;
-  margin-right: 10rpx;
+  margin-right: 12rpx;
 }
 
 .tm-airport {
@@ -211,7 +213,7 @@ page {
 .tm-note {
   font-size: 18rpx;
   color: #94A3B8;
-  margin-top: 2rpx;
+  margin-top: 4rpx;
 }
 
 .tm-cta {
@@ -219,9 +221,9 @@ page {
   color: #FFFFFF;
   font-size: 20rpx;
   font-weight: 800;
-  padding: 8rpx 18rpx;
+  padding: 10rpx 20rpx;
   border-radius: 16rpx;
-  margin-left: 10rpx;
+  margin-left: 12rpx;
 }
 
 .tm-cta-gold {
@@ -232,29 +234,29 @@ page {
   background: #0F131C;
   border: 1.5px dashed #DFA938;
   border-radius: 20rpx;
-  padding: 20rpx;
+  padding: 24rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Sections in Default State */
+/* Sections in Full-Screen Default State */
 .top-sec-block {
-  margin-bottom: 22rpx;
+  margin-bottom: 32rpx;
 }
 
 .top-block-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
 }
 
 .top-block-title {
-  font-size: 22rpx;
+  font-size: 24rpx;
   font-weight: 800;
   color: #DFA938;
-  margin-bottom: 12rpx;
+  margin-bottom: 14rpx;
   display: block;
 }
 
@@ -266,7 +268,7 @@ page {
 .top-quick-pills-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .top-pill-loc {
@@ -275,12 +277,12 @@ page {
   background: rgba(6, 78, 59, 0.7);
   border: 1px solid rgba(16, 185, 129, 0.5);
   border-radius: 20rpx;
-  padding: 10rpx 18rpx;
+  padding: 12rpx 20rpx;
 }
 
-.loc-dot { color: #34D399; font-size: 18rpx; margin-right: 6rpx; }
-.loc-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 6rpx; }
-.loc-name { font-size: 20rpx; font-weight: 700; color: #FFFFFF; }
+.loc-dot { color: #34D399; font-size: 20rpx; margin-right: 6rpx; }
+.loc-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 8rpx; }
+.loc-name { font-size: 22rpx; font-weight: 700; color: #FFFFFF; }
 
 .top-pill-hist {
   display: flex;
@@ -288,27 +290,28 @@ page {
   background: #1E293B;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18rpx;
-  padding: 10rpx 16rpx;
+  padding: 12rpx 18rpx;
 }
 
-.hist-code { font-size: 22rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 6rpx; }
-.hist-name { font-size: 20rpx; color: #CBD5E1; }
+.hist-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 6rpx; }
+.hist-name { font-size: 22rpx; color: #CBD5E1; }
 
 .top-grid-3col {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .top-hub-pill {
   background: #0F131C;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18rpx;
-  padding: 14rpx 12rpx;
+  border-radius: 20rpx;
+  padding: 18rpx 14rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.4);
 }
 
 .top-hub-active {
@@ -317,7 +320,7 @@ page {
 }
 
 .thp-code {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 900;
   font-family: monospace;
   color: #DFA938;
@@ -326,16 +329,16 @@ page {
 .top-hub-active .thp-code { color: #FFFFFF; }
 
 .thp-city {
-  font-size: 22rpx;
+  font-size: 24rpx;
   font-weight: 800;
   color: #FFFFFF;
-  margin-top: 2rpx;
+  margin-top: 4rpx;
 }
 
 .thp-port {
   font-size: 16rpx;
   color: #94A3B8;
-  margin-top: 2rpx;
+  margin-top: 4rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -967,11 +970,6 @@ page {
 /* ==================== FLIGHT SEARCH RESULTS VIEW ==================== */
 .flight-results-view {
   animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10rpx); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .results-header-bar {
