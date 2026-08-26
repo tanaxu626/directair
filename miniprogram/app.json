@@ -9,6 +9,15 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#EBF3FC"
   },
+  "navigateToMiniProgramAppIdList": [
+    "wxa13efcae54dfb141",
+    "wx233481ec57171d3e",
+    "wx04c356b7bb88f343",
+    "wx16bb1c251410884d",
+    "wxb850a7f1a30faad9",
+    "wxdd7333bfec9bf156",
+    "wxaae3c4284d720b08"
+  ],
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

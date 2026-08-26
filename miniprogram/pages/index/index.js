@@ -1067,45 +1067,46 @@ Page({
     this.closeFlightModal();
     const airlineConfig = AIRLINE_MINIPROGRAMS[flight.airlineCode] || AIRLINE_MINIPROGRAMS['MU'];
     
-    wx.showModal({
-      title: `直通【${airlineConfig.name}】官方出票`,
-      content: `即将通过微信安全通道唤起【${airlineConfig.name}】官方小程序。\n\n享受 100% 航司直营裸票价与官方退改保障，0 中介加价与套路！\n\n航司官方服务专线：${airlineConfig.hotline}`,
-      confirmText: '立即直通航司',
-      cancelText: '返回',
-      confirmColor: '#2563EB',
-      success: (res) => {
-        if (res.confirm) {
-          wx.navigateToMiniProgram({
-            appId: airlineConfig.appId,
-            path: airlineConfig.path,
-            extraData: {
-              from: 'DirectAir',
-              dep: this.data.originCode,
-              arr: this.data.destCode,
-              date: this.data.departDate,
-              flightNo: flight.flightNo
-            },
-            envVersion: 'release',
-            success(navRes) {
-              console.log('成功直通航司小程序', navRes);
-            },
-            fail(err) {
-              console.log('跳转取消或环境受限', err);
-              wx.showModal({
-                title: `${airlineConfig.name}官方直通保障`,
-                content: `您已复制航班号【${flight.flightNo}】！可直接在微信中搜索打开【${airlineConfig.name}】小程序或拨打官方服务专线 ${airlineConfig.hotline}，官方全包价 ¥${flight.ecoPrice + 50} 即可完成出票。`,
-                showCancel: true,
-                cancelText: '知道了',
-                confirmText: '复制官方热线',
-                success: (r) => {
-                  if (r.confirm) {
-                    wx.setClipboardData({ data: airlineConfig.hotline });
-                  }
+    console.log('[DirectAir] 用户点击直接唤起航司官方小程序:', airlineConfig.name, airlineConfig.appId);
+    wx.showLoading({ title: `直通${airlineConfig.name}...` });
+
+    wx.navigateToMiniProgram({
+      appId: airlineConfig.appId,
+      path: airlineConfig.path || 'pages/index/index',
+      extraData: {
+        from: 'DirectAir',
+        dep: this.data.originCode,
+        arr: this.data.destCode,
+        date: this.data.departDate,
+        flightNo: flight.flightNo
+      },
+      envVersion: 'release',
+      success: (navRes) => {
+        wx.hideLoading();
+        console.log('[DirectAir] 成功跳转航司小程序:', navRes);
+      },
+      fail: (err) => {
+        wx.hideLoading();
+        console.warn('[DirectAir] 跳转航司小程序拦截或用户返回:', err);
+        wx.showModal({
+          title: `直通【${airlineConfig.name}】官方出票`,
+          content: `已为您复制航班号【${flight.flightNo}】与官方专线【${airlineConfig.hotline}】！\n\n您可直接在微信中搜索打开【${airlineConfig.name}】官方小程序，或拨打官方服务专线出票，享 100% 官方原价 ¥${flight.ecoPrice + 50} 与无损退改保障。`,
+          confirmText: '拨打官方热线',
+          cancelText: '复制航班号',
+          confirmColor: '#2563EB',
+          success: (r) => {
+            if (r.confirm) {
+              wx.makePhoneCall({
+                phoneNumber: airlineConfig.hotline,
+                fail: () => {
+                  wx.setClipboardData({ data: airlineConfig.hotline });
                 }
               });
+            } else {
+              wx.setClipboardData({ data: flight.flightNo });
             }
-          });
-        }
+          }
+        });
       }
     });
   },
@@ -1115,23 +1116,31 @@ Page({
     const appCode = (app === 'ceair' ? 'MU' : (app === 'airchina' ? 'CA' : 'CZ'));
     const airlineConfig = AIRLINE_MINIPROGRAMS[appCode] || AIRLINE_MINIPROGRAMS['MU'];
     
-    wx.showModal({
-      title: `⚡ 直通【${airlineConfig.name}】放票抢兑`,
-      content: `雷达已为您捕获可兑换放票席位！即将跳转【${airlineConfig.name}】官方微信小程序进行随心飞/次卡/特价票抢兑。\n\n官方服务热线：${airlineConfig.hotline}`,
-      confirmText: '立即直通抢兑',
-      cancelText: '稍后',
-      confirmColor: '#059669',
-      success: (res) => {
-        if (res.confirm) {
-          wx.navigateToMiniProgram({
-            appId: airlineConfig.appId,
-            path: airlineConfig.path,
-            envVersion: 'release',
-            fail(err) {
-              wx.showToast({ title: `已复制 ${airlineConfig.name} 抢兑指令`, icon: 'none' });
+    console.log('[DirectAir] 愿望雷达直通抢兑:', airlineConfig.name);
+    wx.showLoading({ title: `直通${airlineConfig.name}抢兑...` });
+
+    wx.navigateToMiniProgram({
+      appId: airlineConfig.appId,
+      path: airlineConfig.path || 'pages/index/index',
+      envVersion: 'release',
+      success: () => {
+        wx.hideLoading();
+      },
+      fail: (err) => {
+        wx.hideLoading();
+        console.warn('[DirectAir] 雷达直通跳转受限:', err);
+        wx.showModal({
+          title: `⚡ 直通【${airlineConfig.name}】放票抢兑`,
+          content: `雷达已捕获可兑换放票席位！\n\n您可直接搜索微信小程序【${airlineConfig.name}】或拨打专线 ${airlineConfig.hotline} 抢兑次卡/特价票。`,
+          confirmText: '拨打官方专线',
+          cancelText: '知道了',
+          confirmColor: '#059669',
+          success: (r) => {
+            if (r.confirm) {
+              wx.makePhoneCall({ phoneNumber: airlineConfig.hotline });
             }
-          });
-        }
+          }
+        });
       }
     });
   },
