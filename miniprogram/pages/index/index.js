@@ -1,5 +1,5 @@
 // pages/index/index.js
-// 直航 DirectAir 100% 原生全国 250+ 机场与无机场城市多维深度接驳系统 (v1.36)
+// 直航 DirectAir 100% 原生全国 250+ 机场与无机场城市多维深度接驳系统 (v1.37)
 
 // 1. 全国 250+ 在册民航机场全量数据库
 const COMPREHENSIVE_AIRPORTS_DATABASE = [
@@ -21,20 +21,20 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
   // 2. 超级直辖市与核心商务大都会
   { code: 'PEK', city: '北京', airport: '首都国际 T2/T3', note: '国航/海航主基地 · 距市中心25km', keywords: 'beijing shoudu pek bjs bj 北京 首都' },
   { code: 'PKX', city: '北京', airport: '大兴国际', note: '东航/南航主基地 · 高铁20分钟抵京', keywords: 'beijing daxing pkx dx 北京 大兴 雄安 廊坊' },
-  { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '京沪商务核心 · 距市中心13km', keywords: 'shanghai hongqiao sha hq sh 上海 虹桥 苏州 昆山 嘉兴' },
+  { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '京沪商务核心 · 距市中心13km', keywords: 'shanghai hongqiao sha hq sh 上海 虹桥' },
   { code: 'PVG', city: '上海', airport: '浦东国际 T1/T2', note: '国际与跨洲际超级枢纽 · 距市中心30km', keywords: 'shanghai pudong pvg pd 上海 浦东 迪士尼' },
-  { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '南航超级主基地 · 华南第一枢纽', keywords: 'guangzhou baiyun can by gz 广州 白云 佛山 顺德 东莞' },
-  { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '深航主基地 · 大湾区核心极点', keywords: 'shenzhen baoan szx ba sz 深圳 宝安 东莞 虎门 中山' },
-  { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '老牌市区枢纽 · 距春熙路16km', keywords: 'chengdu shuangliu ctu sl cd 成都 双流 乐山 峨眉山 都江堰' },
+  { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '南航超级主基地 · 华南第一枢纽', keywords: 'guangzhou baiyun can by gz 广州 白云' },
+  { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '深航主基地 · 大湾区核心极点', keywords: 'shenzhen baoan szx ba sz 深圳 宝安' },
+  { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '老牌市区枢纽 · 距春熙路16km', keywords: 'chengdu shuangliu ctu sl cd 成都 双流' },
   { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '西南超级枢纽 · 18号线快线直通', keywords: 'chengdu tianfu tfu tf 成都 天府 简阳' },
   { code: 'CKG', city: '重庆', airport: '江北国际 T3', note: '成渝双城核心 · 轨道10号线直达', keywords: 'chongqing jiangbei ckg jb cq 重庆 江北' },
-  { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '长三角南翼枢纽 · 19号线快线', keywords: 'hangzhou xiaoshan hgh xs hz 杭州 萧山 绍兴 乌镇 莫干山 千岛湖' },
+  { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '长三角南翼枢纽 · 19号线快线', keywords: 'hangzhou xiaoshan hgh xs hz 杭州 萧山' },
   { code: 'TSN', city: '天津', airport: '滨海国际 T1/T2', note: '京津冀核心干线机场', keywords: 'tianjin binhai tsn bh tj 天津 滨海' },
 
   // 3. 四川 / 贵州 / 西藏
   { code: 'JZH', city: '九寨沟', airport: '黄龙机场', note: '九寨归来不看水 · 高原旅游航点', keywords: 'jiuzhaigou huanglong jzh jz 九寨沟 黄龙 九寨' },
   { code: 'DCY', city: '稻城', airport: '亚丁机场', note: '世界最高民航机场 · 蓝色星球净土', keywords: 'daocheng yading dcy yd 稻城 亚丁' },
-  { code: 'XIC', city: '西昌', airport: '青山机场', note: '航天城 · 邛海湿地度假胜地', keywords: 'xichang qingshan xic xc 西昌 青山 泸沽湖' },
+  { code: 'XIC', city: '西昌', airport: '青山机场', note: '航天城 · 邛海湿地度假胜地', keywords: 'xichang qingshan xic xc 西昌 青山' },
   { code: 'MIG', city: '绵阳', airport: '南郊机场', note: '川北核心区域枢纽', keywords: 'mianyang nanjiao mig my 绵阳' },
   { code: 'YBP', city: '宜宾', airport: '五粮液机场', note: '万里长江第一城 · 中国酒都', keywords: 'yibin wuliangye ybp yb 宜宾 五粮液 蜀南竹海' },
   { code: 'LZO', city: '泸州', airport: '云龙机场', note: '川南区域综合航运中心', keywords: 'luzhou yunlong lzo lz 泸州 云龙' },
@@ -46,14 +46,14 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
   { code: 'LLB', city: '荔波', airport: '荔波机场', note: '地球绿宝石 · 小七孔景区直通', keywords: 'libo llb lb 荔波 小七孔' },
 
   // 4. 海南 / 广东 / 广西 / 福建
-  { code: 'SYX', city: '三亚', airport: '凤凰国际 T1/T2', note: '热带滨海度假核心 · 距市区12km', keywords: 'sanya fenghuang syx fh sy 海南 三亚 凤凰 海棠湾 亚龙湾 陵水' },
-  { code: 'HAK', city: '海口', airport: '美兰国际 T1/T2', note: '海南自贸港门户 · 环岛高铁无缝接驳', keywords: 'haikou meilan hak ml hk 海口 美兰 万宁 文昌' },
-  { code: 'BAR', city: '琼海', airport: '博鳌机场', note: '博鳌亚洲论坛专用航空港', keywords: 'qionghai boao bar ba 琼海 博鳌 万宁' },
-  { code: 'ZUH', city: '珠海', airport: '金湾机场', note: '中国航展举办地 · 毗邻港珠澳大桥', keywords: 'zhuhai jinwan zuh jw zh 珠海 金湾 横琴 长隆 中山' },
+  { code: 'SYX', city: '三亚', airport: '凤凰国际 T1/T2', note: '热带滨海度假核心 · 距市区12km', keywords: 'sanya fenghuang syx fh sy 海南 三亚 凤凰' },
+  { code: 'HAK', city: '海口', airport: '美兰国际 T1/T2', note: '海南自贸港门户 · 环岛高铁无缝接驳', keywords: 'haikou meilan hak ml hk 海口 美兰' },
+  { code: 'BAR', city: '琼海', airport: '博鳌机场', note: '博鳌亚洲论坛专用航空港', keywords: 'qionghai boao bar ba 琼海 博鳌' },
+  { code: 'ZUH', city: '珠海', airport: '金湾机场', note: '中国航展举办地 · 毗邻港珠澳大桥', keywords: 'zhuhai jinwan zuh jw zh 珠海 金湾 横琴 长隆' },
   { code: 'SWA', city: '揭阳', airport: '潮汕国际机场', note: '潮汕美食与文化大都会航点', keywords: 'jieyang chaoshan swa cs jy 揭阳 潮汕 汕头 潮州 南澳岛' },
   { code: 'ZHA', city: '湛江', airport: '吴川国际机场', note: '粤西国际航空新枢纽', keywords: 'zhanjiang wuchuan zha wc zj 湛江 吴川' },
   { code: 'HUZ', city: '惠州', airport: '平潭机场', note: '深圳第二机场协同航点', keywords: 'huizhou pingtan huz hz 惠州 平潭 双月湾' },
-  { code: 'KWL', city: '桂林', airport: '两江国际 T2', note: '桂林山水甲天下 · 阳朔漓江旅游枢纽', keywords: 'guilin liangjiang kwl lj gl 桂林 两江 阳朔 龙脊梯田' },
+  { code: 'KWL', city: '桂林', airport: '两江国际 T2', note: '桂林山水甲天下 · 阳朔漓江旅游枢纽', keywords: 'guilin liangjiang kwl lj gl 桂林 两江 龙脊梯田' },
   { code: 'NNG', city: '南宁', airport: '吴圩国际 T2', note: '中国-东盟博览会主基地', keywords: 'nanning wuxu nng wx nn 南宁 吴圩 德天跨国瀑布' },
   { code: 'BHY', city: '北海', airport: '福成机场', note: '天下第一滩 · 涠洲岛度假门户', keywords: 'beihai fucheng bhy fc bh 北海 福成 涠洲岛 银滩' },
   { code: 'XMN', city: '厦门', airport: '高崎国际 T3/T4', note: '厦航主基地 · 鼓浪屿滨海花园之城', keywords: 'xiamen gaoqi xmn gq xm 厦门 高崎 鼓浪屿 漳州' },
@@ -63,29 +63,29 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
 
   // 5. 江苏 / 浙江 / 安徽 / 江西 / 湖北 / 湖南 / 河南 / 山西 / 陕西
   { code: 'NKG', city: '南京', airport: '禄口国际 T1/T2', note: '六朝古都江苏枢纽 · S1号线直通', keywords: 'nanjing lukou nkg lk nj 南京 禄口 扬州 镇江 句容 滁州' },
-  { code: 'WUX', city: '无锡', airport: '硕放国际机场', note: '苏南核心 · 服务无锡/苏州大都会', keywords: 'wuxi shuofang wux sf wx sz suzhou 无锡 硕放 苏州 昆山 宜兴 阳山' },
-  { code: 'NGB', city: '宁波', airport: '栎社国际 T2', note: '东方大港 · 浙东重要门户', keywords: 'ningbo lishe ngb ls nb 宁波 栎社 绍兴 慈溪 余姚' },
+  { code: 'WUX', city: '无锡', airport: '硕放国际机场', note: '苏南核心 · 服务无锡及周边都会', keywords: 'wuxi shuofang wux sf wx 无锡 硕放 宜兴 阳山' },
+  { code: 'NGB', city: '宁波', airport: '栎社国际 T2', note: '东方大港 · 浙东重要门户', keywords: 'ningbo lishe ngb ls nb 宁波 栎社 慈溪 余姚' },
   { code: 'WNZ', city: '温州', airport: '龙湾国际 T2', note: '民营经济之都 · 浙南枢纽', keywords: 'wenzhou longwan wnz lw wz 温州 龙湾 雁荡山' },
   { code: 'YIW', city: '义乌', airport: '义乌机场', note: '世界小商品之都国际航空港', keywords: 'yiwu yiw 金华 义乌 横店 横店影视城' },
   { code: 'HSN', city: '舟山', airport: '普陀山机场', note: '海天佛国 · 普陀山朝圣度假专用口岸', keywords: 'zhoushan putuoshan hsn pts zs 舟山 普陀山 朱家尖 东极岛' },
   { code: 'HFE', city: '合肥', airport: '新桥国际 T1', note: '科创名城 · 皖中核心枢纽', keywords: 'hefei xinqiao hfe xq hf 合肥 新桥 巢湖' },
-  { code: 'TXN', city: '黄山', airport: '屯溪国际机场', note: '天下第一奇山 · 徽州古村落门户', keywords: 'huangshan tunxi txn hs 黄山 屯溪 宏村 西递 婺源 歙县' },
+  { code: 'TXN', city: '黄山', airport: '屯溪国际机场', note: '天下第一奇山 · 徽州古村落门户', keywords: 'huangshan tunxi txn hs 黄山 屯溪 宏村 西递 歙县' },
   { code: 'KHN', city: '南昌', airport: '昌北国际 T2', note: '英雄城江西省主枢纽', keywords: 'nanchang changbei khn cb nc 南昌 昌北 庐山' },
-  { code: 'JDZ', city: '景德镇', airport: '罗家机场', note: '千年瓷都文化胜地 · 临近婺源', keywords: 'jingdezhen luojia jdz 景德镇 婺源 瓷都' },
+  { code: 'JDZ', city: '景德镇', airport: '罗家机场', note: '千年瓷都文化胜地', keywords: 'jingdezhen luojia jdz 景德镇 瓷都' },
   { code: 'JGS', city: '井冈山', airport: '井冈山机场', note: '红色摇篮名山', keywords: 'jinggangshan jgs 井冈山 吉安' },
   { code: 'WUH', city: '武汉', airport: '天河国际 T3', note: '九省通衢超级综合交通枢纽', keywords: 'wuhan tianhe wuh th wh 武汉 天河 黄鹤楼 鄂州 孝感' },
   { code: 'YIH', city: '宜昌', airport: '三峡机场', note: '世界水电名城 · 长江三峡游轮始发地', keywords: 'yichang sanxia yih sx yc 宜昌 三峡 神农架' },
   { code: 'ENH', city: '恩施', airport: '许家坪机场', note: '世界硒都 · 恩施大峡谷绝壁仙境', keywords: 'enshi xujiaping enh es 恩施 许家坪 利川' },
   { code: 'CSX', city: '长沙', airport: '黄花国际 T1/T2', note: '网红星城 · 磁浮列车站直连高铁', keywords: 'changsha huanghua csx hh cs 长沙 黄花 岳麓山 橘子洲' },
   { code: 'DYG', city: '张家界', airport: '荷花国际机场', note: '阿凡达哈利路亚悬浮山 · 天门山天险', keywords: 'zhangjiajie hehua dyg hh zjj 张家界 荷花 天门山 凤凰古城' },
-  { code: 'CGO', city: '郑州', airport: '新郑国际 T2', note: '中原腹地 · 国际超级航空客运大枢纽', keywords: 'zhengzhou xinzheng cgo xz zz 郑州 新郑 开封 少林寺 登封' },
+  { code: 'CGO', city: '郑州', airport: '新郑国际 T2', note: '中原腹地 · 国际超级航空客运大枢纽', keywords: 'zhengzhou xinzheng cgo xz zz 郑州 新郑 少林寺 登封' },
   { code: 'LYA', city: '洛阳', airport: '北郊机场', note: '十三朝古都 · 龙门石窟与牡丹之乡', keywords: 'luoyang beijiao lya ly 洛阳 北郊 龙门石窟 白马寺' },
   { code: 'XIY', city: '西安', airport: '咸阳国际 T3/T5', note: '西北第一超大枢纽 · 兵马俑大唐不夜城', keywords: 'xian xianyang xiy xy xa 西安 咸阳 兵马俑 华山' },
-  { code: 'TYN', city: '太原', airport: '武宿国际 T2', note: '三晋龙城主枢纽 · 临近平遥古城', keywords: 'taiyuan wusu tyn ws ty 太原 武宿 平遥 平遥古城 晋祠' },
+  { code: 'TYN', city: '太原', airport: '武宿国际 T2', note: '三晋龙城主枢纽', keywords: 'taiyuan wusu tyn ws ty 太原 武宿 晋祠' },
   { code: 'DAT', city: '大同', airport: '云冈机场', note: '北魏京华 · 云冈石窟与悬空寺', keywords: 'datong yungang dat yg dt 大同 云冈 悬空寺 恒山' },
 
   // 6. 山东 / 华北 / 东北 / 西北
-  { code: 'TAO', city: '青岛', airport: '胶东国际机场', note: '红瓦绿树碧海蓝天 · 胶东综合枢纽', keywords: 'qingdao jiaodong tao jd qd 青岛 胶东 崂山 威海' },
+  { code: 'TAO', city: '青岛', airport: '胶东国际机场', note: '红瓦绿树碧海蓝天 · 胶东综合枢纽', keywords: 'qingdao jiaodong tao jd qd 青岛 胶东 崂山' },
   { code: 'TNA', city: '济南', airport: '遥墙国际机场', note: '泉城济南主枢纽 · 临近泰山', keywords: 'jinan yaoqiang tna yq jn 济南 遥墙 泰安 泰山 淄博' },
   { code: 'YNT', city: '烟台', airport: '蓬莱国际 T2', note: '仙境海岸 · 鲜美烟台', keywords: 'yantai penglai ynt pl yt 烟台 蓬莱 威海 长岛' },
   { code: 'WEH', city: '威海', airport: '大水泊国际机场', note: '千里山海最美自驾滨海都市', keywords: 'weihai dashuipo weh wh 威海 大水泊 刘公岛' },
@@ -116,10 +116,10 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
   { code: 'TPE', city: '台北', airport: '桃园国际 T2', note: '华航/长荣航空核心主基地', keywords: 'taipei taoyuan tpe tb 台北 桃园 九份 101' },
   { code: 'TSA', city: '台北', airport: '松山机场', note: '台北市区核心直飞口岸', keywords: 'taipei songshan tsa ss 台北 松山 市区' },
   { code: 'TYO', city: '东京', airport: '羽田 HND / 成田 NRT', note: '日航/全日空超级双场枢纽', keywords: 'tokyo dongjing haneda narita tyo hnd nrt 东京 羽田 成田 银座 新宿' },
-  { code: 'OSA', city: '大阪', airport: '关西国际 KIX', note: '关西空港人工岛 · 临近京都奈良', keywords: 'osaka daban kansai osa kix 大阪 关西 京都 奈良 神户 环球影城' },
+  { code: 'OSA', city: '大阪', airport: '关西国际 KIX', note: '关西空港人工岛 · 临近京都奈良', keywords: 'osaka daban kansai osa kix 大阪 关西 环球影城' },
   { code: 'SEL', city: '首尔', airport: '仁川 ICN / 金浦 GMP', note: '大韩/韩亚航空主基地', keywords: 'seoul shouer incheon sel icn gmp 首尔 仁川 金浦 明洞 弘大' },
   { code: 'SIN', city: '新加坡', airport: '樟宜国际 T1-T4', note: '新航主基地 · 连续多年世界最佳机场', keywords: 'singapore xinjiapo changi sin 新加坡 樟宜 滨海湾 圣淘沙' },
-  { code: 'BKK', city: '曼谷', airport: '素万那普 BKK', note: '东南亚旅游中转大枢纽 · 临近芭提雅', keywords: 'bangkok mangu suvarnabhumi bkk 曼谷 素万那普 芭提雅' },
+  { code: 'BKK', city: '曼谷', airport: '素万那普 BKK', note: '东南亚旅游中转大枢纽', keywords: 'bangkok mangu suvarnabhumi bkk 曼谷 素万那普' },
   { code: 'HKT', city: '普吉岛', airport: '普吉国际机场', note: '安达曼海度假胜地直飞口岸', keywords: 'pujidao phuket hkt 普吉岛 皮皮岛 斯米兰' },
   { code: 'KUL', city: '吉隆坡', airport: '吉隆坡国际 T1/T2', note: '马航/亚航超级枢纽', keywords: 'jilongpo kualalumpur kul 吉隆坡 双子塔 亚航' },
   { code: 'DPS', city: '巴厘岛', airport: '登巴萨努拉莱国际机场', note: '蜜月度假海岛胜地', keywords: 'balidao bali dps denpasar 巴厘岛 登巴萨 乌布 库塔' },
@@ -134,11 +134,11 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
   { code: 'SYD', city: '悉尼', airport: '金斯福德·史密斯国际机场', note: '大洋洲最大跨国综合航空枢纽', keywords: 'sydney xini syd 悉尼 歌剧院 邦迪海滩' }
 ];
 
-// 2. 无独立民航机场的多维深度接驳知识图谱 (丰富包含：距离/高速公路/高铁联运/尊享服务/推荐标签)
+// 2. 无独立民航机场的多维深度接驳知识图谱 (精准涵盖：苏州/乌镇/阳朔/莫干山/乐山/平遥/东莞/顺德/中山/千岛湖/万宁/京都/芭提雅等)
 const NO_AIRPORT_NEARBY_MAP = {
   // 江浙水乡 / 环沪圈
   '苏州': {
-    reason: '苏州市区及下辖市（昆山/常熟/张家港/太仓）暂无民航客运机场。推荐飞往以下周边机场，换乘城际高铁或高速直通：',
+    reason: '苏州市区及下辖县市（昆山/常熟/张家港/太仓）暂无民航客运机场。为您精选以下核心周边机场，换乘城际高铁或高速直通：',
     nearby: [
       {
         code: 'SHA',
@@ -148,8 +148,8 @@ const NO_AIRPORT_NEARBY_MAP = {
         score: '9.9',
         distance: '距苏州市区 65 km',
         highway: '京沪高速直达 · 约 50 分钟 (打车约 ¥180)',
-        rail: '虹桥高铁站 22 分钟直达苏州站 (5~10分钟/班 · ¥39.5)',
-        service: '苏州中心城市航站楼支持异地托运行李/值机，空手出行',
+        rail: '虹桥高铁站 22 分钟直达苏州站 (5~10分/班 · ¥39.5)',
+        service: '苏州中心城市航站楼支持异地托运/值机，空手出行',
         bestFor: '全国航班极密集 · 票价常年最优惠 · 商务出行首选'
       },
       {
@@ -175,6 +175,35 @@ const NO_AIRPORT_NEARBY_MAP = {
         rail: '机场磁浮/地铁转高铁至苏州站 (约 80 分钟)',
         service: '浦东机场客运站有直通苏州各区高频定制商务大巴',
         bestFor: '港澳台、欧美日韩及跨洲际国际长途直飞航线'
+      }
+    ]
+  },
+  '昆山': {
+    reason: '昆山暂无客运机场。毗邻上海虹桥与无锡硕放：',
+    nearby: [
+      {
+        code: 'SHA',
+        city: '上海',
+        airport: '虹桥国际 T2',
+        tag: '🏆 高铁 15 分钟直通昆山南',
+        score: '9.9',
+        distance: '距昆山市区仅 35 km',
+        highway: '京沪高速直达 · 约 30 分钟',
+        rail: '虹桥站高铁 15 分钟直达昆山南站 (¥14.5)',
+        service: '上海地铁 11 号线已直通昆山花桥',
+        bestFor: '昆山商务出差、阳澄湖吃蟹'
+      },
+      {
+        code: 'WUX',
+        city: '无锡',
+        airport: '硕放国际机场',
+        tag: '🚗 沪宁高速直达',
+        score: '9.3',
+        distance: '距昆山 55 km',
+        highway: '沪蓉高速直达 · 约 45 分钟',
+        rail: '高铁 25 分钟达昆山南站',
+        service: '苏南区域便捷支线',
+        bestFor: '苏南短途自驾'
       }
     ]
   },
@@ -830,7 +859,7 @@ Page({
     this.setData({ currentView: 'home' });
   },
 
-  // ==================== FULLSCREEN CITY SEARCH (v1.36 多维周边接驳版) ====================
+  // ==================== FULLSCREEN CITY SEARCH (v1.37 优先智能接驳版) ====================
   openCityPicker(e) {
     const type = e.currentTarget.dataset.type;
     this.setData({
@@ -860,7 +889,29 @@ Page({
       return;
     }
 
-    // 1. Check direct matches in 250+ airport database
+    // 1. Check if user searched for a known non-airport destination (苏州/乌镇/阳朔/莫干山/乐山/平遥/东莞/顺德/中山/千岛湖/万宁/京都/芭提雅...)
+    let noDirectInfo = null;
+    for (const [cityName, info] of Object.entries(NO_AIRPORT_NEARBY_MAP)) {
+      if (query.includes(cityName.toLowerCase()) || cityName.toLowerCase().includes(query)) {
+        noDirectInfo = {
+          queryName: cityName,
+          reason: info.reason,
+          nearby: info.nearby
+        };
+        break;
+      }
+    }
+
+    // IF it is a known non-airport city -> DIRECTLY trigger the rich transit recommendation guide!
+    if (noDirectInfo) {
+      this.setData({
+        filteredMatchList: [],
+        noDirectAirportInfo: noDirectInfo
+      });
+      return;
+    }
+
+    // 2. Direct exact/fuzzy matches in 250+ airport database (by City, Airport, Code)
     const filtered = this.data.allAirports.filter(item => {
       return (
         item.code.toLowerCase().includes(query) ||
@@ -870,21 +921,8 @@ Page({
       );
     });
 
-    // 2. Check if the user searched for a known non-airport city/scenic spot
-    let noDirectInfo = null;
-    for (const [cityName, info] of Object.entries(NO_AIRPORT_NEARBY_MAP)) {
-      if (query.includes(cityName.toLowerCase()) || cityName.toLowerCase().includes(query)) {
-        noDirectInfo = {
-          queryName: raw.trim(),
-          reason: info.reason,
-          nearby: info.nearby
-        };
-        break;
-      }
-    }
-
-    // If zero direct airport matches AND no specific city mapping found, generate intelligent fallback recommendations
-    if (filtered.length === 0 && !noDirectInfo) {
+    // 3. If zero direct airport matches AND no specific city mapping found, generate intelligent fallback recommendations
+    if (filtered.length === 0) {
       noDirectInfo = {
         queryName: raw.trim(),
         reason: `“${raw.trim()}”当地目前暂无独立民航客运直航机场。推荐您选择直达全国各大城市的超级航空中转枢纽，再通过城际高铁或高速专线抵达：`,
