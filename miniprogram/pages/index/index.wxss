@@ -1,5 +1,5 @@
 /** pages/index/index.wxss **/
-/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.31) */
+/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.32 - Top Spotlight Architecture) */
 
 page {
   background-color: #07090E;
@@ -13,7 +13,7 @@ page {
   box-sizing: border-box;
 }
 
-/* ==================== 1. FULLSCREEN CITY SEARCH VIEW (v1.31 防遮挡全屏检索) ==================== */
+/* ==================== 1. TOP SPOTLIGHT CITY SEARCH (v1.32 顶部聚光灯架构) ==================== */
 .fullscreen-city-view {
   position: fixed;
   top: 0;
@@ -21,38 +21,46 @@ page {
   right: 0;
   bottom: 0;
   background-color: #07090E;
-  z-index: 9999;
+  z-index: 99999;
   display: flex;
   flex-direction: column;
-  padding: env(safe-area-inset-top) 24rpx env(safe-area-inset-bottom);
+  padding: env(safe-area-inset-top) 24rpx 0;
   box-sizing: border-box;
-  animation: slideInUp 0.25s ease-out;
+  animation: fadeInDown 0.2s ease-out;
 }
 
-@keyframes slideInUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20rpx); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.fs-nav-header {
+.top-spotlight-bar {
+  display: flex;
+  flex-direction: column;
+  background: #07090E;
+  padding-bottom: 16rpx;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fs-nav-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16rpx 0 20rpx;
+  padding: 12rpx 0 18rpx;
 }
 
 .fs-back-btn {
   display: flex;
   align-items: center;
   background: #1E293B;
-  padding: 10rpx 20rpx;
-  border-radius: 24rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 20rpx;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .fs-back-arrow {
   color: #38BDF8;
-  font-size: 30rpx;
+  font-size: 28rpx;
   margin-right: 6rpx;
 }
 
@@ -71,29 +79,28 @@ page {
 
 .fs-cancel-text {
   font-size: 24rpx;
-  color: #94A3B8;
-  font-weight: 700;
-  padding: 10rpx 16rpx;
+  color: #38BDF8;
+  font-weight: 800;
+  padding: 8rpx 16rpx;
 }
 
-.fs-search-bar {
+.fs-search-box-top {
   display: flex;
   align-items: center;
   background: #0F131C;
-  border: 1.5px solid #0284C7;
+  border: 1.5px solid #DFA938;
   border-radius: 24rpx;
-  padding: 18rpx 24rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 8rpx 24rpx rgba(2, 132, 199, 0.25);
+  padding: 16rpx 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(223, 169, 56, 0.25);
 }
 
 .fs-search-icon {
-  font-size: 30rpx;
-  color: #38BDF8;
+  font-size: 28rpx;
+  color: #DFA938;
   margin-right: 14rpx;
 }
 
-.fs-input {
+.fs-input-top {
   flex: 1;
   font-size: 28rpx;
   color: #FFFFFF;
@@ -112,263 +119,230 @@ page {
   font-size: 22rpx;
 }
 
-.fs-scroll-area {
-  flex: 1;
-  height: 75vh;
+/* Scroll Container is restricted to the upper 48% of screen, 100% immune to keyboard occlusion! */
+.fs-top-scroll-container {
+  max-height: 48vh;
+  height: 48vh;
   box-sizing: border-box;
+  padding-top: 16rpx;
 }
 
-.fs-results-group {
+.top-match-group {
   display: flex;
   flex-direction: column;
 }
 
-.fs-group-header {
+.top-group-label-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 16rpx;
+  margin-bottom: 14rpx;
   padding: 0 4rpx;
 }
 
-.fs-group-title {
+.top-group-label {
   font-size: 24rpx;
   font-weight: 800;
   color: #38BDF8;
 }
 
-.fs-count-tag {
+.top-hint-label {
   font-size: 20rpx;
   color: #64748B;
 }
 
-.fs-match-list {
+.top-compact-list {
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: 12rpx;
 }
 
-.fs-match-item {
+.top-match-row {
   background: #0F131C;
-  border-radius: 24rpx;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 22rpx 24rpx;
+  border-radius: 20rpx;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16rpx 20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.6);
 }
 
-.fs-match-left {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.fs-code-badge {
-  width: 84rpx;
-  height: 84rpx;
-  border-radius: 20rpx;
+.tm-badge {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 18rpx;
   background: linear-gradient(135deg, #1E293B, #0F172A);
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #38BDF8;
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 18rpx;
+  margin-right: 16rpx;
 }
 
-.fs-match-info {
+.tm-info {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.fs-match-city-row {
+.tm-name-line {
   display: flex;
   align-items: baseline;
 }
 
-.fs-city-name {
-  font-size: 28rpx;
+.tm-city {
+  font-size: 26rpx;
   font-weight: 900;
   color: #FFFFFF;
-  margin-right: 12rpx;
+  margin-right: 10rpx;
 }
 
-.fs-airport-name {
+.tm-airport {
   font-size: 22rpx;
   font-weight: 700;
   color: #CBD5E1;
 }
 
-.fs-airport-note {
+.tm-note {
   font-size: 18rpx;
   color: #94A3B8;
-  margin-top: 4rpx;
+  margin-top: 2rpx;
 }
 
-.fs-select-btn {
+.tm-cta {
   background: #0284C7;
   color: #FFFFFF;
   font-size: 20rpx;
   font-weight: 800;
-  padding: 10rpx 20rpx;
-  border-radius: 18rpx;
-  margin-left: 12rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 16rpx;
+  margin-left: 10rpx;
 }
 
-.fs-custom-card {
+.tm-cta-gold {
+  background: #D97706;
+}
+
+.top-custom-row {
   background: #0F131C;
-  border: 1.5px dashed #38BDF8;
-  border-radius: 24rpx;
-  padding: 24rpx;
+  border: 1.5px dashed #DFA938;
+  border-radius: 20rpx;
+  padding: 20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10rpx;
-}
-
-.fs-custom-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.fs-custom-title {
-  font-size: 26rpx;
-  font-weight: 800;
-  color: #38BDF8;
-}
-
-.fs-custom-sub {
-  font-size: 20rpx;
-  color: #94A3B8;
-  margin-top: 4rpx;
-}
-
-.fs-custom-btn {
-  background: linear-gradient(90deg, #0284C7, #0369A1);
-  color: #FFFFFF;
-  font-size: 22rpx;
-  font-weight: 800;
-  padding: 12rpx 22rpx;
-  border-radius: 18rpx;
 }
 
 /* Sections in Default State */
-.fs-section {
-  margin-bottom: 28rpx;
+.top-sec-block {
+  margin-bottom: 22rpx;
 }
 
-.fs-sec-header-row {
+.top-block-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 16rpx;
+  margin-bottom: 12rpx;
 }
 
-.fs-sec-title {
-  font-size: 24rpx;
+.top-block-title {
+  font-size: 22rpx;
   font-weight: 800;
   color: #DFA938;
-  margin-bottom: 14rpx;
+  margin-bottom: 12rpx;
   display: block;
 }
 
-.fs-sec-hint {
+.top-block-sub {
   font-size: 18rpx;
   color: #64748B;
 }
 
-.fs-tag-row {
+.top-quick-pills-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 14rpx;
+  gap: 12rpx;
 }
 
-.fs-loc-pill {
+.top-pill-loc {
   display: flex;
   align-items: center;
   background: rgba(6, 78, 59, 0.7);
   border: 1px solid rgba(16, 185, 129, 0.5);
-  border-radius: 24rpx;
-  padding: 14rpx 22rpx;
+  border-radius: 20rpx;
+  padding: 10rpx 18rpx;
 }
 
-.loc-pin { font-size: 24rpx; margin-right: 8rpx; }
-.loc-code { font-size: 26rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 8rpx; }
-.loc-text { font-size: 22rpx; font-weight: 700; color: #FFFFFF; }
+.loc-dot { color: #34D399; font-size: 18rpx; margin-right: 6rpx; }
+.loc-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 6rpx; }
+.loc-name { font-size: 20rpx; font-weight: 700; color: #FFFFFF; }
 
-.fs-history-pill {
+.top-pill-hist {
   display: flex;
   align-items: baseline;
   background: #1E293B;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20rpx;
-  padding: 12rpx 20rpx;
+  border-radius: 18rpx;
+  padding: 10rpx 16rpx;
 }
 
-.hp-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 8rpx; }
-.hp-city { font-size: 22rpx; color: #CBD5E1; }
+.hist-code { font-size: 22rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 6rpx; }
+.hist-name { font-size: 20rpx; color: #CBD5E1; }
 
-.fs-grid-2col {
+.top-grid-3col {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16rpx;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12rpx;
 }
 
-.fs-hub-card {
+.top-hub-pill {
   background: #0F131C;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 22rpx;
-  padding: 20rpx;
+  border-radius: 18rpx;
+  padding: 14rpx 12rpx;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.fs-hub-active {
+.top-hub-active {
   background: #0284C7;
   border-color: #38BDF8;
 }
 
-.hub-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.hub-code {
-  font-size: 34rpx;
+.thp-code {
+  font-size: 28rpx;
   font-weight: 900;
   font-family: monospace;
   color: #DFA938;
 }
 
-.fs-hub-active .hub-code { color: #FFFFFF; }
+.top-hub-active .thp-code { color: #FFFFFF; }
 
-.hub-city {
-  font-size: 24rpx;
+.thp-city {
+  font-size: 22rpx;
   font-weight: 800;
   color: #FFFFFF;
+  margin-top: 2rpx;
 }
 
-.hub-airport {
-  font-size: 20rpx;
-  font-weight: 700;
-  color: #CBD5E1;
-  margin-top: 4rpx;
-}
-
-.hub-note {
+.thp-port {
   font-size: 16rpx;
-  color: #64748B;
-  margin-top: 6rpx;
+  color: #94A3B8;
+  margin-top: 2rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.fs-hub-active .hub-note { color: #E0F2FE; }
+.top-hub-active .thp-port { color: #E0F2FE; }
 
 /* ==================== 2. BRAND BAR & GENERAL STYLES ==================== */
 .brand-bar {

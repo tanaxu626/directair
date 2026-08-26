@@ -1,125 +1,113 @@
 <!-- pages/index/index.wxml -->
-<!-- 直航 DirectAir 100% 原生全屏流体城市检索与防遮挡版 (v1.31) -->
+<!-- 直航 DirectAir 100% 原生顶部聚光灯式城市检索与绝对防遮挡版 (v1.32) -->
 <view class="container">
 
-  <!-- ==================== VIEW 1: FULLSCREEN CITY SEARCH (全屏独立防遮挡搜索页) ==================== -->
+  <!-- ==================== VIEW 1: TOP-ANCHORED SPOTLIGHT CITY SEARCH (顶部强固定·绝不沉底) ==================== -->
   <view class="fullscreen-city-view" wx:if="{{currentView === 'city_search_fullscreen'}}">
     
-    <!-- Top Nav Header -->
-    <view class="fs-nav-header">
-      <view class="fs-back-btn" bindtap="closeCitySearchFullscreen">
-        <text class="fs-back-arrow">←</text>
-        <text class="fs-back-text">返回</text>
+    <!-- 1. Top Fixed Navigation Bar -->
+    <view class="top-spotlight-bar">
+      <view class="fs-nav-top-row">
+        <view class="fs-back-btn" bindtap="closeCitySearchFullscreen">
+          <text class="fs-back-arrow">←</text>
+          <text class="fs-back-text">返回</text>
+        </view>
+        <text class="fs-nav-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}城市</text>
+        <text class="fs-cancel-text" bindtap="closeCitySearchFullscreen">完成</text>
       </view>
-      <text class="fs-nav-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}城市 / 机场</text>
-      <text class="fs-cancel-text" bindtap="closeCitySearchFullscreen">取消</text>
+
+      <!-- 2. Top Prominent Search Input Box -->
+      <view class="fs-search-box-top">
+        <text class="fs-search-icon">🔍</text>
+        <input class="fs-input-top" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{true}}" confirm-type="search" adjust-position="{{false}}" />
+        <view class="fs-clear-btn" wx:if="{{citySearchQuery}}" bindtap="clearSearchQuery">✕</view>
+      </view>
     </view>
 
-    <!-- Sticky Search Input Bar -->
-    <view class="fs-search-bar">
-      <text class="fs-search-icon">🔍</text>
-      <input class="fs-input" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA / CTU)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{true}}" confirm-type="search" />
-      <view class="fs-clear-btn" wx:if="{{citySearchQuery}}" bindtap="clearSearchQuery">✕</view>
-    </view>
+    <!-- 3. Top-Half Scroll Container (严格锁定在上半屏幕 45% 区域，绝不沉底被键盘遮挡) -->
+    <scroll-view class="fs-top-scroll-container" scroll-y="true">
 
-    <!-- Scrollable Content Area (自适应键盘高度) -->
-    <scroll-view class="fs-scroll-area" scroll-y="true">
-
-      <!-- ================= SCENARIO A: ACTIVE MATCH RESULTS ================= -->
-      <view class="fs-results-group" wx:if="{{citySearchQuery.length > 0}}">
-        <view class="fs-group-header">
-          <text class="fs-group-title">🎯 搜索匹配航点</text>
-          <text class="fs-count-tag">找到 {{filteredMatchList.length}} 个可用机场</text>
+      <!-- ================= SCENARIO A: ACTIVE MATCH RESULTS (顶部下拉匹配结果) ================= -->
+      <view class="top-match-group" wx:if="{{citySearchQuery.length > 0}}">
+        <view class="top-group-label-row">
+          <text class="top-group-label">🎯 匹配航点 (共 {{filteredMatchList.length}} 项)</text>
+          <text class="top-hint-label">点击直接选定</text>
         </view>
 
-        <view class="fs-match-list">
+        <view class="top-compact-list">
           <block wx:for="{{filteredMatchList}}" wx:key="code">
-            <view class="fs-match-item" bindtap="selectCityItem" data-item="{{item}}">
-              <view class="fs-match-left">
-                <view class="fs-code-badge">{{item.code}}</view>
-                <view class="fs-match-info">
-                  <view class="fs-match-city-row">
-                    <text class="fs-city-name">{{item.city}}</text>
-                    <text class="fs-airport-name">{{item.airport}}</text>
-                  </view>
-                  <text class="fs-airport-note">{{item.note}}</text>
+            <view class="top-match-row" bindtap="selectCityItem" data-item="{{item}}">
+              <view class="tm-badge">{{item.code}}</view>
+              <view class="tm-info">
+                <view class="tm-name-line">
+                  <text class="tm-city">{{item.city}}</text>
+                  <text class="tm-airport">{{item.airport}}</text>
                 </view>
+                <text class="tm-note">{{item.note}}</text>
               </view>
-              <view class="fs-select-btn">选择 ></view>
+              <view class="tm-cta">选择 ></view>
             </view>
           </block>
 
-          <!-- Custom Query Option -->
-          <view class="fs-custom-card" wx:if="{{filteredMatchList.length === 0}}" bindtap="applyCustomSearchCity">
-            <view class="fs-custom-info">
-              <text class="fs-custom-title">输入航点：“{{citySearchQuery}}”</text>
-              <text class="fs-custom-sub">直接应用为此段行程的{{selectingType === 'origin' ? '出发' : '到达'}}地</text>
+          <!-- Custom City Fallback -->
+          <view class="top-custom-row" wx:if="{{filteredMatchList.length === 0}}" bindtap="applyCustomSearchCity">
+            <view class="tm-info">
+              <text class="tm-city">使用自定义输入：“{{citySearchQuery}}”</text>
+              <text class="tm-note">直接应用为此航段{{selectingType === 'origin' ? '出发' : '到达'}}地</text>
             </view>
-            <view class="fs-custom-btn">确定应用</view>
+            <view class="tm-cta tm-cta-gold">确定应用</view>
           </view>
         </view>
       </view>
 
-      <!-- ================= SCENARIO B: DEFAULT INACTIVE STATE ================= -->
-      <view class="fs-default-group" wx:if="{{!citySearchQuery}}">
+      <!-- ================= SCENARIO B: DEFAULT TOP HOT HUBS (顶部高频商务微胶囊) ================= -->
+      <view class="top-default-group" wx:if="{{!citySearchQuery}}">
         
-        <!-- 1. Current Location GPS -->
-        <view class="fs-section">
-          <text class="fs-sec-title">📍 当前定位航点</text>
-          <view class="fs-tag-row">
-            <view class="fs-loc-pill" bindtap="selectCityItem" data-item="{{domesticHubs[0]}}">
-              <text class="loc-pin">🎯</text>
+        <!-- Quick Location Pin -->
+        <view class="top-sec-block">
+          <text class="top-block-title">📍 当前定位 / 历史常用</text>
+          <view class="top-quick-pills-row">
+            <view class="top-pill-loc" bindtap="selectCityItem" data-item="{{domesticHubs[0]}}">
+              <text class="loc-dot">●</text>
               <text class="loc-code">PEK</text>
-              <text class="loc-text">北京首都国际 (当前)</text>
+              <text class="loc-name">北京首都 (定位)</text>
             </view>
-          </view>
-        </view>
-
-        <!-- 2. History Searches -->
-        <view class="fs-section" wx:if="{{historyCities.length > 0}}">
-          <text class="fs-sec-title">🕒 最近搜索</text>
-          <view class="fs-tag-row">
             <block wx:for="{{historyCities}}" wx:key="code">
-              <view class="fs-history-pill" bindtap="selectCityItem" data-item="{{item}}">
-                <text class="hp-code">{{item.code}}</text>
-                <text class="hp-city">{{item.city}}</text>
+              <view class="top-pill-hist" bindtap="selectCityItem" data-item="{{item}}">
+                <text class="hist-code">{{item.code}}</text>
+                <text class="hist-name">{{item.city}}</text>
               </view>
             </block>
           </view>
         </view>
 
-        <!-- 3. Popular Domestic Hubs (18 Major Hubs) -->
-        <view class="fs-section">
-          <view class="fs-sec-header-row">
-            <text class="fs-sec-title">🔥 热门商务快线大都会</text>
-            <text class="fs-sec-hint">点击即选 · 免受键盘打扰</text>
+        <!-- 18 Top Domestic Hubs in 3-Col Top Grid -->
+        <view class="top-sec-block">
+          <view class="top-block-header">
+            <text class="top-block-title">🔥 热门大都会枢纽 (点击秒选)</text>
+            <text class="top-block-sub">京沪广深 · 成渝大都会</text>
           </view>
-          <view class="fs-grid-2col">
+          
+          <view class="top-grid-3col">
             <block wx:for="{{domesticHubs}}" wx:key="code">
-              <view class="fs-hub-card {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'fs-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
-                <view class="hub-top">
-                  <text class="hub-code">{{item.code}}</text>
-                  <text class="hub-city">{{item.city}}</text>
-                </view>
-                <text class="hub-airport">{{item.airport}}</text>
-                <text class="hub-note">{{item.note}}</text>
+              <view class="top-hub-pill {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'top-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
+                <text class="thp-code">{{item.code}}</text>
+                <text class="thp-city">{{item.city}}</text>
+                <text class="thp-port">{{item.airport}}</text>
               </view>
             </block>
           </view>
         </view>
 
-        <!-- 4. International Gateways (10 Gateways) -->
-        <view class="fs-section">
-          <text class="fs-sec-title">🌏 港澳台与国际主要枢纽</text>
-          <view class="fs-grid-2col">
+        <!-- International Hubs -->
+        <view class="top-sec-block">
+          <text class="top-block-title">🌏 港澳台与国际核心枢纽</text>
+          <view class="top-grid-3col">
             <block wx:for="{{internationalHubs}}" wx:key="code">
-              <view class="fs-hub-card {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'fs-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
-                <view class="hub-top">
-                  <text class="hub-code">{{item.code}}</text>
-                  <text class="hub-city">{{item.city}}</text>
-                </view>
-                <text class="hub-airport">{{item.airport}}</text>
-                <text class="hub-note">{{item.note}}</text>
+              <view class="top-hub-pill {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'top-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
+                <text class="thp-code">{{item.code}}</text>
+                <text class="thp-city">{{item.city}}</text>
+                <text class="thp-port">{{item.airport}}</text>
               </view>
             </block>
           </view>
@@ -153,7 +141,7 @@
     </view>
   </view>
 
-  <!-- ==================== VIEW 3: FLIGHT SEARCH RESULTS (搜索结果列表) ==================== -->
+  <!-- ==================== VIEW 3: FLIGHT SEARCH RESULTS ==================== -->
   <view class="flight-results-view" wx:if="{{currentView === 'flight_results'}}">
     
     <!-- Top Return & Summary Bar -->
@@ -310,7 +298,7 @@
           <view class="seg-btn {{tripType === 'DAY_RETURN' ? 'seg-active-gold' : ''}}" bindtap="setTripType" data-type="DAY_RETURN">当日往返</view>
         </view>
 
-        <!-- City Pair Capsule (点击唤起全屏防遮挡搜索) -->
+        <!-- City Pair Capsule (点击唤起顶部聚光灯搜索) -->
         <view class="city-pair-box">
           <view class="city-col city-left" bindtap="openCityPicker" data-type="origin">
             <text class="city-hint-label">出发城市 (可输入/选择)</text>
