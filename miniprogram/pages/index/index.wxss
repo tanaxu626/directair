@@ -1,5 +1,5 @@
 /** pages/index/index.wxss **/
-/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.3.0) */
+/* DirectAir Skyward Dark Velvet Luxury Style (100% Native v1.31) */
 
 page {
   background-color: #07090E;
@@ -13,7 +13,364 @@ page {
   box-sizing: border-box;
 }
 
-/* 1. Top Brand Header */
+/* ==================== 1. FULLSCREEN CITY SEARCH VIEW (v1.31 防遮挡全屏检索) ==================== */
+.fullscreen-city-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #07090E;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) 24rpx env(safe-area-inset-bottom);
+  box-sizing: border-box;
+  animation: slideInUp 0.25s ease-out;
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.fs-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0 20rpx;
+}
+
+.fs-back-btn {
+  display: flex;
+  align-items: center;
+  background: #1E293B;
+  padding: 10rpx 20rpx;
+  border-radius: 24rpx;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.fs-back-arrow {
+  color: #38BDF8;
+  font-size: 30rpx;
+  margin-right: 6rpx;
+}
+
+.fs-back-text {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.fs-nav-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #DFA938;
+  letter-spacing: 1rpx;
+}
+
+.fs-cancel-text {
+  font-size: 24rpx;
+  color: #94A3B8;
+  font-weight: 700;
+  padding: 10rpx 16rpx;
+}
+
+.fs-search-bar {
+  display: flex;
+  align-items: center;
+  background: #0F131C;
+  border: 1.5px solid #0284C7;
+  border-radius: 24rpx;
+  padding: 18rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(2, 132, 199, 0.25);
+}
+
+.fs-search-icon {
+  font-size: 30rpx;
+  color: #38BDF8;
+  margin-right: 14rpx;
+}
+
+.fs-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  height: 52rpx;
+}
+
+.fs-clear-btn {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: #1E293B;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+}
+
+.fs-scroll-area {
+  flex: 1;
+  height: 75vh;
+  box-sizing: border-box;
+}
+
+.fs-results-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+  padding: 0 4rpx;
+}
+
+.fs-group-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #38BDF8;
+}
+
+.fs-count-tag {
+  font-size: 20rpx;
+  color: #64748B;
+}
+
+.fs-match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.fs-match-item {
+  background: #0F131C;
+  border-radius: 24rpx;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22rpx 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.5);
+}
+
+.fs-match-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.fs-code-badge {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, #1E293B, #0F172A);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38BDF8;
+  font-size: 30rpx;
+  font-weight: 900;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18rpx;
+}
+
+.fs-match-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fs-match-city-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.fs-city-name {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-right: 12rpx;
+}
+
+.fs-airport-name {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #CBD5E1;
+}
+
+.fs-airport-note {
+  font-size: 18rpx;
+  color: #94A3B8;
+  margin-top: 4rpx;
+}
+
+.fs-select-btn {
+  background: #0284C7;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  font-weight: 800;
+  padding: 10rpx 20rpx;
+  border-radius: 18rpx;
+  margin-left: 12rpx;
+}
+
+.fs-custom-card {
+  background: #0F131C;
+  border: 1.5px dashed #38BDF8;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.fs-custom-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-custom-title {
+  font-size: 26rpx;
+  font-weight: 800;
+  color: #38BDF8;
+}
+
+.fs-custom-sub {
+  font-size: 20rpx;
+  color: #94A3B8;
+  margin-top: 4rpx;
+}
+
+.fs-custom-btn {
+  background: linear-gradient(90deg, #0284C7, #0369A1);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  font-weight: 800;
+  padding: 12rpx 22rpx;
+  border-radius: 18rpx;
+}
+
+/* Sections in Default State */
+.fs-section {
+  margin-bottom: 28rpx;
+}
+
+.fs-sec-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.fs-sec-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #DFA938;
+  margin-bottom: 14rpx;
+  display: block;
+}
+
+.fs-sec-hint {
+  font-size: 18rpx;
+  color: #64748B;
+}
+
+.fs-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.fs-loc-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(6, 78, 59, 0.7);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 24rpx;
+  padding: 14rpx 22rpx;
+}
+
+.loc-pin { font-size: 24rpx; margin-right: 8rpx; }
+.loc-code { font-size: 26rpx; font-weight: 900; font-family: monospace; color: #34D399; margin-right: 8rpx; }
+.loc-text { font-size: 22rpx; font-weight: 700; color: #FFFFFF; }
+
+.fs-history-pill {
+  display: flex;
+  align-items: baseline;
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20rpx;
+  padding: 12rpx 20rpx;
+}
+
+.hp-code { font-size: 24rpx; font-weight: 900; font-family: monospace; color: #DFA938; margin-right: 8rpx; }
+.hp-city { font-size: 22rpx; color: #CBD5E1; }
+
+.fs-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+}
+
+.fs-hub-card {
+  background: #0F131C;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.fs-hub-active {
+  background: #0284C7;
+  border-color: #38BDF8;
+}
+
+.hub-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.hub-code {
+  font-size: 34rpx;
+  font-weight: 900;
+  font-family: monospace;
+  color: #DFA938;
+}
+
+.fs-hub-active .hub-code { color: #FFFFFF; }
+
+.hub-city {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.hub-airport {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #CBD5E1;
+  margin-top: 4rpx;
+}
+
+.hub-note {
+  font-size: 16rpx;
+  color: #64748B;
+  margin-top: 6rpx;
+}
+
+.fs-hub-active .hub-note { color: #E0F2FE; }
+
+/* ==================== 2. BRAND BAR & GENERAL STYLES ==================== */
 .brand-bar {
   display: flex;
   align-items: center;
@@ -106,7 +463,7 @@ page {
   color: #CBD5E1;
 }
 
-/* 2. Common Card Style */
+/* 3. Common Card Style */
 .card {
   background: #0F131C;
   border-radius: 32rpx;
@@ -168,7 +525,7 @@ page {
   display: block;
 }
 
-/* 3. Section Title Bar */
+/* 4. Section Title Bar */
 .section-title-row {
   display: flex;
   align-items: center;
@@ -195,7 +552,7 @@ page {
   font-weight: 700;
 }
 
-/* 4. Compact Live Countdown Capsule */
+/* 5. Live Countdown Capsule */
 .countdown-capsule {
   background: linear-gradient(135deg, #131722, #0A0D14);
   border-radius: 28rpx;
@@ -339,7 +696,7 @@ page {
   box-shadow: 0 0 8rpx rgba(223, 169, 56, 0.9);
 }
 
-/* 5. Search Capsule */
+/* 6. Search Capsule */
 .segmented-control {
   display: flex;
   background: #07090E;
@@ -518,7 +875,7 @@ page {
   margin-right: 12rpx;
 }
 
-/* 6. Radar Alert Card */
+/* 7. Radar Alert Card */
 .radar-alert-card {
   background: linear-gradient(90deg, rgba(6, 78, 59, 0.7), #0F131C);
   border: 1px solid rgba(16, 185, 129, 0.45);
@@ -594,7 +951,7 @@ page {
   display: block;
 }
 
-/* 7. Quick Tools Grid */
+/* 8. Quick Tools Grid */
 .quick-tools-grid {
   display: flex;
   gap: 16rpx;
@@ -952,7 +1309,7 @@ page {
   margin-left: 8rpx;
 }
 
-/* 8. Trips Hub: Golden VIP Boarding Pass */
+/* 9. Trips Hub: Golden VIP Boarding Pass */
 .golden-boarding-pass {
   background: linear-gradient(145deg, #F5D77F, #DFA938, #BF8B23);
   border-radius: 36rpx;
@@ -1130,7 +1487,7 @@ page {
   opacity: 0.85;
 }
 
-/* 9. Inbound Tracking Card */
+/* 10. Inbound Tracking Card */
 .inbound-card {
   background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), #0F131C);
   border: 1px solid rgba(56, 189, 248, 0.35);
@@ -1200,7 +1557,7 @@ page {
   margin-top: 4rpx;
 }
 
-/* ==================== 10. WALLET SUB-TABS & RIGHTS CENTER ==================== */
+/* ==================== 11. WALLET SUB-TABS & RIGHTS CENTER ==================== */
 .wallet-subtab-bar {
   display: flex;
   background: #0F131C;
@@ -1521,95 +1878,6 @@ page {
   font-size: 26rpx;
 }
 
-/* ==================== CITY PICKER SEARCH BOX STYLES ==================== */
-.modal-city-sheet {
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.city-search-box {
-  display: flex;
-  align-items: center;
-  background: #07090E;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  border-radius: 20rpx;
-  padding: 16rpx 20rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.5);
-}
-
-.cs-icon {
-  font-size: 28rpx;
-  margin-right: 12rpx;
-  color: #38BDF8;
-}
-
-.cs-input {
-  flex: 1;
-  font-size: 26rpx;
-  color: #FFFFFF;
-  height: 48rpx;
-}
-
-.city-list-scroll {
-  max-height: 55vh;
-}
-
-.city-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 16rpx;
-}
-
-.city-count-hint {
-  font-size: 20rpx;
-  color: #64748B;
-}
-
-.cp-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.cp-city {
-  font-size: 24rpx;
-  font-weight: 800;
-  color: #FFFFFF;
-}
-
-.cp-airport {
-  font-size: 18rpx;
-  color: #94A3B8;
-  margin-top: 4rpx;
-  display: block;
-}
-
-.custom-query-box {
-  background: #1E293B;
-  border: 1px solid #38BDF8;
-  border-radius: 20rpx;
-  padding: 24rpx;
-  margin-top: 16rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cq-text {
-  font-size: 24rpx;
-  color: #38BDF8;
-  font-weight: 700;
-}
-
-.cq-btn {
-  font-size: 22rpx;
-  color: #FFFFFF;
-  font-weight: 800;
-}
-
 /* ==================== MODALS & BOTTOM SHEETS ==================== */
 .modal-mask {
   position: fixed;
@@ -1667,44 +1935,6 @@ page {
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-}
-
-.city-group-title {
-  font-size: 22rpx;
-  font-weight: 700;
-  color: #DFA938;
-  display: block;
-}
-
-.city-pills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16rpx;
-}
-
-.city-pill {
-  background: #07090E;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20rpx;
-  padding: 18rpx;
-  display: flex;
-  flex-direction: column;
-}
-
-.city-pill-active {
-  background: #0284C7;
-  border-color: #38BDF8;
-}
-
-.cp-code {
-  font-size: 34rpx;
-  font-weight: 900;
-  font-family: monospace;
-  color: #DFA938;
-}
-
-.city-pill-active .cp-code {
-  color: #FFFFFF;
 }
 
 .modal-schedule-box {
@@ -2008,7 +2238,7 @@ page {
 .pqi-lbl { font-size: 18rpx; color: #94A3B8; margin-bottom: 4rpx; }
 .pqi-val { font-size: 24rpx; font-weight: 800; color: #FFFFFF; }
 
-/* 11. Bottom Floating TabBar */
+/* 12. Bottom Floating TabBar */
 .bottom-tab-bar {
   position: fixed;
   bottom: 0;

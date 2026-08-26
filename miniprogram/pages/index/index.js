@@ -1,40 +1,38 @@
 // pages/index/index.js
-// 直航 DirectAir 100% 原生全交互与智能搜索输入版 (v1.3.0)
+// 直航 DirectAir 100% 原生全屏流体城市搜索与防遮挡版 (v1.31)
 
-const MOCK_CITIES_ALL = [
-  { code: 'PEK', city: '北京', airport: '首都国际 T2/T3', keywords: 'beijing shoudu beijingshoudu pek bjs' },
-  { code: 'PKX', city: '北京', airport: '大兴国际', keywords: 'beijing daxing beijingdaxing pkx' },
-  { code: 'SHA', city: '上海', airport: '虹桥国际 T2', keywords: 'shanghai hongqiao shanghaihongqiao sha' },
-  { code: 'PVG', city: '上海', airport: '浦东国际 T1/T2', keywords: 'shanghai pudong shanghaipudong pvg' },
-  { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', keywords: 'guangzhou baiyun guangzhoubaiyun can' },
-  { code: 'SZX', city: '深圳', airport: '宝安国际 T3', keywords: 'shenzhen baoan shenzhenbaoan szx' },
-  { code: 'CTU', city: '成都', airport: '双流国际 T2', keywords: 'chengdu shuangliu chengdushuangliu ctu' },
-  { code: 'TFU', city: '成都', airport: '天府国际 T2', keywords: 'chengdu tianfu chengdutianfu tfu' },
-  { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', keywords: 'hangzhou xiaoshan hangzhouxiaoshan hgh' },
-  { code: 'XIY', city: '西安', airport: '咸阳国际 T3', keywords: 'xian xianyang xianxianyang xiy' },
-  { code: 'CKG', city: '重庆', airport: '江北国际 T3', keywords: 'chongqing jiangbei chongqingjiangbei ckg' },
-  { code: 'KMG', city: '昆明', airport: '长水国际', keywords: 'kunming changshui kunmingchangshui kmg' },
-  { code: 'WUH', city: '武汉', airport: '天河国际 T3', keywords: 'wuhan tianhe wuhantianhe wuh' },
-  { code: 'NKG', city: '南京', airport: '禄口国际 T2', keywords: 'nanjing lukou nanjinglukou nkg' },
-  { code: 'XMN', city: '厦门', airport: '高崎国际 T3/T4', keywords: 'xiamen gaoqi xiamengaoqi xmn' },
-  { code: 'SYX', city: '三亚', airport: '凤凰国际 T1/T2', keywords: 'sanya fenghuang sanyafenghuang syx' },
-  { code: 'HAK', city: '海口', airport: '美兰国际 T2', keywords: 'haikou meilan haikoumeilan hak' },
-  { code: 'TAO', city: '青岛', airport: '胶东国际', keywords: 'qingdao jiaodong qingdaojiaodong tao' },
-  { code: 'DLC', city: '大连', airport: '周水子国际', keywords: 'dalian zhoushuizi dalianzhoushuizi dlc' },
-  { code: 'SHE', city: '沈阳', airport: '桃仙国际 T3', keywords: 'shenyang taoxian shenyangtaoxian she' },
-  { code: 'HRB', city: '哈尔滨', airport: '太平国际 T2', keywords: 'haerbin taiping haerbintaiping hrb' },
-  { code: 'URC', city: '乌鲁木齐', airport: '地窝堡国际 T3/T4', keywords: 'wulumuqi diwopu urc' },
-  { code: 'HKG', city: '香港', airport: '香港国际 T1', keywords: 'xianggang hongkong hkg' },
-  { code: 'MFM', city: '澳门', airport: '澳门国际', keywords: 'aomen macau mfm' },
-  { code: 'TPE', city: '台北', airport: '桃园国际 T2', keywords: 'taipei taoyuan tpe' },
-  { code: 'TYO', city: '东京', airport: '羽田/成田国际', keywords: 'dongjing tokyo haneda narita tyo hnd nrt' },
-  { code: 'OSA', city: '大阪', airport: '关西国际 KIX', keywords: 'daban osaka kansai osa kix' },
-  { code: 'SEL', city: '首尔', airport: '仁川/金浦国际', keywords: 'shouer seoul incheon sel icn gmp' },
-  { code: 'SIN', city: '新加坡', airport: '樟宜国际 T1-T4', keywords: 'xinjiapo singapore changi sin' },
-  { code: 'BKK', city: '曼谷', airport: '素万那普国际 BKK', keywords: 'mangu bangkok suvarnabhumi bkk' },
-  { code: 'LHR', city: '伦敦', airport: '希思罗国际 T2/T5', keywords: 'lundun london heathrow lhr' },
-  { code: 'JFK', city: '纽约', airport: '肯尼迪国际 T4/T7', keywords: 'niuyue newyork jfk' },
-  { code: 'SFO', city: '旧金山', airport: '旧金山国际', keywords: 'jiujinshan sanfrancisco sfo' }
+const MOCK_DOMESTIC_HUBS = [
+  { code: 'PEK', city: '北京', airport: '首都国际 T2/T3', note: '国航/海航基地 · 距市中心25km', keywords: 'beijing shoudu pek bjs bj' },
+  { code: 'PKX', city: '北京', airport: '大兴国际', note: '东航/南航基地 · 高铁20分钟抵京', keywords: 'beijing daxing pkx dx' },
+  { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '京沪商务核心 · 距市中心13km', keywords: 'shanghai hongqiao sha hq sh' },
+  { code: 'PVG', city: '上海', airport: '浦东国际 T1/T2', note: '国际与远程枢纽 · 距市中心30km', keywords: 'shanghai pudong pvg pd' },
+  { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '南航主基地 · 华南第一枢纽', keywords: 'guangzhou baiyun can by gz' },
+  { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '深航主基地 · 粤港澳大湾区核心', keywords: 'shenzhen baoan szx ba sz' },
+  { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '市区老牌枢纽 · 距春熙路16km', keywords: 'chengdu shuangliu ctu sl cd' },
+  { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '西南超大超级枢纽 · 18号线直达', keywords: 'chengdu tianfu tfu tf' },
+  { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '长三角南翼枢纽 · 19号线快线', keywords: 'hangzhou xiaoshan hgh xs hz' },
+  { code: 'XIY', city: '西安', airport: '咸阳国际 T3/T5', note: '西北核心航空枢纽', keywords: 'xian xianyang xiy xy xa' },
+  { code: 'CKG', city: '重庆', airport: '江北国际 T3', note: '成渝双城经济圈核心', keywords: 'chongqing jiangbei ckg jb cq' },
+  { code: 'KMG', city: '昆明', airport: '长水国际', note: '东航云南基地 · 面向南亚门户', keywords: 'kunming changshui kmg cs km' },
+  { code: 'WUH', city: '武汉', airport: '天河国际 T3', note: '九省通衢中部大枢纽', keywords: 'wuhan tianhe wuh th wh' },
+  { code: 'NKG', city: '南京', airport: '禄口国际 T2', note: '江苏主枢纽 · S1号线直通', keywords: 'nanjing lukou nkg lk nj' },
+  { code: 'XMN', city: '厦门', airport: '高崎国际 T3/T4', note: '厦航主基地 · 滨海花园枢纽', keywords: 'xiamen gaoqi xmn gq xm' },
+  { code: 'SYX', city: '三亚', airport: '凤凰国际 T1/T2', note: '热带度假航线核心', keywords: 'sanya fenghuang syx fh sy' },
+  { code: 'HAK', city: '海口', airport: '美兰国际 T2', note: '海南自贸港核心门户', keywords: 'haikou meilan hak ml hk' },
+  { code: 'TAO', city: '青岛', airport: '胶东国际', note: '胶东半岛综合枢纽', keywords: 'qingdao jiaodong tao jd qd' }
+];
+
+const MOCK_INTERNATIONAL_HUBS = [
+  { code: 'HKG', city: '香港', airport: '香港国际 T1', note: '国泰航空超级主基地 · 离境退税¥120', keywords: 'hongkong xianggang hkg hk' },
+  { code: 'MFM', city: '澳门', airport: '澳门国际', note: '珠三角一国两制便捷口岸', keywords: 'macau aomen mfm am' },
+  { code: 'TPE', city: '台北', airport: '桃园国际 T2', note: '华航/长荣主基地', keywords: 'taipei taoyuan tpe tb' },
+  { code: 'TYO', city: '东京', airport: '羽田 HND / 成田 NRT', note: '日航/全日空超级枢纽', keywords: 'tokyo dongjing haneda narita tyo hnd nrt' },
+  { code: 'OSA', city: '大阪', airport: '关西国际 KIX', note: '关西空港人工岛枢纽', keywords: 'osaka daban kansai osa kix' },
+  { code: 'SEL', city: '首尔', airport: '仁川 ICN / 金浦 GMP', note: '大韩/韩亚航空主基地', keywords: 'seoul shouer incheon sel icn gmp' },
+  { code: 'SIN', city: '新加坡', airport: '樟宜国际 T1-T4', note: '新航主基地 · 全球最佳机场', keywords: 'singapore xinjiapo changi sin' },
+  { code: 'BKK', city: '曼谷', airport: '素万那普 BKK', note: '东南亚旅游中转大枢纽', keywords: 'bangkok mangu suvarnabhumi bkk' },
+  { code: 'LHR', city: '伦敦', airport: '希思罗国际 T2/T5', note: '英航主基地 · 欧洲最繁忙门户', keywords: 'london lundun heathrow lhr' },
+  { code: 'JFK', city: '纽约', airport: '肯尼迪国际 T4/T7', note: '北美第一大都会跨大西洋枢纽', keywords: 'newyork niuyue jfk' }
 ];
 
 const MOCK_FLIGHT_LIST = [
@@ -119,7 +117,7 @@ const MOCK_FLIGHT_LIST = [
 Page({
   data: {
     // Navigation Views
-    currentView: 'home', // 'home' | 'flight_results'
+    currentView: 'home', // 'home' | 'flight_results' | 'city_search_fullscreen'
     activeTab: 'home',   // 'home' | 'wishlist' | 'trips' | 'wallet'
     walletSubTab: 'credit_cards', // 'credit_cards' | 'loyalty_cards' | 'rights_center'
 
@@ -140,7 +138,7 @@ Page({
     totalSeconds: 2 * 3600 + 14 * 60 + 22,
 
     // Search Capsule States
-    tripType: 'ONE_WAY', // 'ONE_WAY' | 'ROUND_TRIP' | 'DAY_RETURN'
+    tripType: 'ONE_WAY',
     originCode: 'PEK',
     originCity: '北京',
     originAirport: '首都国际',
@@ -149,32 +147,37 @@ Page({
     destAirport: '虹桥国际',
     departDate: '2026-10-01',
     isSwapping: false,
-    selectedCabin: 'ECONOMY', // 'ECONOMY' | 'PREMIUM_ECONOMY' | 'BUSINESS' | 'FIRST'
+    selectedCabin: 'ECONOMY',
 
-    // Searchable City Picker Modal
-    showCityModal: false,
+    // Full-Screen City Search Engine (v1.31 防遮挡高定版)
     selectingType: 'origin', // 'origin' | 'dest'
     citySearchQuery: '',
-    allCities: MOCK_CITIES_ALL,
-    filteredCityList: MOCK_CITIES_ALL.slice(0, 12), // default top 12 hubs
+    domesticHubs: MOCK_DOMESTIC_HUBS,
+    internationalHubs: MOCK_INTERNATIONAL_HUBS,
+    historyCities: [
+      { code: 'SHA', city: '上海', airport: '虹桥国际 T2' },
+      { code: 'SZX', city: '深圳', airport: '宝安国际 T3' },
+      { code: 'CAN', city: '广州', airport: '白云国际 T1/T2' }
+    ],
+    filteredMatchList: [],
 
-    // Flight Search Results
+    // Flight Search Results View
     allFlights: MOCK_FLIGHT_LIST,
     filteredFlights: MOCK_FLIGHT_LIST,
-    activeFilter: 'ALL', // 'ALL' | 'WIDE_BODY' | 'CHEAPEST' | 'EARLIEST'
+    activeFilter: 'ALL',
 
     // Flight Detail Modal
     showFlightModal: false,
     selectedFlight: MOCK_FLIGHT_LIST[0],
 
     // Credit Cards State
-    selectedCard: 'cmb', // 'cmb' | 'ccb' | 'bocom' | 'boc'
+    selectedCard: 'cmb',
     loungePoints: 4,
     claimToast: false,
 
     // Anti-OTA Rights Modals
     showNameCorrectionModal: false,
-    correctionAirline: 'CX', // 'CX' | 'MU' | 'CA' | 'CZ'
+    correctionAirline: 'CX',
     showDisruptionModal: false,
     showTicketVerifierModal: false,
     verifyTicketNo: '781-2491823901',
@@ -234,7 +237,7 @@ Page({
     }, 1000);
   },
 
-  // Navigation handlers
+  // Tab & Navigation Handlers
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     this.setData({ activeTab: tab, currentView: 'home' });
@@ -261,31 +264,37 @@ Page({
     this.setData({ currentView: 'home' });
   },
 
-  // City Picker with Search Input Handlers
+  // ==================== FULLSCREEN CITY SEARCH (v1.31) ====================
   openCityPicker(e) {
     const type = e.currentTarget.dataset.type;
     this.setData({
       selectingType: type,
       citySearchQuery: '',
-      filteredCityList: this.data.allCities.slice(0, 12),
-      showCityModal: true
+      filteredMatchList: [],
+      currentView: 'city_search_fullscreen'
     });
   },
 
-  closeCityModal() {
-    this.setData({ showCityModal: false });
+  closeCitySearchFullscreen() {
+    this.setData({ currentView: 'home', citySearchQuery: '' });
+  },
+
+  clearSearchQuery() {
+    this.setData({ citySearchQuery: '', filteredMatchList: [] });
   },
 
   onCitySearchInput(e) {
-    const query = (e.detail.value || '').trim().toLowerCase();
-    this.setData({ citySearchQuery: query });
+    const raw = e.detail.value || '';
+    const query = raw.trim().toLowerCase();
+    this.setData({ citySearchQuery: raw });
 
     if (!query) {
-      this.setData({ filteredCityList: this.data.allCities.slice(0, 12) });
+      this.setData({ filteredMatchList: [] });
       return;
     }
 
-    const filtered = this.data.allCities.filter(item => {
+    const allCities = [...this.data.domesticHubs, ...this.data.internationalHubs];
+    const filtered = allCities.filter(item => {
       return (
         item.code.toLowerCase().includes(query) ||
         item.city.toLowerCase().includes(query) ||
@@ -294,48 +303,65 @@ Page({
       );
     });
 
-    this.setData({ filteredCityList: filtered });
+    this.setData({ filteredMatchList: filtered });
   },
 
   selectCityItem(e) {
     const item = e.currentTarget.dataset.item;
+    
+    // Add to history if not existing
+    let history = [...this.data.historyCities];
+    if (!history.some(h => h.code === item.code)) {
+      history.unshift({ code: item.code, city: item.city, airport: item.airport });
+      if (history.length > 5) history.pop();
+    }
+
     if (this.data.selectingType === 'origin') {
       this.setData({
         originCode: item.code,
         originCity: item.city,
         originAirport: item.airport,
-        showCityModal: false
+        historyCities: history,
+        currentView: 'home',
+        citySearchQuery: ''
       });
     } else {
       this.setData({
         destCode: item.code,
         destCity: item.city,
         destAirport: item.airport,
-        showCityModal: false
+        historyCities: history,
+        currentView: 'home',
+        citySearchQuery: ''
       });
     }
     wx.vibrateShort({ type: 'light' });
   },
 
   applyCustomSearchCity() {
-    const query = this.data.citySearchQuery.toUpperCase();
+    const query = this.data.citySearchQuery.trim();
     if (!query) return;
+
+    const upperCode = (query.length <= 4 ? query.toUpperCase() : query.slice(0, 3).toUpperCase());
 
     if (this.data.selectingType === 'origin') {
       this.setData({
-        originCode: query.slice(0, 3),
-        originCity: this.data.citySearchQuery,
-        originAirport: '机场',
-        showCityModal: false
+        originCode: upperCode,
+        originCity: query,
+        originAirport: '主要机场',
+        currentView: 'home',
+        citySearchQuery: ''
       });
     } else {
       this.setData({
-        destCode: query.slice(0, 3),
-        destCity: this.data.citySearchQuery,
-        destAirport: '机场',
-        showCityModal: false
+        destCode: upperCode,
+        destCity: query,
+        destAirport: '主要机场',
+        currentView: 'home',
+        citySearchQuery: ''
       });
     }
+    wx.vibrateShort({ type: 'light' });
   },
 
   // Airport Swap
@@ -594,9 +620,7 @@ Page({
     });
   },
 
-  preventDumb() {
-    // Prevent modal clicks bubbling to mask
-  },
+  preventDumb() {},
 
   onShareAppMessage() {
     return {

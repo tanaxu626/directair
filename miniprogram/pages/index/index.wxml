@@ -1,9 +1,137 @@
 <!-- pages/index/index.wxml -->
-<!-- 直航 DirectAir 100% 原生架构 · 内容重组与输入搜索结合版 (v1.3.0) -->
+<!-- 直航 DirectAir 100% 原生全屏流体城市检索与防遮挡版 (v1.31) -->
 <view class="container">
 
-  <!-- ==================== 1. TOP BRAND NAVBAR ==================== -->
-  <view class="brand-bar">
+  <!-- ==================== VIEW 1: FULLSCREEN CITY SEARCH (全屏独立防遮挡搜索页) ==================== -->
+  <view class="fullscreen-city-view" wx:if="{{currentView === 'city_search_fullscreen'}}">
+    
+    <!-- Top Nav Header -->
+    <view class="fs-nav-header">
+      <view class="fs-back-btn" bindtap="closeCitySearchFullscreen">
+        <text class="fs-back-arrow">←</text>
+        <text class="fs-back-text">返回</text>
+      </view>
+      <text class="fs-nav-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}城市 / 机场</text>
+      <text class="fs-cancel-text" bindtap="closeCitySearchFullscreen">取消</text>
+    </view>
+
+    <!-- Sticky Search Input Bar -->
+    <view class="fs-search-bar">
+      <text class="fs-search-icon">🔍</text>
+      <input class="fs-input" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA / CTU)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{true}}" confirm-type="search" />
+      <view class="fs-clear-btn" wx:if="{{citySearchQuery}}" bindtap="clearSearchQuery">✕</view>
+    </view>
+
+    <!-- Scrollable Content Area (自适应键盘高度) -->
+    <scroll-view class="fs-scroll-area" scroll-y="true">
+
+      <!-- ================= SCENARIO A: ACTIVE MATCH RESULTS ================= -->
+      <view class="fs-results-group" wx:if="{{citySearchQuery.length > 0}}">
+        <view class="fs-group-header">
+          <text class="fs-group-title">🎯 搜索匹配航点</text>
+          <text class="fs-count-tag">找到 {{filteredMatchList.length}} 个可用机场</text>
+        </view>
+
+        <view class="fs-match-list">
+          <block wx:for="{{filteredMatchList}}" wx:key="code">
+            <view class="fs-match-item" bindtap="selectCityItem" data-item="{{item}}">
+              <view class="fs-match-left">
+                <view class="fs-code-badge">{{item.code}}</view>
+                <view class="fs-match-info">
+                  <view class="fs-match-city-row">
+                    <text class="fs-city-name">{{item.city}}</text>
+                    <text class="fs-airport-name">{{item.airport}}</text>
+                  </view>
+                  <text class="fs-airport-note">{{item.note}}</text>
+                </view>
+              </view>
+              <view class="fs-select-btn">选择 ></view>
+            </view>
+          </block>
+
+          <!-- Custom Query Option -->
+          <view class="fs-custom-card" wx:if="{{filteredMatchList.length === 0}}" bindtap="applyCustomSearchCity">
+            <view class="fs-custom-info">
+              <text class="fs-custom-title">输入航点：“{{citySearchQuery}}”</text>
+              <text class="fs-custom-sub">直接应用为此段行程的{{selectingType === 'origin' ? '出发' : '到达'}}地</text>
+            </view>
+            <view class="fs-custom-btn">确定应用</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- ================= SCENARIO B: DEFAULT INACTIVE STATE ================= -->
+      <view class="fs-default-group" wx:if="{{!citySearchQuery}}">
+        
+        <!-- 1. Current Location GPS -->
+        <view class="fs-section">
+          <text class="fs-sec-title">📍 当前定位航点</text>
+          <view class="fs-tag-row">
+            <view class="fs-loc-pill" bindtap="selectCityItem" data-item="{{domesticHubs[0]}}">
+              <text class="loc-pin">🎯</text>
+              <text class="loc-code">PEK</text>
+              <text class="loc-text">北京首都国际 (当前)</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 2. History Searches -->
+        <view class="fs-section" wx:if="{{historyCities.length > 0}}">
+          <text class="fs-sec-title">🕒 最近搜索</text>
+          <view class="fs-tag-row">
+            <block wx:for="{{historyCities}}" wx:key="code">
+              <view class="fs-history-pill" bindtap="selectCityItem" data-item="{{item}}">
+                <text class="hp-code">{{item.code}}</text>
+                <text class="hp-city">{{item.city}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 3. Popular Domestic Hubs (18 Major Hubs) -->
+        <view class="fs-section">
+          <view class="fs-sec-header-row">
+            <text class="fs-sec-title">🔥 热门商务快线大都会</text>
+            <text class="fs-sec-hint">点击即选 · 免受键盘打扰</text>
+          </view>
+          <view class="fs-grid-2col">
+            <block wx:for="{{domesticHubs}}" wx:key="code">
+              <view class="fs-hub-card {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'fs-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
+                <view class="hub-top">
+                  <text class="hub-code">{{item.code}}</text>
+                  <text class="hub-city">{{item.city}}</text>
+                </view>
+                <text class="hub-airport">{{item.airport}}</text>
+                <text class="hub-note">{{item.note}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 4. International Gateways (10 Gateways) -->
+        <view class="fs-section">
+          <text class="fs-sec-title">🌏 港澳台与国际主要枢纽</text>
+          <view class="fs-grid-2col">
+            <block wx:for="{{internationalHubs}}" wx:key="code">
+              <view class="fs-hub-card {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'fs-hub-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
+                <view class="hub-top">
+                  <text class="hub-code">{{item.code}}</text>
+                  <text class="hub-city">{{item.city}}</text>
+                </view>
+                <text class="hub-airport">{{item.airport}}</text>
+                <text class="hub-note">{{item.note}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+      </view>
+
+    </scroll-view>
+  </view>
+
+  <!-- ==================== VIEW 2: TOP BRAND NAVBAR (HOME/MAIN) ==================== -->
+  <view class="brand-bar" wx:if="{{currentView !== 'city_search_fullscreen'}}">
     <view class="brand-logo-wrap" bindtap="backToHome">
       <view class="gold-wing-icon">
         <text class="wing-glyph">✈</text>
@@ -25,7 +153,7 @@
     </view>
   </view>
 
-  <!-- ==================== VIEW A: FLIGHT SEARCH RESULTS (搜索结果列表) ==================== -->
+  <!-- ==================== VIEW 3: FLIGHT SEARCH RESULTS (搜索结果列表) ==================== -->
   <view class="flight-results-view" wx:if="{{currentView === 'flight_results'}}">
     
     <!-- Top Return & Summary Bar -->
@@ -124,7 +252,7 @@
 
   </view>
 
-  <!-- ==================== VIEW B: 4 MAIN TABS ==================== -->
+  <!-- ==================== VIEW 4: 4 MAIN TABS ==================== -->
   <view wx:if="{{currentView === 'home'}}">
 
     <!-- ---------------- TAB 1: 首页 (HOME) ---------------- -->
@@ -182,7 +310,7 @@
           <view class="seg-btn {{tripType === 'DAY_RETURN' ? 'seg-active-gold' : ''}}" bindtap="setTripType" data-type="DAY_RETURN">当日往返</view>
         </view>
 
-        <!-- City Pair Capsule (点击唤起支持搜索+输入的城市选择弹窗) -->
+        <!-- City Pair Capsule (点击唤起全屏防遮挡搜索) -->
         <view class="city-pair-box">
           <view class="city-col city-left" bindtap="openCityPicker" data-type="origin">
             <text class="city-hint-label">出发城市 (可输入/选择)</text>
@@ -747,51 +875,7 @@
 
   </view>
 
-  <!-- ==================== 5. SEARCHABLE CITY / AIRPORT PICKER MODAL (支持自由搜索输入与快速点选) ==================== -->
-  <view class="modal-mask" wx:if="{{showCityModal}}" bindtap="closeCityModal">
-    <view class="modal-sheet modal-city-sheet" catchtap="preventDumb">
-      <view class="modal-sheet-header">
-        <text class="modal-sheet-title">选择{{selectingType === 'origin' ? '出发' : '到达'}}城市 / 机场</text>
-        <view class="modal-close-btn" bindtap="closeCityModal">✕</view>
-      </view>
-
-      <!-- Search Input Box (支持输入搜索) -->
-      <view class="city-search-box">
-        <text class="cs-icon">🔍</text>
-        <input class="cs-input" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA / 成都)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{showCityModal}}" confirm-type="search" />
-      </view>
-
-      <!-- Scrollable Cities List -->
-      <scroll-view class="city-list-scroll" scroll-y="true">
-        <view class="city-grid-section">
-          <view class="city-section-header">
-            <text class="city-group-title">{{citySearchQuery ? '🎯 搜索匹配机场' : '🔥 热门商务大都会枢纽'}}</text>
-            <text class="city-count-hint">共 {{filteredCityList.length}} 个可用航点</text>
-          </view>
-          
-          <view class="city-pills-grid">
-            <block wx:for="{{filteredCityList}}" wx:key="code">
-              <view class="city-pill {{((selectingType === 'origin' ? originCode : destCode) === item.code) ? 'city-pill-active' : ''}}" bindtap="selectCityItem" data-item="{{item}}">
-                <view class="cp-top">
-                  <text class="cp-code">{{item.code}}</text>
-                  <text class="cp-city">{{item.city}}</text>
-                </view>
-                <text class="cp-airport">{{item.airport}}</text>
-              </view>
-            </block>
-          </view>
-
-          <!-- Custom Query Fallback -->
-          <view class="custom-query-box" wx:if="{{citySearchQuery && filteredCityList.length === 0}}" bindtap="applyCustomSearchCity">
-            <text class="cq-text">直接使用输入：“{{citySearchQuery}}”</text>
-            <text class="cq-btn">确定应用 ></text>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-  </view>
-
-  <!-- ==================== 6. FLIGHT DETAIL MODAL ==================== -->
+  <!-- ==================== 5. FLIGHT DETAIL MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showFlightModal}}" bindtap="closeFlightModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -856,7 +940,7 @@
     </view>
   </view>
 
-  <!-- ==================== 7. NAME CORRECTION CALCULATOR MODAL ==================== -->
+  <!-- ==================== 6. NAME CORRECTION CALCULATOR MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showNameCorrectionModal}}" bindtap="closeNameCorrectionModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -903,7 +987,7 @@
     </view>
   </view>
 
-  <!-- ==================== 8. FLIGHT DISRUPTION REFUND MODAL ==================== -->
+  <!-- ==================== 7. FLIGHT DISRUPTION REFUND MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showDisruptionModal}}" bindtap="closeDisruptionModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -927,7 +1011,7 @@
     </view>
   </view>
 
-  <!-- ==================== 9. TICKET VERIFIER MODAL ==================== -->
+  <!-- ==================== 8. TICKET VERIFIER MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showTicketVerifierModal}}" bindtap="closeTicketVerifierModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -958,7 +1042,7 @@
     </view>
   </view>
 
-  <!-- ==================== 10. SPECIAL SERVICES MODAL ==================== -->
+  <!-- ==================== 9. SPECIAL SERVICES MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showSpecialServicesModal}}" bindtap="closeSpecialServicesModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -990,7 +1074,7 @@
     </view>
   </view>
 
-  <!-- ==================== 11. ADD WISHLIST RADAR MODAL ==================== -->
+  <!-- ==================== 10. ADD WISHLIST RADAR MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showAddWishlistModal}}" bindtap="closeAddWishlistModal">
     <view class="modal-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -1021,7 +1105,7 @@
     </view>
   </view>
 
-  <!-- ==================== 12. BOARDING PASS ENLARGED MODAL ==================== -->
+  <!-- ==================== 11. BOARDING PASS ENLARGED MODAL ==================== -->
   <view class="modal-mask" wx:if="{{showBoardingPassModal}}" bindtap="closeBoardingPassModal">
     <view class="modal-sheet modal-pass-sheet" catchtap="preventDumb">
       <view class="modal-sheet-header">
@@ -1056,7 +1140,7 @@
     </view>
   </view>
 
-  <!-- ==================== 13. FIXED BOTTOM TAB BAR ==================== -->
+  <!-- ==================== 12. FIXED BOTTOM TAB BAR ==================== -->
   <view class="bottom-tab-bar" wx:if="{{currentView === 'home'}}">
     <view class="tab-item {{activeTab === 'home' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="home">
       <text class="tab-icon">🏠</text>
