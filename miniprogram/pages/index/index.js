@@ -728,13 +728,46 @@ Page({
         airlineName: '东航',
         airlineApp: 'ceair'
       }
-    ]
+    ],
+
+    // ==================== 75% 净利润常旅客分红中心与生产级精算引擎 (DIRECTDIVIDEND) ====================
+    walletSubTab: 'dividend_center', // 'dividend_center' | 'credit_cards' | 'loyalty_cards' | 'rights_center'
+    
+    // 宏观大盘精算模型参数 (以 1000 万年度净利润模型为基准)
+    dividendAnnualNetProfit: 10000000, // 假设公司年度净利润 1000 万元
+    dividendReservePct: 25,            // 25% 公司研发与安全公积金 (严格保留，保证公司稳健轮转运营)
+    dividendPoolPct: 75,               // 75% 常旅客年度总分红资金池 (750 万元)
+    dividendContribPoolPct: 80,        // 75% 总池中的 80%：综合毛利贡献分配池 (600 万元)
+    dividendSuperPoolPct: 20,          // 75% 总池中的 20%：超高频常旅客二次超级大奖池 (150 万元)
+
+    // 用户交互式动态精算模拟器输入变量
+    simFlightCount: 18,                // 用户年度乘机次数 (1~50次)
+    simAvgFare: 1200,                  // 预计平均单段票面价格 (¥400~¥4000)
+    simReferrals: 4,                   // 成功推荐新客户人数 (0~20人)
+    simAvgRefFare: 900,                // 推荐新客平均单价
+    simRefFlightsPerUser: 3,           // 推荐新客年均乘机次数
+    myReferralCode: 'DA8892',          // 专属推荐口令
+
+    // 精算引擎实时计算输出 (Live Actuarial Output)
+    simSelfGrossProfit: 691,           // 自身购票创造的直接毛利 (元)
+    simRefGrossProfit: 311,            // 推荐新客创造的直接毛利 (元)
+    simTotalContribScore: 1002,        // 综合毛利贡献总分值
+    simIsQualifiedBase: true,          // 是否跨过 6 飞基础门槛 (进入 80% 贡献池)
+    simIsQualifiedSuper: false,        // 是否跨过 24 飞超高频门槛 (独享 20% 超级二次大奖池)
+    simBaseDividend: 4008,             // 80% 综合毛利贡献池分配金额 (元)
+    simSuperDividend: 0,               // 20% 超高频二次大奖分配金额 (元)
+    simTotalDividend: 4008,            // 年末预计实发到手现金分红总额 (元)
+
+    // 弹窗状态
+    showDividendCharterModal: false,   // 75% 分红宪章与 25% 安全保留公约弹窗
+    showReferralModal: false           // 新客裂变邀请海报与积分说明弹窗
   },
 
   timer: null,
 
   onLoad() {
     this.startCountdown();
+    this.calculateDividendSimulator();
     // 生产级：从本地及云端同步已保存的雷达任务与乘机人
     const cachedWishlist = wx.getStorageSync('directair_wishlist_tasks');
     if (cachedWishlist && Array.isArray(cachedWishlist) && cachedWishlist.length > 0) {
@@ -1471,11 +1504,117 @@ Page({
     });
   },
 
+  // ==================== DIRECTDIVIDEND 生产级精算引擎与交互方法 ====================
+  calculateDividendSimulator() {
+    const count = Number(this.data.simFlightCount) || 18;
+    const fare = Number(this.data.simAvgFare) || 1200;
+    const refs = Number(this.data.simReferrals) || 4;
+    const refFlights = Number(this.data.simRefFlightsPerUser) || 3;
+    const refFare = Number(this.data.simAvgRefFare) || 900;
+
+    // 行业标准：航司综合渠道补贴/返点率平均按 3.2% 测算 (毛利基准)
+    const commissionRate = 0.032;
+
+    // 1. 自身年度购票为平台创造的直接毛利
+    const selfGrossProfit = Math.round(count * fare * commissionRate);
+
+    // 2. 推荐新客首年购票为平台创造的毛利 (赋以 1.25x 裂变贡献权重)
+    const refGrossProfit = Math.round(refs * refFlights * refFare * commissionRate * 1.25);
+
+    // 3. 综合毛利贡献分值
+    const totalContribScore = selfGrossProfit + refGrossProfit;
+
+    // 4. 资格门槛判定
+    const isQualifiedBase = count >= 6;       // 满 6 次：解锁 80% 综合贡献分红池
+    const isQualifiedSuper = count >= 24;     // 满 24 次：解锁 20% 超高频精英独立大奖池
+
+    // 5. 宏观精算模型 (基于 1000 万净利润，750 万总分红池，全网常旅客贡献精算分母)
+    const totalContribMarketDenominator = 1500000;
+    const superMarketDenominator = 350;
+
+    let baseDividend = 0;
+    if (isQualifiedBase) {
+      baseDividend = Math.round(6000000 * (totalContribScore / totalContribMarketDenominator));
+      if (baseDividend < 100 && totalContribScore > 0) baseDividend = Math.round(totalContribScore * 0.75);
+    }
+
+    let superDividend = 0;
+    if (isQualifiedSuper) {
+      superDividend = Math.round((1500000 / superMarketDenominator) * (selfGrossProfit / 1200));
+      if (superDividend < 1500) superDividend = 1500;
+    }
+
+    const totalDividend = baseDividend + superDividend;
+
+    this.setData({
+      simSelfGrossProfit: selfGrossProfit,
+      simRefGrossProfit: refGrossProfit,
+      simTotalContribScore: totalContribScore,
+      simIsQualifiedBase: isQualifiedBase,
+      simIsQualifiedSuper: isQualifiedSuper,
+      simBaseDividend: baseDividend,
+      simSuperDividend: superDividend,
+      simTotalDividend: totalDividend
+    });
+  },
+
+  onSimFlightChange(e) {
+    this.setData({ simFlightCount: e.detail.value });
+    this.calculateDividendSimulator();
+    wx.vibrateShort({ type: 'light' });
+  },
+
+  onSimFareChange(e) {
+    this.setData({ simAvgFare: e.detail.value });
+    this.calculateDividendSimulator();
+    wx.vibrateShort({ type: 'light' });
+  },
+
+  onSimRefChange(e) {
+    this.setData({ simReferrals: e.detail.value });
+    this.calculateDividendSimulator();
+    wx.vibrateShort({ type: 'light' });
+  },
+
+  openDividendCharter() {
+    this.setData({ showDividendCharterModal: true });
+  },
+
+  closeDividendCharter() {
+    this.setData({ showDividendCharterModal: false });
+  },
+
+  openReferralModal() {
+    this.setData({ showReferralModal: true });
+  },
+
+  closeReferralModal() {
+    this.setData({ showReferralModal: false });
+  },
+
+  copyReferralCode() {
+    wx.setClipboardData({
+      data: `【直航 DirectAir 常旅客分红邀请】我的专属邀请口令【${this.data.myReferralCode}】！直通航司原价出票，全年享 75% 净利润分红，首单立赠 500 DirectPoints 全额抵扣机建费！`,
+      success: () => {
+        wx.showToast({ title: '邀请口令已复制', icon: 'success' });
+      }
+    });
+  },
+
+  copyAntiOtaManifesto() {
+    wx.setClipboardData({
+      data: '直航 DirectAir 品牌宣言：直达航司原价，利润还给常客！0 隐形加价、0 诱导捆绑、75% 净利润全员分红！',
+      success: () => {
+        wx.showToast({ title: '品牌宣言已复制', icon: 'success' });
+      }
+    });
+  },
+
   preventDumb() {},
 
   onShareAppMessage() {
     return {
-      title: '直航 DirectAir - 航司官方直通与常旅客雷达',
+      title: '直航 DirectAir - 直达航司原价，利润还给常客',
       path: '/pages/index/index'
     };
   }

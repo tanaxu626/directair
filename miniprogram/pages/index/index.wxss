@@ -3005,3 +3005,429 @@ page {
 .tab-active {
   color: #2563EB;
 }
+
+/* ==================== 17. DIRECTDIVIDEND 75% 净利润分红中心专属样式 ==================== */
+.brand-slogan-capsule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #0F2B5C, #1E3A8A);
+  padding: 16rpx 24rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 14rpx rgba(15, 43, 92, 0.2);
+}
+
+.bsc-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.bsc-tag {
+  font-size: 18rpx;
+  font-weight: 900;
+  color: #FEF08A;
+  background: rgba(254, 240, 138, 0.15);
+  border: 1px solid rgba(254, 240, 138, 0.3);
+  padding: 2rpx 10rpx;
+  border-radius: 10rpx;
+}
+
+.bsc-text {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.5rpx;
+}
+
+.bsc-arrow {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #93C5FD;
+}
+
+.w-subtab-active-emerald {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #FFFFFF;
+  font-weight: 800;
+  box-shadow: 0 4rpx 12rpx rgba(5, 150, 105, 0.25);
+}
+
+/* Dividend Hero Card */
+.dividend-hero-card {
+  background: linear-gradient(135deg, #0F2B5C 0%, #1E3A8A 50%, #172554 100%);
+  border-radius: 28rpx;
+  padding: 30rpx;
+  color: #FFFFFF;
+  margin-bottom: 24rpx;
+  box-shadow: 0 10rpx 28rpx rgba(15, 43, 92, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dh-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.dh-tag {
+  font-size: 18rpx;
+  font-weight: 900;
+  color: #FEF08A;
+  background: rgba(254, 240, 138, 0.15);
+  border: 1px solid rgba(254, 240, 138, 0.3);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.dh-charter-link {
+  font-size: 20rpx;
+  color: #93C5FD;
+  font-weight: 700;
+}
+
+.dh-title {
+  font-size: 34rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 10rpx;
+  letter-spacing: 0.5rpx;
+}
+
+.dh-desc {
+  font-size: 20rpx;
+  color: #CBD5E1;
+  line-height: 1.5;
+  display: block;
+  margin-bottom: 22rpx;
+}
+
+.dh-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+}
+
+.dhm-item {
+  border-radius: 20rpx;
+  padding: 18rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.dhm-safe {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dhm-pool {
+  background: rgba(5, 150, 105, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.dhm-lbl {
+  font-size: 18rpx;
+  color: #94A3B8;
+  margin-bottom: 4rpx;
+  font-weight: 600;
+}
+
+.dhm-val {
+  font-size: 24rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 2rpx;
+}
+
+.dhm-hint {
+  font-size: 16rpx;
+  color: #64748B;
+}
+
+/* Dual Pool Structure */
+.dual-pool-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.pool-box {
+  border-radius: 22rpx;
+  padding: 22rpx;
+  box-sizing: border-box;
+}
+
+.pool-box-blue {
+  background: #F0F7FF;
+  border: 1px solid #BFDBFE;
+}
+
+.pool-box-gold {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+}
+
+.pb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.pb-badge {
+  font-size: 20rpx;
+  font-weight: 900;
+  color: #1E40AF;
+  background: #DBEAFE;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.pb-badge-gold {
+  color: #B45309;
+  background: #FEF3C7;
+}
+
+.pb-cond {
+  font-size: 18rpx;
+  font-weight: 800;
+  color: #2563EB;
+}
+
+.pb-cond-gold {
+  color: #D97706;
+}
+
+.pb-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #0F172A;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.pb-desc {
+  font-size: 20rpx;
+  color: #475569;
+  line-height: 1.45;
+  display: block;
+}
+
+/* Actuarial Slider Controls */
+.slider-control-group {
+  margin-bottom: 22rpx;
+  background: #F8FAFC;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  border: 1px solid #E2E8F0;
+}
+
+.sc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.sc-label {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #334155;
+}
+
+.sc-value-highlight {
+  font-size: 24rpx;
+  font-weight: 900;
+  color: #2563EB;
+}
+
+.sc-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rpx;
+}
+
+.sc-tick {
+  font-size: 16rpx;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.tick-pass {
+  color: #2563EB;
+  font-weight: 800;
+}
+
+.tick-pass-gold {
+  color: #D97706;
+  font-weight: 900;
+}
+
+/* Simulation Result Dashboard */
+.sim-result-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  border: 1.5px solid #2563EB;
+  padding: 24rpx;
+  margin-top: 20rpx;
+  box-shadow: 0 8rpx 24rpx rgba(37, 99, 235, 0.12);
+}
+
+.src-status-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-bottom: 18rpx;
+}
+
+.src-badge {
+  font-size: 20rpx;
+  font-weight: 800;
+  padding: 6rpx 14rpx;
+  border-radius: 12rpx;
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.src-badge-active {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #10B981;
+}
+
+.src-badge-super {
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #F59E0B;
+}
+
+.src-badge-locked {
+  background: #F8FAFC;
+  color: #94A3B8;
+  border: 1px dashed #CBD5E1;
+}
+
+.src-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14rpx;
+  margin-bottom: 20rpx;
+  background: #F8FAFC;
+  padding: 16rpx;
+  border-radius: 18rpx;
+}
+
+.src-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.src-lbl {
+  font-size: 18rpx;
+  color: #64748B;
+  margin-bottom: 2rpx;
+}
+
+.src-val {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.src-total-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  border-top: 1px dashed #E2E8F0;
+}
+
+.st-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.st-title {
+  font-size: 24rpx;
+  font-weight: 900;
+  color: #0F172A;
+}
+
+.st-sub {
+  font-size: 16rpx;
+  color: #64748B;
+  margin-top: 2rpx;
+}
+
+.st-amount {
+  font-size: 44rpx;
+  font-weight: 900;
+  color: #D97706;
+  font-family: monospace;
+}
+
+/* Referral Box */
+.referral-box {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.ref-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-title {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #065F46;
+  margin-bottom: 4rpx;
+}
+
+.ref-code {
+  font-size: 40rpx;
+  font-weight: 900;
+  color: #047857;
+  letter-spacing: 2rpx;
+  margin-bottom: 8rpx;
+  font-family: monospace;
+}
+
+.ref-desc {
+  font-size: 20rpx;
+  color: #065F46;
+  line-height: 1.5;
+}
+
+.ref-copy-btn {
+  width: 100%;
+  height: 76rpx;
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #FFFFFF;
+  font-size: 24rpx;
+  font-weight: 900;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 4rpx 12rpx rgba(5, 150, 105, 0.25);
+}
+
+.rgb-blue {
+  background: #EFF6FF !important;
+  border-left-color: #2563EB !important;
+}
+
+.rgb-blue .rgb-heading {
+  color: #1D4ED8 !important;
+}
+

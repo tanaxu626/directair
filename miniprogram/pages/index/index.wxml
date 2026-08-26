@@ -351,6 +351,15 @@
         </view>
       </view>
 
+      <!-- Brand Anti-OTA Slogan Capsule -->
+      <view class="brand-slogan-capsule" bindtap="openDividendCharter">
+        <view class="bsc-left">
+          <text class="bsc-tag">💎 75% 利润分红</text>
+          <text class="bsc-text">直达航司原价，利润还给常客</text>
+        </view>
+        <text class="bsc-arrow">分红公约 ></text>
+      </view>
+
       <!-- B. DirectAir Smart Search Capsule -->
       <view class="card search-card">
         <view class="card-header-row">
@@ -707,9 +716,176 @@
       
       <!-- Sub-Tab Switcher -->
       <view class="wallet-subtab-bar">
+        <view class="w-subtab {{walletSubTab === 'dividend_center' ? 'w-subtab-active-emerald' : ''}}" bindtap="setWalletSubTab" data-sub="dividend_center">💎 75%利润分红</view>
         <view class="w-subtab {{walletSubTab === 'credit_cards' ? 'w-subtab-active' : ''}}" bindtap="setWalletSubTab" data-sub="credit_cards">💳 信用卡权益</view>
         <view class="w-subtab {{walletSubTab === 'loyalty_cards' ? 'w-subtab-active' : ''}}" bindtap="setWalletSubTab" data-sub="loyalty_cards">🪪 常旅客会员</view>
-        <view class="w-subtab {{walletSubTab === 'rights_center' ? 'w-subtab-active-gold' : ''}}" bindtap="setWalletSubTab" data-sub="rights_center">🛡️ 避坑维权中心</view>
+        <view class="w-subtab {{walletSubTab === 'rights_center' ? 'w-subtab-active-gold' : ''}}" bindtap="setWalletSubTab" data-sub="rights_center">🛡️ 避坑维权</view>
+      </view>
+
+      <!-- SUBTAB 0: 75% 净利润常旅客分红中心与生产级精算大盘 -->
+      <view wx:if="{{walletSubTab === 'dividend_center'}}">
+        
+        <!-- 1. Anti-OTA & Dividend Hero Capsule -->
+        <view class="dividend-hero-card">
+          <view class="dh-top-row">
+            <view class="dh-tag">💎 行业首创 · 常旅客利润共同体</view>
+            <view class="dh-charter-link" bindtap="openDividendCharter">分红宪章与审计公示 ></view>
+          </view>
+          <text class="dh-title">直达航司原价，利润还给常客</text>
+          <text class="dh-desc">告别 OTA 大数据杀熟与暴利垄断。DirectAir 坚持 0 隐形加价，将公司年度净利润的 75% 全部分配给真实高频常旅客与新客引荐人！</text>
+          
+          <view class="dh-metrics-grid">
+            <view class="dhm-item dhm-safe">
+              <text class="dhm-lbl">🛡️ 公司安全运营公积金</text>
+              <text class="dhm-val">25% (严格留存)</text>
+              <text class="dhm-hint">保障研发、算力与健康轮转</text>
+            </view>
+            <view class="dhm-item dhm-pool">
+              <text class="dhm-lbl">💰 常旅客年度分红总池</text>
+              <text class="dhm-val gold-bright">75% 净利润总盘</text>
+              <text class="dhm-hint">基于毛利贡献 + 超级双重分红</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 2. 分红资金池双轨结构图解 -->
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">⚖️</text>
+              <text class="card-title">75% 分红基金池分配架构</text>
+            </view>
+            <text class="verified-tag">严密精算模型</text>
+          </view>
+          
+          <view class="dual-pool-container">
+            <!-- Pool 1: 80% 综合毛利贡献池 -->
+            <view class="pool-box pool-box-blue">
+              <view class="pb-top">
+                <text class="pb-badge">80% 综合贡献池</text>
+                <text class="pb-cond">年度乘机 ≥ 6 次</text>
+              </view>
+              <text class="pb-title">综合毛利加权分配 (¥6,000,000)</text>
+              <text class="pb-desc">按【自身乘机产生的直接毛利贡献】与【引荐新客首年毛利贡献】综合打分加权瓜分，多贡献多收益！</text>
+            </view>
+
+            <!-- Pool 2: 20% 超高频精英大奖池 -->
+            <view class="pool-box pool-box-gold">
+              <view class="pb-top">
+                <text class="pb-badge pb-badge-gold">🌟 20% 超级高频池</text>
+                <text class="pb-cond pb-cond-gold">年度乘机 ≥ 24 次</text>
+              </view>
+              <text class="pb-title">超高频精英二次独立分配 (¥1,500,000)</text>
+              <text class="pb-desc">第一轮分配完成后，剩余 20% 大奖池由年乘机 ≥ 24 航段的超高频常旅客二次单独平分，享双重叠加分红！</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 3. 生产级交互式动态分红精算模拟器 (ACTUARIAL SIMULATOR) -->
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">🧮</text>
+              <text class="card-title">常旅客个人年度分红精算测算器</text>
+            </view>
+            <text class="verified-tag">实时动态计算</text>
+          </view>
+          <text class="sub-hint">拖动下方滑块调整您的年度乘机频次与推荐人数，实时试算年末预计到手现金分红：</text>
+
+          <!-- Slider 1: 自身年乘机次数 -->
+          <view class="slider-control-group">
+            <view class="sc-header">
+              <text class="sc-label">✈️ 本人年度成行乘机次数：</text>
+              <text class="sc-value-highlight">{{simFlightCount}} 航段 / 年</text>
+            </view>
+            <slider min="1" max="40" step="1" value="{{simFlightCount}}" activeColor="#2563EB" block-size="20" bindchange="onSimFlightChange" bindchanging="onSimFlightChange"/>
+            <view class="sc-ticks">
+              <text class="sc-tick">1 飞 (初入)</text>
+              <text class="sc-tick {{simFlightCount >= 6 ? 'tick-pass' : ''}}">6 飞 (解锁80%池)</text>
+              <text class="sc-tick {{simFlightCount >= 24 ? 'tick-pass-gold' : ''}}">24 飞 (解锁20%超级池)</text>
+              <text class="sc-tick">40 飞 (顶级金主)</text>
+            </view>
+          </view>
+
+          <!-- Slider 2: 平均客票单价 -->
+          <view class="slider-control-group">
+            <view class="sc-header">
+              <text class="sc-label">🎫 预计平均单段票面价格：</text>
+              <text class="sc-value-highlight">¥{{simAvgFare}} 元</text>
+            </view>
+            <slider min="400" max="3500" step="50" value="{{simAvgFare}}" activeColor="#2563EB" block-size="20" bindchange="onSimFareChange" bindchanging="onSimFareChange"/>
+          </view>
+
+          <!-- Slider 3: 推荐新客户人数 -->
+          <view class="slider-control-group">
+            <view class="sc-header">
+              <text class="sc-label">👥 成功推荐新客户注册购票：</text>
+              <text class="sc-value-highlight">{{simReferrals}} 位好友</text>
+            </view>
+            <slider min="0" max="15" step="1" value="{{simReferrals}}" activeColor="#059669" block-size="20" bindchange="onSimRefChange" bindchanging="onSimRefChange"/>
+          </view>
+
+          <!-- Actuarial Result Dashboard -->
+          <view class="sim-result-card">
+            <view class="src-status-row">
+              <view class="src-badge {{simIsQualifiedBase ? 'src-badge-active' : ''}}">
+                {{simIsQualifiedBase ? '✓ 已解锁 80% 贡献分红池 (满6飞)' : '✕ 未达 6 飞基础分红门槛'}}
+              </view>
+              <view class="src-badge {{simIsQualifiedSuper ? 'src-badge-super' : 'src-badge-locked'}}">
+                {{simIsQualifiedSuper ? '🌟 已解锁 20% 超高频二次大奖 (满24飞)' : '🔒 20% 超级大奖池锁定 (需≥24飞)'}}
+              </view>
+            </view>
+
+            <view class="src-breakdown-grid">
+              <view class="src-item">
+                <text class="src-lbl">自身购票毛利贡献</text>
+                <text class="src-val">¥{{simSelfGrossProfit}}</text>
+              </view>
+              <view class="src-item">
+                <text class="src-lbl">推荐新客裂变贡献</text>
+                <text class="src-val">¥{{simRefGrossProfit}}</text>
+              </view>
+              <view class="src-item">
+                <text class="src-lbl">80% 贡献池预计分红</text>
+                <text class="src-val">¥{{simBaseDividend}}</text>
+              </view>
+              <view class="src-item">
+                <text class="src-lbl">20% 超级池二次分红</text>
+                <text class="src-val gold-bright">¥{{simSuperDividend}}</text>
+              </view>
+            </view>
+
+            <view class="src-total-box">
+              <view class="st-left">
+                <text class="st-title">年末预计实发到手现金分红</text>
+                <text class="st-sub">直接转账至微信零钱 · 100% 审计级透明公开</text>
+              </view>
+              <text class="st-amount">¥{{simTotalDividend}}</text>
+            </view>
+          </view>
+
+        </view>
+
+        <!-- 4. 新客裂变专属邀请卡与积分金库 -->
+        <view class="card">
+          <view class="card-header-row">
+            <view class="header-left">
+              <text class="header-icon">🎁</text>
+              <text class="card-title">新客裂变激励与积分金库</text>
+            </view>
+            <text class="verified-tag">即时到账</text>
+          </view>
+          
+          <view class="referral-box">
+            <view class="ref-info-col">
+              <text class="ref-title">我的专属分红邀请口令</text>
+              <text class="ref-code">{{myReferralCode}}</text>
+              <text class="ref-desc">好友使用您的口令首次在直航完成出票，双方各赠 500 DirectPoints（全额抵扣机建费），且好友首年乘机毛利的 125% 永久计入您的年度分红贡献分！</text>
+            </view>
+            <button class="ref-copy-btn" bindtap="copyReferralCode">复制邀请口令</button>
+          </view>
+        </view>
+
       </view>
 
       <!-- SUBTAB 1: 信用卡权益金库 -->
@@ -1413,6 +1589,44 @@
     </view>
   </view>
 
+  <!-- ==================== 16. DIRECTDIVIDEND CHARTER & AUDIT MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showDividendCharterModal}}" bindtap="closeDividendCharter">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">💎 DirectAir 75% 净利润常旅客分红公约</text>
+          <text class="modal-sheet-sub">Anti-OTA 商业白皮书与 25% 运营底线精算细则</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeDividendCharter">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        
+        <view class="radar-guide-box">
+          <text class="rgb-heading">🛡️ 铁律一：严格保留 25% 净利润作为公司安全运营公积金</text>
+          <text class="rgb-p">为确保 DirectAir 长期健康、稳定、可持续的轮转运营，公司在每年决算时，必须严格留存 25% 的年度净利润，专项用于高并发中航信算力采购、7×24h 客户服务中心与底层安全系统研发，坚决不盲目过激分配，筑牢公司运营安全防线！</text>
+        </view>
+
+        <view class="radar-guide-box rgb-blue">
+          <text class="rgb-heading">💰 铁律二：75% 净利润全部设立为常旅客分红总基金池</text>
+          <text class="rgb-p">其余 75% 的净利润全部注入分红池，分为两大科学梯队：</text>
+          <text class="rgb-p">• **80% 综合贡献池**：年度乘机 ≥ 6 次起，按每位用户自身购票带来的直接毛利 + 引荐新客首年毛利加权分配，多贡献多得；</text>
+          <text class="rgb-p">• **20% 超高频精英池**：年度乘机 ≥ 24 次的超级常旅客，在享受 80% 贡献池分红后，额外独享 20% 超级奖金池的【二次独立分红】！</text>
+        </view>
+
+        <view class="radar-guide-box rgb-green">
+          <text class="rgb-heading">⚖️ 铁律三：100% 审计级透明与微信零钱直发</text>
+          <text class="rgb-p">所有分红数据由智能中台实时记录毛利点数，每年 12 月 31 日公示年度分红审计报告，分红款项通过微信官方商户号直接单级打款至您的微信零钱，杜绝任何中介截留与隐形扣费！</text>
+        </view>
+
+        <button class="handoff-cta-btn" bindtap="closeDividendCharter">
+          我已阅读并认同常旅客分红公约
+        </button>
+
+      </view>
+    </view>
+  </view>
+
   <!-- ==================== 12. FIXED BOTTOM TAB BAR ==================== -->
   <view class="bottom-tab-bar" wx:if="{{currentView === 'home'}}">
     <view class="tab-item {{activeTab === 'home' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="home">
@@ -1431,9 +1645,10 @@
     </view>
 
     <view class="tab-item {{activeTab === 'wallet' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="wallet">
-      <text class="tab-icon">🪪</text>
-      <text class="tab-label">卡包与维权</text>
+      <text class="tab-icon">💎</text>
+      <text class="tab-label">分红与卡包</text>
     </view>
   </view>
 
 </view>
+
