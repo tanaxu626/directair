@@ -68,19 +68,52 @@
             <text class="tr-reason-text">{{noDirectAirportInfo.reason}}</text>
           </view>
 
-          <!-- Nearby Clickable Airports List -->
+          <!-- Nearby Clickable Airports List with Rich Multi-Dimensional Details -->
           <view class="nearby-hubs-list">
             <block wx:for="{{noDirectAirportInfo.nearby}}" wx:key="code">
-              <view class="nearby-hub-card" bindtap="selectCityItem" data-item="{{item}}">
-                <view class="nh-badge">{{item.code}}</view>
-                <view class="nh-info">
-                  <view class="nh-name-line">
-                    <text class="nh-city">{{item.city}}</text>
-                    <text class="nh-port">{{item.airport}}</text>
-                  </view>
-                  <text class="nh-note">🚄 {{item.note}}</text>
+              <view class="nearby-hub-card-rich" bindtap="selectCityItem" data-item="{{item}}">
+                
+                <!-- Card Header with Tag & Rating -->
+                <view class="nhr-top-tag-row">
+                  <text class="nhr-tag-badge">{{item.tag}}</text>
+                  <text class="nhr-score">推荐指数 {{item.score}}</text>
                 </view>
-                <view class="nh-cta-btn">选此机场 ></view>
+
+                <view class="nhr-main-row">
+                  <view class="nh-badge">{{item.code}}</view>
+                  <view class="nh-info">
+                    <view class="nh-name-line">
+                      <text class="nh-city">{{item.city}}</text>
+                      <text class="nh-port">{{item.airport}}</text>
+                    </view>
+                    <text class="nh-dist-badge">📍 物理距离：{{item.distance}}</text>
+                  </view>
+                  <view class="nh-cta-btn">选此机场 ></view>
+                </view>
+
+                <!-- Detailed Transit Specs Grid -->
+                <view class="nhr-specs-box">
+                  <view class="nhr-spec-item" wx:if="{{item.rail}}">
+                    <text class="nhr-spec-icon">🚄</text>
+                    <text class="nhr-spec-text"><text class="spec-strong">空铁/大巴：</text>{{item.rail}}</text>
+                  </view>
+
+                  <view class="nhr-spec-item" wx:if="{{item.highway}}">
+                    <text class="nhr-spec-icon">🚗</text>
+                    <text class="nhr-spec-text"><text class="spec-strong">高速/自驾：</text>{{item.highway}}</text>
+                  </view>
+
+                  <view class="nhr-spec-item" wx:if="{{item.service}}">
+                    <text class="nhr-spec-icon">🧳</text>
+                    <text class="nhr-spec-text"><text class="spec-strong">特色服务：</text>{{item.service}}</text>
+                  </view>
+
+                  <view class="nhr-spec-item nhr-spec-highlight" wx:if="{{item.bestFor}}">
+                    <text class="nhr-spec-icon">💡</text>
+                    <text class="nhr-spec-text"><text class="spec-strong">出行建议：</text>{{item.bestFor}}</text>
+                  </view>
+                </view>
+
               </view>
             </block>
           </view>

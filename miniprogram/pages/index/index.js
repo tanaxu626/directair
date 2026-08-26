@@ -1,5 +1,5 @@
 // pages/index/index.js
-// 直航 DirectAir 100% 原生全国 250+ 机场与无机场城市智能周边接驳系统 (v1.35)
+// 直航 DirectAir 100% 原生全国 250+ 机场与无机场城市多维深度接驳系统 (v1.36)
 
 // 1. 全国 250+ 在册民航机场全量数据库
 const COMPREHENSIVE_AIRPORTS_DATABASE = [
@@ -134,181 +134,464 @@ const COMPREHENSIVE_AIRPORTS_DATABASE = [
   { code: 'SYD', city: '悉尼', airport: '金斯福德·史密斯国际机场', note: '大洋洲最大跨国综合航空枢纽', keywords: 'sydney xini syd 悉尼 歌剧院 邦迪海滩' }
 ];
 
-// 2. 无独立民航机场的热门城市/景区精准周边接驳知识图谱 (Empty City -> Nearby Airports)
+// 2. 无独立民航机场的多维深度接驳知识图谱 (丰富包含：距离/高速公路/高铁联运/尊享服务/推荐标签)
 const NO_AIRPORT_NEARBY_MAP = {
   // 江浙水乡 / 环沪圈
   '苏州': {
-    reason: '苏州市区及下辖县市暂无民用客运机场。推荐飞往以下周边机场，换乘城际高铁或机场大巴极速直达：',
+    reason: '苏州市区及下辖市（昆山/常熟/张家港/太仓）暂无民航客运机场。推荐飞往以下周边机场，换乘城际高铁或高速直通：',
     nearby: [
-      { code: 'WUX', city: '无锡', airport: '硕放国际机场', note: '距苏州市区约35km · 机场大巴/打车40分钟直达' },
-      { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '距苏州市区约65km · 虹桥高铁22分钟直抵苏州站' },
-      { code: 'PVG', city: '上海', airport: '浦东国际 T1/T2', note: '距苏州市区约100km · 国际/远程航线核心' }
-    ]
-  },
-  '昆山': {
-    reason: '昆山暂无客运机场。毗邻上海虹桥与无锡硕放：',
-    nearby: [
-      { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '距昆山仅35km · 高铁15分钟直达' },
-      { code: 'WUX', city: '无锡', airport: '硕放国际机场', note: '距昆山约55km · 驾车45分钟' }
+      {
+        code: 'SHA',
+        city: '上海',
+        airport: '虹桥国际 T2',
+        tag: '🏆 综合首选 · 高铁极速直达',
+        score: '9.9',
+        distance: '距苏州市区 65 km',
+        highway: '京沪高速直达 · 约 50 分钟 (打车约 ¥180)',
+        rail: '虹桥高铁站 22 分钟直达苏州站 (5~10分钟/班 · ¥39.5)',
+        service: '苏州中心城市航站楼支持异地托运行李/值机，空手出行',
+        bestFor: '全国航班极密集 · 票价常年最优惠 · 商务出行首选'
+      },
+      {
+        code: 'WUX',
+        city: '无锡',
+        airport: '硕放国际机场',
+        tag: '📍 距离最近 · 打车自驾首选',
+        score: '9.5',
+        distance: '距苏州市区仅 35 km',
+        highway: '中环快速路/沪蓉高速直达 · 约 35 分钟 (打车约 ¥90)',
+        rail: '硕放机场至苏州高新区/相城区专线大巴 40 分钟 (¥30)',
+        service: '苏锡一体化便捷通关，安检与值机排队时间较短',
+        bestFor: '适合随行行李较多、带老人儿童直接打车直达'
+      },
+      {
+        code: 'PVG',
+        city: '上海',
+        airport: '浦东国际 T1/T2',
+        tag: '🌏 国际及跨洲际航班首选',
+        score: '9.2',
+        distance: '距苏州市区 110 km',
+        highway: '申嘉湖高速直达 · 约 100 分钟 (打车约 ¥350)',
+        rail: '机场磁浮/地铁转高铁至苏州站 (约 80 分钟)',
+        service: '浦东机场客运站有直通苏州各区高频定制商务大巴',
+        bestFor: '港澳台、欧美日韩及跨洲际国际长途直飞航线'
+      }
     ]
   },
   '乌镇': {
-    reason: '桐乡乌镇景区暂无民航客运机场。推荐飞往杭州或上海转乘直通专线：',
+    reason: '桐乡乌镇景区暂无民用机场。推荐直飞杭州萧山或上海虹桥机场转乘直通大巴：',
     nearby: [
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距乌镇约60km · 萧山机场有直达乌镇专线大巴' },
-      { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '距乌镇约75km · 虹桥站乘高铁至桐乡站转大巴' }
+      {
+        code: 'HGH',
+        city: '杭州',
+        airport: '萧山国际 T3/T4',
+        tag: '🏆 直达大巴首选 · 无需进市区',
+        score: '9.8',
+        distance: '距乌镇西栅景区 60 km',
+        highway: '申嘉湖高速直达 · 约 55 分钟 (打车约 ¥160)',
+        rail: '萧山机场客运站每小时一班【乌镇景区直达专线大巴】 (约65分钟/¥45)',
+        service: '大巴直达乌镇西栅景区游客服务中心，免去提行李多次换乘',
+        bestFor: '自由行度假、情侣闺蜜度假首选'
+      },
+      {
+        code: 'SHA',
+        city: '上海',
+        airport: '虹桥国际 T2',
+        tag: '🚄 班次极多 · 空铁联运',
+        score: '9.4',
+        distance: '距乌镇西栅约 75 km',
+        highway: '沪昆高速直达 · 约 70 分钟 (打车约 ¥220)',
+        rail: '虹桥站高铁 25 分钟至桐乡高铁站，出站乘 K282 旅游公交 30 分钟达乌镇',
+        service: '全国各大城市直飞航班极丰富',
+        bestFor: '全国直飞班次多、适合商务+度假连程'
+      }
     ]
   },
   '西塘': {
     reason: '嘉善西塘水乡暂无机场。推荐选择上海虹桥或杭州萧山：',
     nearby: [
-      { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '距西塘约55km · 驾车/大巴约50分钟' },
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距西塘约80km · 交通便利' }
-    ]
-  },
-  '嘉兴': {
-    reason: '嘉兴客运民航机场建设中。推荐飞抵上海虹桥或杭州萧山：',
-    nearby: [
-      { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '距嘉兴约70km · 高铁25分钟直达' },
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距嘉兴约65km · 高铁20分钟' }
-    ]
-  },
-  '绍兴': {
-    reason: '绍兴暂无独立民航客运机场。萧山机场即在绍兴北侧：',
-    nearby: [
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距绍兴市区仅30km · 地铁/大巴40分钟直达' },
-      { code: 'NGB', city: '宁波', airport: '栎社国际 T2', note: '距绍兴约70km · 高铁30分钟' }
-    ]
-  },
-  '莫干山': {
-    reason: '德清莫干山民宿度假区暂无机场。推荐飞往杭州萧山或南京禄口：',
-    nearby: [
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距莫干山约65km · 驾车/包车约1小时' },
-      { code: 'NKG', city: '南京', airport: '禄口国际 T1/T2', note: '距莫干山约110km · 宁杭高铁直通德清站' }
-    ]
-  },
-  '安吉': {
-    reason: '安吉竹海度假胜地暂无机场。推荐飞往杭州萧山机场：',
-    nearby: [
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '距安吉约80km · 专线大巴/打车直达' }
-    ]
-  },
-  '千岛湖': {
-    reason: '淳安千岛湖暂无民航客运机场。推荐飞抵杭州萧山或黄山屯溪：',
-    nearby: [
-      { code: 'HGH', city: '杭州', airport: '萧山国际 T3/T4', note: '萧山机场有直达千岛湖巴士 · 高铁直达千岛湖站' },
-      { code: 'TXN', city: '黄山', airport: '屯溪国际机场', note: '距千岛湖西北约90km · 杭黄高铁通达' }
+      {
+        code: 'SHA',
+        city: '上海',
+        airport: '虹桥国际 T2',
+        tag: '📍 距离最近 · 约 50 分钟直达',
+        score: '9.8',
+        distance: '距西塘景区仅 55 km',
+        highway: '沪昆高速直达 · 约 48 分钟 (打车约 ¥150)',
+        rail: '虹桥站乘高铁 19 分钟直达嘉善南站，换乘快速接驳车 25 分钟抵景区',
+        service: '虹桥客运西站有直达西塘客运大巴 (约 50 分钟/¥36)',
+        bestFor: '华东短途度假、周末休闲'
+      },
+      {
+        code: 'HGH',
+        city: '杭州',
+        airport: '萧山国际 T3/T4',
+        tag: '🚌 浙北旅游互通',
+        score: '9.2',
+        distance: '距西塘景区 80 km',
+        highway: '杭州湾环线高速直达 · 约 75 分钟',
+        rail: '高铁至嘉善南站转公交',
+        service: '适宜连线杭州西湖、钱塘江游览',
+        bestFor: '浙北环线深度游'
+      }
     ]
   },
   '阳朔': {
-    reason: '阳朔西街/十里画廊暂无机场。桂林两江国际机场有直通大巴：',
+    reason: '阳朔西街/十里画廊/遇龙河暂无独立机场。桂林两江国际机场为官方推荐直通大门：',
     nearby: [
-      { code: 'KWL', city: '桂林', airport: '两江国际 T2', note: '距阳朔约65km · 出站即有直达阳朔大巴 (约80分钟)' }
+      {
+        code: 'KWL',
+        city: '桂林',
+        airport: '两江国际 T2',
+        tag: '🏆 阳朔唯一官方航空门户',
+        score: '9.9',
+        distance: '距阳朔西街约 65 km',
+        highway: '包茂高速直达 · 约 60 分钟 (打车约 ¥160)',
+        rail: '两江机场出站口即设【阳朔直达豪华大巴】 (每30分钟/班 · 80分钟/¥50)',
+        service: '大巴直接停靠阳朔汽车客运总站，途中无需进入桂林市区堵车',
+        bestFor: '阳朔山水度假、攀岩骑行、漓江竹筏体验'
+      }
     ]
   },
-  '婺源': {
-    reason: '中国最美乡村婺源暂无机场。推荐飞抵景德镇或黄山屯溪机场：',
+  '莫干山': {
+    reason: '德清莫干山民宿度假区暂无机场。推荐直飞杭州萧山或南京禄口：',
     nearby: [
-      { code: 'JDZ', city: '景德镇', airport: '罗家机场', note: '距婺源仅60km · 高铁20分钟 / 汽车40分钟' },
-      { code: 'TXN', city: '黄山', airport: '屯溪国际机场', note: '距婺源约80km · 杭黄高铁22分钟直通婺源站' }
+      {
+        code: 'HGH',
+        city: '杭州',
+        airport: '萧山国际 T3/T4',
+        tag: '🏆 距离最近 · 度假首选',
+        score: '9.8',
+        distance: '距莫干山景区 65 km',
+        highway: '杭州绕城/练杭高速直达 · 约 60 分钟 (打车约 ¥190)',
+        rail: '萧山机场乘地铁转杭州东站高铁 13 分钟至德清站，再打车 20 分钟上山',
+        service: '高端民宿通常支持德清站及萧山机场专车预约接送',
+        bestFor: '避暑度假、高定民宿打卡、亲子家庭出游'
+      },
+      {
+        code: 'NKG',
+        city: '南京',
+        airport: '禄口国际 T1/T2',
+        tag: '🚄 宁杭高铁快线',
+        score: '9.1',
+        distance: '距莫干山 115 km',
+        highway: '长深高速直达 · 约 90 分钟',
+        rail: '南京南站乘宁杭高铁 40 分钟直达德清站',
+        service: '适合北方省份直飞旅客',
+        bestFor: '苏皖地区及北方城市直飞旅客'
+      }
     ]
   },
   '乐山': {
-    reason: '乐山大佛景区暂无独立机场。成都双流机场高铁直通乐山站：',
+    reason: '乐山大佛/峨眉山景区暂无独立机场。成都双流机场地下高铁站直通乐山站：',
     nearby: [
-      { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '双流机场高铁站直通乐山站 (城际高铁45分钟)' },
-      { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '西南最大综合航运枢纽' },
-      { code: 'YBP', city: '宜宾', airport: '五粮液机场', note: '距乐山约120km · 高铁直达' }
+      {
+        code: 'CTU',
+        city: '成都',
+        airport: '双流国际 T2',
+        tag: '🏆 站内空铁零换乘 · 46 分钟直达',
+        score: '9.9',
+        distance: '距乐山市区 110 km',
+        highway: '成乐高速直达 · 约 75 分钟 (打车约 ¥260)',
+        rail: '双流机场 T2 地下高铁站乘成绵乐客专 46 分钟直达乐山站 (¥46)',
+        service: '航站楼内直接下楼乘高铁，全程行李推车直达站台，无需出站',
+        bestFor: '乐山大佛、峨眉山金顶朝圣、川味美食打卡'
+      },
+      {
+        code: 'TFU',
+        city: '成都',
+        airport: '天府国际 T2',
+        tag: '✈️ 全国直飞航线最全',
+        score: '9.3',
+        distance: '距乐山市区 135 km',
+        highway: '天府国际机场高速/成都三绕直达 · 约 90 分钟',
+        rail: '天府机场长途汽车站有直达乐山肖坝客运站大巴 (约 100 分钟)',
+        service: '全国中中小城市及低成本航空航班丰富',
+        bestFor: '直飞航班多、特价机票多'
+      }
     ]
   },
   '峨眉山': {
-    reason: '峨眉山风景区暂无机场。成都双流机场高铁直通峨眉山站：',
+    reason: '峨眉山风景名胜区暂无机场。成都双流机场有直达峨眉山高铁：',
     nearby: [
-      { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '双流机场站乘成绵乐城际直抵峨眉山站 (约50分钟)' },
-      { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '成渝大都会综合口岸' }
+      {
+        code: 'CTU',
+        city: '成都',
+        airport: '双流国际 T2',
+        tag: '🏆 站内高铁直达峨眉山山脚',
+        score: '9.9',
+        distance: '距峨眉山报国寺景区 120 km',
+        highway: '成乐高速直达 · 约 80 分钟',
+        rail: '双流机场地下高铁站直达【峨眉山站】 (52分钟/¥56)，出站即是景区入口',
+        service: '全程无缝空铁接驳，适合携带大件行李的登山朝圣旅客',
+        bestFor: '峨眉山金顶日出、温泉度假'
+      },
+      {
+        code: 'TFU',
+        city: '成都',
+        airport: '天府国际 T2',
+        tag: '✈️ 航班密度大',
+        score: '9.2',
+        distance: '距峨眉山 145 km',
+        highway: '成乐高速 · 约 100 分钟',
+        rail: '天府机场有直达峨眉山旅游专线班车',
+        service: '西南航线网络中心',
+        bestFor: '远程直飞'
+      }
     ]
   },
   '都江堰': {
-    reason: '都江堰及青城山景区暂无机场。推荐直飞成都双流：',
+    reason: '都江堰水利工程及青城山道教圣地暂无民航机场。双流机场高铁直通：',
     nearby: [
-      { code: 'CTU', city: '成都', airport: '双流国际 T2', note: '双流机场乘城际高铁/快铁直通青城山/都江堰' },
-      { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '成都天府国际枢纽' }
+      {
+        code: 'CTU',
+        city: '成都',
+        airport: '双流国际 T2',
+        tag: '🏆 城际高铁直通青城山/都江堰',
+        score: '9.8',
+        distance: '距都江堰市区 55 km',
+        highway: '蓉昌高速/成灌快速路直达 · 约 50 分钟',
+        rail: '双流机场乘城际列车至犀浦站同台换乘成灌快铁 20 分钟达离堆公园站',
+        service: '成都地铁 19 号线快线亦可无缝接驳成灌线',
+        bestFor: '青城山问道、都江堰看水、熊猫谷看滚滚'
+      }
     ]
   },
   '平遥': {
-    reason: '平遥古城暂无机场。太原武宿机场高铁直通平遥古城站：',
+    reason: '平遥古城暂无机场。太原武宿国际机场有高频高铁直达古城站：',
     nearby: [
-      { code: 'TYN', city: '太原', airport: '武宿国际 T2', note: '距平遥约85km · 太原南站乘高铁30分钟直抵平遥古城' }
+      {
+        code: 'TYN',
+        city: '太原',
+        airport: '武宿国际 T2',
+        tag: '🏆 太原高铁 30 分钟直达古城',
+        score: '9.8',
+        distance: '距平遥古城 85 km',
+        highway: '京昆高速直达 · 约 65 分钟 (打车约 ¥180)',
+        rail: '武宿机场乘打车/机场大巴 10 分钟至太原南站，高铁 30 分钟直抵【平遥古城站】(¥28.5)',
+        service: '平遥古城站出站乘 108 路公交或打车 10 分钟即可进古城客栈',
+        bestFor: '晋商文化探索、又见平遥剧场、古城摄影'
+      }
     ]
   },
   '东莞': {
-    reason: '东莞市区暂无民用客运机场。深圳宝安与广州白云环绕：',
+    reason: '东莞暂无客运机场。深圳宝安与广州白云两大超级枢纽环绕：',
     nearby: [
-      { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '距东莞市区仅35km · 穗莞深城际/打车30分钟' },
-      { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '距东莞市区约60km · 机场大巴直通' }
-    ]
-  },
-  '佛山': {
-    reason: '佛山沙堤机场班次较少。大都会出行推荐直飞广州白云：',
-    nearby: [
-      { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '广佛地铁/城际直通顺德、禅城、南海' },
-      { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '大湾区高铁核心互通' }
+      {
+        code: 'SZX',
+        city: '深圳',
+        airport: '宝安国际 T3',
+        tag: '🏆 距离最近 · 城际高铁 20 分钟',
+        score: '9.9',
+        distance: '距东莞市区仅 35 km (距虎门/长安 20km)',
+        highway: '沿江高速/京港澳高速直达 · 约 30 分钟 (打车约 ¥90)',
+        rail: '宝安机场站乘【穗莞深城际】 22 分钟直达东莞虎门/厚街/南城各站',
+        service: '东莞南城城市候机楼支持直接办理登机牌和行李托运',
+        bestFor: '制造名城商务出差、大湾区快速通勤'
+      },
+      {
+        code: 'CAN',
+        city: '广州',
+        airport: '白云国际 T1/T2',
+        tag: '🚌 广州北翼综合枢纽',
+        score: '9.5',
+        distance: '距东莞市区 60 km',
+        highway: '广深高速直达 · 约 50 分钟',
+        rail: '白云机场直达东莞南城/万江专线大巴 (每20分钟/班)',
+        service: '航线覆盖全球及国内所有航点',
+        bestFor: '北方城市及国际长途旅客'
+      }
     ]
   },
   '顺德': {
-    reason: '世界美食之都顺德暂无机场。广州白云机场地铁直通顺德：',
+    reason: '世界美食之都顺德暂无机场。广州白云机场地铁及大巴直达大良/容桂：',
     nearby: [
-      { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '广州地铁3号线/广佛线直通顺德大良' },
-      { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '经广深港高铁/深中通道快速抵粤' }
+      {
+        code: 'CAN',
+        city: '广州',
+        airport: '白云国际 T1/T2',
+        tag: '🏆 地铁/城际直通美食核心圈',
+        score: '9.8',
+        distance: '距顺德大良约 65 km',
+        highway: '广州东新高速/广珠西线直达 · 约 55 分钟 (打车约 ¥170)',
+        rail: '白云机场直接乘坐广州地铁 3 号线转 7 号线直通顺德各美食商圈',
+        service: '顺德大良新城区城市候机楼支持行李直挂',
+        bestFor: '双皮奶、毋米粥、桑拿鸡寻味顺德吃货之旅'
+      },
+      {
+        code: 'SZX',
+        city: '深圳',
+        airport: '宝安国际 T3',
+        tag: '🌉 深中通道直通珠江西岸',
+        score: '9.4',
+        distance: '距顺德 75 km',
+        highway: '经深中通道/广中江高速约 60 分钟直达',
+        rail: '广深港高铁转广珠城际至顺德站',
+        service: '大湾区双核联动',
+        bestFor: '广深港联程旅行'
+      }
     ]
   },
   '中山': {
-    reason: '中山市暂无民航机场。深中通道开通后，深圳宝安机场 30 分钟直抵中山：',
+    reason: '中山市暂无民航机场。深中通道通车后，深圳宝安机场成为最快直达通道：',
     nearby: [
-      { code: 'SZX', city: '深圳', airport: '宝安国际 T3', note: '深中通道直达巴士 30 分钟直抵中山市区！' },
-      { code: 'ZUH', city: '珠海', airport: '金湾机场', note: '距中山约50km · 机场快线直通' },
-      { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '广珠城际直达' }
+      {
+        code: 'SZX',
+        city: '深圳',
+        airport: '宝安国际 T3',
+        tag: '🏆 深中通道 30 分钟跨海直达',
+        score: '9.9',
+        distance: '距中山市区仅 45 km',
+        highway: '深中通道跨海大桥直达 · 仅需 30 分钟 (打车约 ¥120)',
+        rail: '深圳机场至中山博览中心【深中机场快线】大巴 (每15分钟/班 · 40分钟直达)',
+        service: '中山博览中心城市航站楼支持异地托运/前置安检，跨海无缝衔接',
+        bestFor: '中山孙中山故居、古镇灯饰展会、小榄菊花会'
+      },
+      {
+        code: 'ZUH',
+        city: '珠海',
+        airport: '金湾机场',
+        tag: '🚗 珠江西岸传统口岸',
+        score: '9.3',
+        distance: '距中山市区 50 km',
+        highway: '广澳高速/西部沿海高速直达 · 约 45 分钟',
+        rail: '机场快线直通中山三乡、坦洲',
+        service: '航线覆盖全国主要干线',
+        bestFor: '中山南部镇街旅客'
+      }
     ]
   },
-  '开封': {
-    reason: '八朝古都开封暂无客运机场。郑州新郑国际机场有直达城际轻轨：',
+  '千岛湖': {
+    reason: '淳安千岛湖景区暂无机场。推荐直飞杭州萧山或黄山屯溪机场：',
     nearby: [
-      { code: 'CGO', city: '郑州', airport: '新郑国际 T2', note: '新郑机场有直通开封城际轻轨 (约40分钟)' }
+      {
+        code: 'HGH',
+        city: '杭州',
+        airport: '萧山国际 T3/T4',
+        tag: '🏆 高铁/大巴双重保障',
+        score: '9.8',
+        distance: '距千岛湖中心湖区 135 km',
+        highway: '杭新景高速直达 · 约 100 分钟 (打车约 ¥350)',
+        rail: '萧山机场乘地铁转杭州东站，乘杭黄高铁 48 分钟直达【千岛湖站】',
+        service: '萧山机场客运站有直达千岛湖长途客运大巴 (每天多班)',
+        bestFor: '湖景游艇度假、骑行环湖、千岛湖有机鱼头打卡'
+      },
+      {
+        code: 'TXN',
+        city: '黄山',
+        airport: '屯溪国际机场',
+        tag: '🏞️ 杭黄世界级旅游廊道',
+        score: '9.2',
+        distance: '距千岛湖西北约 90 km',
+        highway: '杭瑞高速直达 · 约 70 分钟',
+        rail: '黄山北站乘杭黄高铁 25 分钟至千岛湖站',
+        service: '适合黄山+千岛湖山水连线游',
+        bestFor: '名山+名湖一站式畅游'
+      }
     ]
   },
-  '泸沽湖': {
-    reason: '宁蒗泸沽湖机场航班极少。大部分旅客经丽江或西昌前往：',
+  '婺源': {
+    reason: '中国最美乡村婺源暂无机场。景德镇与黄山机场高铁 20 分钟直达：',
     nearby: [
-      { code: 'LJG', city: '丽江', airport: '三义国际机场', note: '丽江市区乘旅游专线车/包车约3小时达泸沽湖' },
-      { code: 'XIC', city: '西昌', airport: '青山机场', note: '经盐源前往泸沽湖四川段' }
-    ]
-  },
-  '万宁': {
-    reason: '冲浪胜地万宁日月湾暂无机场。推荐直飞琼海博鳌或三亚凤凰：',
-    nearby: [
-      { code: 'BAR', city: '琼海', airport: '博鳌机场', note: '距万宁仅45km · 环岛高铁15分钟达万宁站' },
-      { code: 'SYX', city: '三亚', airport: '凤凰国际 T1/T2', note: '三亚凤凰机场站乘环岛高铁30分钟达神州/万宁' },
-      { code: 'HAK', city: '海口', airport: '美兰国际 T1/T2', note: '美兰机场高铁直达万宁 (40分钟)' }
+      {
+        code: 'JDZ',
+        city: '景德镇',
+        airport: '罗家机场',
+        tag: '🏆 距离最近 · 高铁 20 分钟',
+        score: '9.8',
+        distance: '距婺源县城仅 60 km',
+        highway: '杭瑞高速直达 · 约 45 分钟 (打车约 ¥130)',
+        rail: '景德镇北站乘高铁 22 分钟直达【婺源站】 (¥24)',
+        service: '可顺道体验千年瓷都景德镇陶瓷手作与市集',
+        bestFor: '油菜花海赏花、篁岭晒秋、徽派古村落探秘'
+      },
+      {
+        code: 'TXN',
+        city: '黄山',
+        airport: '屯溪国际机场',
+        tag: '🚄 班次多 · 杭黄名线',
+        score: '9.5',
+        distance: '距婺源 80 km',
+        highway: '京台/杭瑞高速直达 · 约 55 分钟',
+        rail: '黄山北站乘合福高铁 20 分钟直达婺源站 (¥22)',
+        service: '黄山屯溪机场全国通航城市更多',
+        bestFor: '北方直飞及多航线选择'
+      }
     ]
   },
   '京都': {
-    reason: '日本京都古都暂无机场。推荐直飞大阪关西国际机场：',
+    reason: '日本京都古都暂无机场。大阪关西国际机场有特急列车 75 分钟直达京都站：',
     nearby: [
-      { code: 'KIX', city: '大阪', airport: '关西国际 KIX', note: '乘 JR Haruka 特急列车 75 分钟直达京都站' },
-      { code: 'ITM', city: '大阪', airport: '伊丹机场 (ITM)', note: '大阪市区机场 · 直达大巴直通京都站' }
+      {
+        code: 'KIX',
+        city: '大阪',
+        airport: '关西国际 KIX',
+        tag: '🏆 JR Haruka 特急 75 分钟直达京都站',
+        score: '9.9',
+        distance: '距京都市中心约 95 km',
+        highway: '阪神高速/名神高速 · 约 80 分钟 (包车约 ¥1200)',
+        rail: '关西机场地下站乘【JR 关空特急 Haruka】直达京都站 (75分钟/无需换乘)',
+        service: '支持关西 ICOCA 卡与 JR 关西周游券无缝刷卡，车厢设大件行李专用锁',
+        bestFor: '清水寺、金阁寺、伏见稻荷大社、岚山红叶季'
+      },
+      {
+        code: 'ITM',
+        city: '大阪',
+        airport: '伊丹机场 (ITM)',
+        tag: '🚌 日本国内线直达大巴',
+        score: '9.3',
+        distance: '距京都市中心 45 km',
+        highway: '名神高速直达 · 约 40 分钟',
+        rail: '机场出站即有利木津豪华大巴 50 分钟直达京都站八条口',
+        service: '适合从东京羽田/札幌飞抵中转至京都的旅客',
+        bestFor: '日本境内短途转机'
+      }
     ]
   },
   '奈良': {
-    reason: '日本奈良暂无机场。推荐直飞大阪关西或名古屋：',
+    reason: '日本奈良公园暂无机场。推荐直飞大阪关西国际机场：',
     nearby: [
-      { code: 'KIX', city: '大阪', airport: '关西国际 KIX', note: '关西机场乘 JR 或近铁电车直达奈良公园' }
+      {
+        code: 'KIX',
+        city: '大阪',
+        airport: '关西国际 KIX',
+        tag: '🏆 关西机场直达专线',
+        score: '9.8',
+        distance: '距奈良公园约 75 km',
+        highway: '西名阪高速直达 · 约 65 分钟',
+        rail: '关西机场乘利木津巴士直达近铁奈良站 (约85分钟) 或乘 JR 直达',
+        service: '近铁奈良站出站步行 5 分钟即可喂小鹿',
+        bestFor: '东大寺、春日大社、若草山小鹿打卡'
+      }
     ]
   },
   '芭提雅': {
-    reason: '芭提雅乌塔堡机场国内直飞班次较少。推荐直飞曼谷素万那普：',
+    reason: '泰国芭提雅暂无密集国内直飞机场。曼谷素万那普机场有官方直达巴士：',
     nearby: [
-      { code: 'BKK', city: '曼谷', airport: '素万那普 BKK', note: '素万那普机场底层有直达芭提雅巴士 (约90分钟)' },
-      { code: 'DMK', city: '曼谷', airport: '廊曼国际 DMK', note: '曼谷两大枢纽之一' }
+      {
+        code: 'BKK',
+        city: '曼谷',
+        airport: '素万那普 BKK',
+        tag: '🏆 机场底层直达大巴 90 分钟直抵芭提雅',
+        score: '9.9',
+        distance: '距芭提雅海滩约 115 km',
+        highway: '7号高速公路直达 · 约 75 分钟 (打车约 1200 泰铢)',
+        rail: '素万那普机场 1 楼 8 号门设有【芭提雅直通冷气大巴】 (每小时/班 · 143泰铢)',
+        service: '大巴直接抵达芭提雅中路/北路车站，免去在曼谷市区堵车中转',
+        bestFor: '芭提雅海滩、格兰岛浮潜、蒂芬妮人妖秀'
+      },
+      {
+        code: 'DMK',
+        city: '曼谷',
+        airport: '廊曼国际 DMK',
+        tag: '✈️ 廉航亚航主基地',
+        score: '9.1',
+        distance: '距芭提雅 155 km',
+        highway: '曼谷高速公路 · 约 110 分钟',
+        rail: '廊曼机场有定点直通班车或拼车专线',
+        service: '亚航等低成本航空票价极其优惠',
+        bestFor: '青年旅舍背包客、低预算出行'
+      }
     ]
   }
 };
@@ -441,7 +724,7 @@ Page({
     ],
     filteredMatchList: [],
     
-    // No-Airport Intelligent Nearby Recommendation Info
+    // No-Airport Intelligent Multi-Dimensional Nearby Recommendation Info
     noDirectAirportInfo: null, // { queryName, reason, nearby: [...] }
 
     // Flight Search Results View
@@ -547,7 +830,7 @@ Page({
     this.setData({ currentView: 'home' });
   },
 
-  // ==================== FULLSCREEN CITY SEARCH (v1.35 智能周边接驳版) ====================
+  // ==================== FULLSCREEN CITY SEARCH (v1.36 多维周边接驳版) ====================
   openCityPicker(e) {
     const type = e.currentTarget.dataset.type;
     this.setData({
@@ -587,7 +870,7 @@ Page({
       );
     });
 
-    // 2. Check if the user searched for a known non-airport city/scenic spot (e.g. 苏州, 乌镇, 阳朔, 莫干山, 平遥, 顺德, 东莞...)
+    // 2. Check if the user searched for a known non-airport city/scenic spot
     let noDirectInfo = null;
     for (const [cityName, info] of Object.entries(NO_AIRPORT_NEARBY_MAP)) {
       if (query.includes(cityName.toLowerCase()) || cityName.toLowerCase().includes(query)) {
@@ -604,12 +887,56 @@ Page({
     if (filtered.length === 0 && !noDirectInfo) {
       noDirectInfo = {
         queryName: raw.trim(),
-        reason: `“${raw.trim()}”当地目前暂无民用客运直航机场。推荐您飞往以下邻近核心大都会枢纽，再换乘高铁或机场快线大巴直达：`,
+        reason: `“${raw.trim()}”当地目前暂无独立民航客运直航机场。推荐您选择直达全国各大城市的超级航空中转枢纽，再通过城际高铁或高速专线抵达：`,
         nearby: [
-          { code: 'SHA', city: '上海', airport: '虹桥国际 T2', note: '华东高铁超级枢纽 · 50+条城际直通全国' },
-          { code: 'PEK', city: '北京', airport: '首都国际 T2/T3', note: '北方最大综合航空枢纽' },
-          { code: 'CAN', city: '广州', airport: '白云国际 T1/T2', note: '大湾区及华南超级门户' },
-          { code: 'TFU', city: '成都', airport: '天府国际 T2', note: '西南综合航空大枢纽' }
+          {
+            code: 'SHA',
+            city: '上海',
+            airport: '虹桥国际 T2',
+            tag: '🏆 华东超大枢纽 · 高铁连通全国',
+            score: '9.9',
+            distance: '综合辐射长三角各市',
+            highway: '京沪/沪昆高速直达',
+            rail: '虹桥高铁站 50+ 条高铁直通华东华中各城市',
+            service: '全国航线最密集 · 票价常年最透明优惠',
+            bestFor: '长三角及华东区域出行首选'
+          },
+          {
+            code: 'PEK',
+            city: '北京',
+            airport: '首都国际 T2/T3',
+            tag: '🏆 北方超级主枢纽',
+            score: '9.8',
+            distance: '综合辐射京津冀环渤海',
+            highway: '机场高速直达二环/三环',
+            rail: '首都机场快轨 16 分钟直达三元桥/东直门地铁枢纽',
+            service: '三大航核心主基地，宽体大客机最多',
+            bestFor: '北方省市及国际航班首选'
+          },
+          {
+            code: 'CAN',
+            city: '广州',
+            airport: '白云国际 T1/T2',
+            tag: '🏆 华南大湾区超级门户',
+            score: '9.8',
+            distance: '综合辐射珠三角各城市',
+            highway: '机场高速/花莞高速直达广佛莞深',
+            rail: '广州地铁 3 号线/广佛线城际直达',
+            service: '南航超级枢纽，东南亚及国内航线极全',
+            bestFor: '华南及大湾区各城市出行首选'
+          },
+          {
+            code: 'TFU',
+            city: '成都',
+            airport: '天府国际 T2',
+            tag: '🏆 西南综合航空大口岸',
+            score: '9.7',
+            distance: '综合辐射成渝及川西高原',
+            highway: '天府机场高速直通成渝环线',
+            rail: '地铁 18 号线快线直通成都南站转高铁',
+            service: '西南地区最新最高规格航站楼',
+            bestFor: '川渝及大西南各景区中转'
+          }
         ]
       };
     }
