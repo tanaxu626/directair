@@ -742,16 +742,16 @@ page {
   font-weight: 700;
 }
 
-/* 5. Live Countdown Capsule (晨曦天青航空票卡) */
+/* 5. Live Countdown Capsule (民航深蓝高对比度醒目票卡) */
 .countdown-capsule {
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  background: linear-gradient(135deg, #0F2B5C 0%, #1E3A8A 55%, #2563EB 100%);
   border-radius: 28rpx;
-  border: 1.5px solid #BFDBFE;
-  padding: 22rpx 26rpx;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 24rpx 28rpx;
   margin-bottom: 24rpx;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10rpx 28rpx rgba(37, 99, 235, 0.08);
+  box-shadow: 0 12rpx 32rpx rgba(30, 58, 138, 0.25);
 }
 
 .capsule-inner {
@@ -769,35 +769,43 @@ page {
   display: flex;
   align-items: center;
   font-size: 20rpx;
-  color: #475569;
+  color: #BFDBFE;
   margin-bottom: 8rpx;
 }
 
 .live-dot {
-  width: 12rpx;
-  height: 12rpx;
+  width: 14rpx;
+  height: 14rpx;
   border-radius: 50%;
-  background-color: #2563EB;
-  margin-right: 8rpx;
+  background-color: #34D399;
+  box-shadow: 0 0 10rpx #34D399;
+  margin-right: 10rpx;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
 
 .airline-flight {
-  color: #1E3A8A;
+  color: #FFFFFF;
   font-weight: 800;
 }
 
 .dot-divider {
-  margin: 0 6rpx;
-  color: #94A3B8;
+  margin: 0 8rpx;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .gold-bold {
-  color: #1E40AF;
+  color: #FDE047;
   font-weight: 800;
 }
 
 .white-bold {
-  color: #0F172A;
+  color: #FFFFFF;
   font-weight: 800;
 }
 
@@ -807,26 +815,25 @@ page {
 }
 
 .route-city {
-  font-size: 38rpx;
+  font-size: 40rpx;
   font-weight: 900;
-  color: #0F172A;
+  color: #FFFFFF;
 }
 
 .route-plane {
-  font-size: 24rpx;
-  color: #2563EB;
-  margin: 0 12rpx;
+  font-size: 26rpx;
+  color: #93C5FD;
+  margin: 0 14rpx;
 }
 
 .ontime-badge {
   font-size: 18rpx;
   font-weight: 800;
   color: #065F46;
-  background: #D1FAE5;
-  border: 1px solid #A7F3D0;
-  padding: 2rpx 10rpx;
+  background: #A7F3D0;
+  padding: 2rpx 12rpx;
   border-radius: 12rpx;
-  margin-left: 12rpx;
+  margin-left: 14rpx;
 }
 
 .capsule-right {
@@ -843,29 +850,30 @@ page {
 .countdown-label {
   font-size: 18rpx;
   font-weight: 800;
-  color: #1D4ED8;
+  color: #93C5FD;
   letter-spacing: 1rpx;
 }
 
 .arrow-right {
   font-size: 18rpx;
-  color: #1D4ED8;
+  color: #93C5FD;
   margin-left: 4rpx;
 }
 
 .countdown-digits {
-  font-size: 38rpx;
+  font-size: 40rpx;
   font-weight: 900;
   font-family: monospace;
-  color: #1E3A8A;
+  color: #FFFFFF;
   letter-spacing: 2rpx;
   margin: 4rpx 0;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
 }
 
 .countdown-legend {
   font-size: 14rpx;
   font-weight: 700;
-  color: #64748B;
+  color: #93C5FD;
   letter-spacing: 2rpx;
 }
 
@@ -875,13 +883,13 @@ page {
   left: 0;
   right: 0;
   height: 6rpx;
-  background: #BFDBFE;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .capsule-progress-active {
   height: 100%;
-  background: linear-gradient(90deg, #2563EB, #1D4ED8);
-  box-shadow: 0 0 8rpx rgba(37, 99, 235, 0.4);
+  background: linear-gradient(90deg, #34D399, #60A5FA);
+  box-shadow: 0 0 10rpx #34D399;
 }
 
 /* ==================== 6. CHINESE-CENTRIC CITY PAIR CAPSULE (中文大字主导) ==================== */
@@ -1081,22 +1089,191 @@ page {
   margin-right: 12rpx;
 }
 
-/* 7. Radar Alert Card */
-.radar-alert-card {
-  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
-  border: 1.5px solid #A7F3D0;
+/* ==================== 7. RADAR SECTION & CARD (高对比度翡翠绿放票雷达) ==================== */
+.radar-section-wrap {
+  margin-bottom: 24rpx;
 }
 
-.radar-top-row {
+.radar-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+  padding: 0 4rpx;
+}
+
+.rh-left {
+  display: flex;
+  align-items: center;
+}
+
+.rh-title {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #065F46;
+}
+
+.rh-guide-btn {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.rh-guide-text {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #047857;
+}
+
+.radar-alert-card-v2 {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  border: 1.5px solid #6EE7B7;
+  border-left: 10rpx solid #059669;
+  border-radius: 28rpx;
+  padding: 24rpx 26rpx;
+  box-shadow: 0 8rpx 24rpx rgba(5, 150, 105, 0.12);
+}
+
+.rac-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12rpx;
 }
 
-.radar-title-left {
+.rac-badge-row {
   display: flex;
   align-items: center;
+  gap: 10rpx;
+}
+
+.rac-pulse-badge {
+  font-size: 20rpx;
+  font-weight: 900;
+  color: #047857;
+  background: #A7F3D0;
+  padding: 2rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.rac-airline-tag {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.rac-time {
+  font-size: 20rpx;
+  color: #059669;
+  font-weight: 700;
+}
+
+.rac-mid-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16rpx;
+  border-bottom: 1px dashed #A7F3D0;
+  margin-bottom: 14rpx;
+}
+
+.rac-route-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.rac-city-line {
+  font-size: 34rpx;
+  font-weight: 900;
+  color: #064E3B;
+}
+
+.rac-sub-line {
+  font-size: 22rpx;
+  color: #047857;
+  margin-top: 4rpx;
+}
+
+.rac-price-col {
+  text-align: right;
+}
+
+.rac-price {
+  font-size: 36rpx;
+  font-weight: 900;
+  font-family: monospace;
+  color: #059669;
+}
+
+.rac-unit {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #047857;
+}
+
+.rac-seats-pill {
+  display: block;
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #065F46;
+  background: #A7F3D0;
+  padding: 2rpx 10rpx;
+  border-radius: 10rpx;
+  margin-top: 4rpx;
+}
+
+.radar-mini-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: #047857;
+  font-weight: 700;
+}
+
+.rms-step { opacity: 0.85; }
+.rms-arrow { color: #059669; font-weight: 900; }
+.rms-act { color: #065F46; font-weight: 900; text-decoration: underline; opacity: 1; }
+
+/* 8. Quick Tools Grid (精致轻奢 4 色徽章) */
+.quick-tools-grid {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 18rpx;
+}
+
+.tool-btn {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  border: 1px solid #E2E8F0;
+  padding: 22rpx;
+  box-shadow: 0 4rpx 14rpx rgba(15, 23, 42, 0.04);
+}
+
+.tool-title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.tool-icon {
+  font-size: 26rpx;
+  margin-right: 8rpx;
+}
+
+.tool-name {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #1E40AF;
+}
+
+.tool-desc {
+  font-size: 20rpx;
+  color: #64748B;
+  line-height: 1.4;
+  display: block;
 }
 
 .radar-ping-dot {
@@ -2440,14 +2617,352 @@ page {
   border: 1px solid #E2E8F0;
 }
 
-.pqi-box {
+/* ==================== 12. WISHLIST TAB HERO GUIDE & 3-STEP PIPELINE ==================== */
+.radar-hero-guide-card {
+  background: linear-gradient(135deg, #064E3B 0%, #065F46 60%, #047857 100%);
+  border-radius: 32rpx;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 32rpx rgba(6, 78, 59, 0.25);
+}
+
+.rhg-top {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+
+.rhg-title-row {
+  display: flex;
   align-items: center;
 }
 
-.pqi-lbl { font-size: 18rpx; color: #64748B; margin-bottom: 4rpx; }
-.pqi-val { font-size: 24rpx; font-weight: 800; color: #0F172A; }
+.rhg-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.rhg-title {
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.rhg-desc {
+  font-size: 22rpx;
+  color: #D1FAE5;
+  line-height: 1.5;
+  margin-bottom: 24rpx;
+  display: block;
+}
+
+.radar-3step-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 24rpx;
+  padding: 20rpx 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.pipe-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.pipe-circle {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+}
+
+.pipe-circle-active {
+  background: #34D399;
+  color: #064E3B;
+  box-shadow: 0 0 12rpx #34D399;
+}
+
+.pipe-title {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: block;
+}
+
+.pipe-sub {
+  font-size: 16rpx;
+  color: #A7F3D0;
+  margin-top: 2rpx;
+  display: block;
+}
+
+.pipe-arrow {
+  color: #6EE7B7;
+  font-weight: 900;
+  font-size: 24rpx;
+  padding: 0 6rpx;
+}
+
+.add-monitor-btn-v2 {
+  width: 100%;
+  height: 84rpx;
+  background: #FFFFFF;
+  color: #065F46;
+  font-size: 26rpx;
+  font-weight: 900;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+
+.amb-icon {
+  margin-right: 8rpx;
+  font-size: 26rpx;
+}
+
+/* ==================== 13. PRIVACY VAULT MODAL STYLES ==================== */
+.vault-security-toggle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #EFF6FF;
+  border-radius: 24rpx;
+  border: 1px solid #BFDBFE;
+  padding: 22rpx 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.vst-text-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.vst-title {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #1E40AF;
+}
+
+.vst-sub {
+  font-size: 20rpx;
+  color: #64748B;
+  margin-top: 4rpx;
+}
+
+.sec-title-row-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+
+.sec-add-link {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #2563EB;
+}
+
+.vault-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border-radius: 20rpx;
+  border: 1px solid #E2E8F0;
+  padding: 20rpx 22rpx;
+  margin-bottom: 14rpx;
+}
+
+.vic-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.vic-name {
+  font-size: 26rpx;
+  font-weight: 900;
+  color: #0F172A;
+}
+
+.vic-id {
+  font-size: 20rpx;
+  color: #64748B;
+  font-family: monospace;
+  margin-top: 4rpx;
+}
+
+.vic-badge {
+  font-size: 18rpx;
+  font-weight: 700;
+  color: #047857;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.vault-empty-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #94A3B8;
+  padding: 30rpx 0;
+}
+
+.vault-wipe-btn {
+  width: 100%;
+  height: 80rpx;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  font-size: 24rpx;
+  font-weight: 800;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24rpx;
+}
+
+/* ==================== 14. SMART TRIP IMPORTER STYLES ==================== */
+.sms-paste-box {
+  background: #F8FAFC;
+  border-radius: 24rpx;
+  border: 1px solid #BFDBFE;
+  padding: 22rpx;
+  margin-bottom: 20rpx;
+}
+
+.spb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.spb-label {
+  font-size: 22rpx;
+  font-weight: 800;
+  color: #1E40AF;
+}
+
+.spb-demo-btn {
+  font-size: 20rpx;
+  font-weight: 800;
+  color: #2563EB;
+  background: #EFF6FF;
+  padding: 4rpx 14rpx;
+  border-radius: 12rpx;
+  border: 1px solid #BFDBFE;
+}
+
+.spb-textarea {
+  width: 100%;
+  height: 140rpx;
+  font-size: 24rpx;
+  color: #0F172A;
+  line-height: 1.5;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  border: 1px solid #E2E8F0;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.import-features-list {
+  background: #F8FAFC;
+  border-radius: 20rpx;
+  padding: 18rpx 20rpx;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.ifl-item {
+  font-size: 20rpx;
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* ==================== 15. ADD CARD FORM STYLES ==================== */
+.form-group-card {
+  background: #F8FAFC;
+  border-radius: 20rpx;
+  border: 1px solid #E2E8F0;
+  padding: 18rpx 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.fgc-label {
+  font-size: 20rpx;
+  color: #64748B;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.fgc-input {
+  font-size: 26rpx;
+  color: #0F172A;
+  height: 56rpx;
+}
+
+/* ==================== 16. RADAR GUIDE MODAL STYLES ==================== */
+.radar-guide-box {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.rgb-green {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+}
+
+.rgb-heading {
+  font-size: 24rpx;
+  font-weight: 800;
+  color: #1E40AF;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.rgb-green .rgb-heading {
+  color: #065F46;
+}
+
+.rgb-p {
+  font-size: 22rpx;
+  color: #334155;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.rgb-green .rgb-p {
+  color: #047857;
+}
 
 /* 12. Bottom Floating TabBar (天青白底高斯模糊) */
 .bottom-tab-bar {

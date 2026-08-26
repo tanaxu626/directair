@@ -205,7 +205,7 @@
     </view>
 
     <!-- Face ID Security Badge -->
-    <view class="face-id-pill" bindtap="showSecurityVaultInfo">
+    <view class="face-id-pill" bindtap="openPrivacyVault">
       <text class="lock-icon">🔒</text>
       <text class="face-id-text">端侧隐私保险箱</text>
     </view>
@@ -424,23 +424,45 @@
         </button>
       </view>
 
-      <!-- C. 24h Radar Release Alert Card -->
-      <view class="card radar-alert-card" bindtap="switchToWishlist">
-        <view class="radar-top-row">
-          <view class="radar-title-left">
+      <!-- C. 24h Radar Release Alert Card (高对比度翡翠绿雷达卡片) -->
+      <view class="radar-section-wrap">
+        <view class="radar-header-bar">
+          <view class="rh-left">
             <view class="radar-ping-dot"></view>
-            <text class="radar-alert-title">⚡ 24h 愿望雷达放票命中</text>
+            <text class="rh-title">24h 航司放票与漏票雷达</text>
           </view>
-          <text class="radar-time">刚刚</text>
+          <view class="rh-guide-btn" bindtap="openRadarGuideModal">
+            <text class="rh-guide-text">💡 什么是放票雷达？</text>
+          </view>
         </view>
-        <view class="radar-detail-row">
-          <view>
-            <text class="radar-flight-pair">{{originCode}} {{originCity}} ✈ {{destCode}} {{destCity}}</text>
-            <text class="radar-airline-hint">中国东航 · 适用【随心飞/次卡】</text>
+
+        <view class="radar-alert-card-v2" bindtap="switchToWishlist">
+          <view class="rac-top-row">
+            <view class="rac-badge-row">
+              <text class="rac-pulse-badge">● 毫秒级命中</text>
+              <text class="rac-airline-tag">中国东航 · 随心飞/次卡直兑</text>
+            </view>
+            <text class="rac-time">刚刚触发</text>
           </view>
-          <view class="radar-price-col">
-            <text class="radar-price">¥399</text>
-            <text class="radar-seats">剩余 2 席 · 可兑换</text>
+          
+          <view class="rac-mid-row">
+            <view class="rac-route-col">
+              <text class="rac-city-line">{{originCity}} ⇄ {{destCity}}</text>
+              <text class="rac-sub-line">MU5101 · 10月01日黄金周早班机</text>
+            </view>
+            <view class="rac-price-col">
+              <text class="rac-price">¥399 <text class="rac-unit">/固定段</text></text>
+              <text class="rac-seats-pill">余 2 席 · 立即抢</text>
+            </view>
+          </view>
+
+          <!-- 3-Step Micro Pipeline -->
+          <view class="radar-mini-steps">
+            <text class="rms-step">① 航司锁座释放</text>
+            <text class="rms-arrow">→</text>
+            <text class="rms-step">② 雷达毫秒级拦截</text>
+            <text class="rms-arrow">→</text>
+            <text class="rms-step rms-act">③ 直通东航官方抢票 ></text>
           </view>
         </view>
       </view>
@@ -492,19 +514,49 @@
 
     <!-- ---------------- TAB 2: 愿望雷达 (WISHLIST) ---------------- -->
     <view class="tab-content" wx:if="{{activeTab === 'wishlist'}}">
-      <view class="card">
-        <view class="card-header-row">
-          <view class="header-left">
-            <text class="header-icon">✨</text>
-            <text class="card-title">24h 静默放票雷达</text>
+      
+      <!-- Radar Explanation Hero Banner -->
+      <view class="radar-hero-guide-card">
+        <view class="rhg-top">
+          <view class="rhg-title-row">
+            <text class="rhg-icon">📡</text>
+            <text class="rhg-title">24h 航司底价与锁座放票雷达</text>
           </view>
-          <text class="verified-tag">毫秒级监控中</text>
+          <text class="verified-tag">毫秒级轮询中</text>
         </view>
-        <text class="sub-hint">专治“航司次卡热门航线秒光”痛点，放票自动推送通知秒级唤起官方 App 抢兑。</text>
-        
-        <button class="add-monitor-btn" bindtap="openAddWishlistModal">
-          <text>+ 添加新的航线监控雷达</text>
+        <text class="rhg-desc">航司常在起飞前 24~72 小时释放锁定的特价座位或里程兑换配额。DirectAir 雷达 24 小时替您盯盘，一旦释放立即唤醒直通抢票！</text>
+
+        <!-- 3-Step Visual Process -->
+        <view class="radar-3step-pipeline">
+          <view class="pipe-col">
+            <view class="pipe-circle">1</view>
+            <text class="pipe-title">添加心仪航线</text>
+            <text class="pipe-sub">设定日期与目标价</text>
+          </view>
+          <text class="pipe-arrow">→</text>
+          <view class="pipe-col">
+            <view class="pipe-circle">2</view>
+            <text class="pipe-title">静默毫秒盯盘</text>
+            <text class="pipe-sub">直连三大航官方底池</text>
+          </view>
+          <text class="pipe-arrow">→</text>
+          <view class="pipe-col">
+            <view class="pipe-circle pipe-circle-active">3</view>
+            <text class="pipe-title">一键唤起抢票</text>
+            <text class="pipe-sub">100% 官方原价锁定</text>
+          </view>
+        </view>
+
+        <button class="add-monitor-btn-v2" bindtap="openAddWishlistModal">
+          <text class="amb-icon">➕</text>
+          <text>添加新的航线放票监控雷达</text>
         </button>
+      </view>
+
+      <!-- Section Title -->
+      <view class="section-title-row">
+        <text class="sec-badge-icon">🎯</text>
+        <text class="sec-title-text">已开启的实时监控任务 (共 1 项)</text>
       </view>
 
       <!-- Wishlist Monitored Items List -->
@@ -524,7 +576,7 @@
             <text class="matched-fixed-price">{{item.priceNote}}</text>
           </view>
           <button class="cta-direct-app-btn" bindtap="openAirlineDirectApp" data-app="{{item.airlineApp}}">
-            一键直通{{item.airlineName}} App 抢兑
+            ⚡ 一键直通{{item.airlineName}} App 抢兑
           </button>
         </view>
       </block>
@@ -613,17 +665,17 @@
         </view>
       </view>
 
-      <!-- Import Trip Ticket Button -->
+      <!-- Import Trip Ticket Button (全功能智能短信与客票导入) -->
       <view class="card import-trip-card">
         <view class="card-header-row">
           <view class="header-left">
-            <text class="header-icon">➕</text>
-            <text class="card-title">导入我的新机票行程</text>
+            <text class="header-icon">📥</text>
+            <text class="card-title">导入我的机票行程</text>
           </view>
-          <text class="future-badge">2.0 OCR升级中</text>
+          <text class="verified-tag">智能短信 OCR 解析</text>
         </view>
-        <button class="import-trip-btn" bindtap="openImportTripModal">
-          <text>输入 13 位票号 / 航司短信导入</text>
+        <button class="import-trip-btn" bindtap="openSmartImportModal">
+          <text>📥 粘贴航司预订短信 / 13位客票号 智能解析导入</text>
         </button>
       </view>
 
@@ -814,8 +866,8 @@
           </view>
 
           <!-- Add New Card Feature -->
-          <button class="add-new-card-btn" bindtap="showUpcomingFeature" data-title="自定义添加信用卡" data-version="2.0">
-            <text>+ 添加新卡片 (支持浦发AE白/平安大白金) <text class="future-tag">🛠️ 2.0开放</text></text>
+          <button class="add-new-card-btn" bindtap="openAddCardModal" data-type="BANK">
+            <text>+ 添加新银行信用卡 (招行/建行/中信/广发/浦发)</text>
           </button>
         </view>
       </view>
@@ -851,8 +903,8 @@
             <text class="loyalty-hint">享商务舱值机柜台 · 额外免费行李 · 优先候补</text>
           </view>
 
-          <button class="add-new-card-btn" bindtap="showUpcomingFeature" data-title="中航信航司卡包自动同步" data-version="2.0">
-            <text>+ 同步南航/海航/厦航会员卡 <text class="future-tag">🛠️ 2.0开放</text></text>
+          <button class="add-new-card-btn" bindtap="openAddCardModal" data-type="LOYALTY">
+            <text>+ 绑定南航/海航/国航会员卡</text>
           </button>
         </view>
       </view>
@@ -1200,6 +1252,163 @@
             <text class="pqi-val">公务舱</text>
           </view>
         </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 12. PRIVACY VAULT MODAL (端侧隐私保险箱管理) ==================== -->
+  <view class="modal-mask" wx:if="{{showPrivacyVaultModal}}" bindtap="closePrivacyVault">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">🔒 端侧隐私保险箱 (AES-256 GCM)</text>
+          <text class="modal-sheet-sub">数据仅保存在您手机本地 Secure Enclave，绝不上传任何云端</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closePrivacyVault">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        
+        <!-- Biometric Lock Switch -->
+        <view class="vault-security-toggle-card">
+          <view class="vst-text-col">
+            <text class="vst-title">生物识别锁定 (Face ID / 指纹)</text>
+            <text class="vst-sub">每次打开 DirectAir 时必须通过本机生物识别核验</text>
+          </view>
+          <switch checked="{{faceIdEnabled}}" color="#2563EB" bindchange="toggleFaceId" />
+        </view>
+
+        <!-- Stored Travelers List -->
+        <view class="modal-section">
+          <view class="sec-title-row-modal">
+            <text class="sec-title">🪪 本地已加密托管的常用乘机人 ({{savedTravelers.length}}人)</text>
+            <text class="sec-add-link" bindtap="addNewTravelerPrompt">+ 新增乘机人</text>
+          </view>
+
+          <block wx:for="{{savedTravelers}}" wx:key="id">
+            <view class="vault-item-card">
+              <view class="vic-left">
+                <text class="vic-name">{{item.name}}</text>
+                <text class="vic-id">{{item.idNo}}</text>
+              </view>
+              <text class="vic-badge">{{item.type}}</text>
+            </view>
+          </block>
+
+          <view class="vault-empty-tip" wx:if="{{savedTravelers.length === 0}}">
+            <text>本地保险箱暂无凭据，点击上方即可新增并加密托管</text>
+          </view>
+        </view>
+
+        <!-- Security Wipe Button -->
+        <button class="vault-wipe-btn" bindtap="wipeAllLocalVaultData">
+          🗑️ 物理抹除本地所有隐私与缓存数据
+        </button>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 13. SMART TRIP IMPORTER MODAL (智能短信/客票解析) ==================== -->
+  <view class="modal-mask" wx:if="{{showSmartImportModal}}" bindtap="closeSmartImportModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">📥 智能行程导入 (航司短信/客票 OCR)</text>
+          <text class="modal-sheet-sub">支持东航/国航/南航/海航预订短信自动提取</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeSmartImportModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        
+        <view class="sms-paste-box">
+          <view class="spb-top">
+            <text class="spb-label">粘贴航司出票短信 / 13位票号：</text>
+            <text class="spb-demo-btn" bindtap="pasteDemoFlightSms">填入示例东航短信</text>
+          </view>
+          <textarea class="spb-textarea" placeholder="例如：【中国东航】您预订的 10月01日 MU5101 北京首都-上海虹桥 航班出票成功，客票号 781-2491823901，登机口 C42，座位 12F。" value="{{importSmsText}}" bindinput="onSmsInput" maxlength="300" />
+        </view>
+
+        <view class="import-features-list">
+          <text class="ifl-item">✓ 自动提取：航司、航班号、起降机场、登机口、座位号</text>
+          <text class="ifl-item">✓ 自动关联：ADS-B 前序航班实时追踪与起飞倒计时</text>
+          <text class="ifl-item">✓ 自动匹配：信用卡免费延误险与中航信验真</text>
+        </view>
+
+        <button class="handoff-cta-btn" bindtap="handleParseAndImportTrip">
+          🚀 立即智能解析并同步至我的行程
+        </button>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 14. ADD BANK / LOYALTY CARD MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showAddCardModal}}" bindtap="closeAddCardModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">{{newCardType === 'BANK' ? '💳 添加信用卡权益金库' : '🪪 绑定航司常旅客卡'}}</text>
+          <text class="modal-sheet-sub">卡号经过 AES-256 本地硬件加密，自动匹配延误险与贵宾厅</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeAddCardModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        
+        <view class="form-group-card">
+          <text class="fgc-label">{{newCardType === 'BANK' ? '发卡银行与卡片级别' : '所属航司与会员级别'}}</text>
+          <input class="fgc-input" value="{{newBankName}}" disabled />
+        </view>
+
+        <view class="form-group-card">
+          <text class="fgc-label">{{newCardType === 'BANK' ? '信用卡卡号 (末 4 位或全卡号)' : '常旅客会员卡号'}}</text>
+          <input class="fgc-input" type="number" placeholder="例如：6225 8801 **** 8821" value="{{newCardNumber}}" bindinput="onCardNumberInput" />
+        </view>
+
+        <view class="form-group-card">
+          <text class="fgc-label">持卡人姓名 (拼音或中文)</text>
+          <input class="fgc-input" placeholder="例如：ZHANG / SAN" value="{{newCardHolder}}" bindinput="onCardHolderInput" />
+        </view>
+
+        <button class="handoff-cta-btn" bindtap="saveNewCard">
+          🔒 加密保存至本地保险箱
+        </button>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- ==================== 15. RADAR ONBOARDING GUIDE MODAL ==================== -->
+  <view class="modal-mask" wx:if="{{showRadarGuideModal}}" bindtap="closeRadarGuideModal">
+    <view class="modal-sheet" catchtap="preventDumb">
+      <view class="modal-sheet-header">
+        <view>
+          <text class="modal-sheet-title">📡 什么是 24h 放票雷达？怎么使用？</text>
+          <text class="modal-sheet-sub">DirectAir 常旅客省钱核心黑科技说明</text>
+        </view>
+        <view class="modal-close-btn" bindtap="closeRadarGuideModal">✕</view>
+      </view>
+
+      <view class="modal-body-scroll">
+        
+        <view class="radar-guide-box">
+          <text class="rgb-heading">❓ 为什么传统 OTA 总是买不到特价或显示已售罄？</text>
+          <text class="rgb-p">航司会预留一定比例的【锁座配额】、【随心飞/次卡兑换席位】和【里程免票】，并在起飞前 72h / 24h / 12h 动态释放。普通平台不会提醒您，导致绝大多数旅客只能买高价全价票。</text>
+        </view>
+
+        <view class="radar-guide-box rgb-green">
+          <text class="rgb-heading">⚡ DirectAir 放票雷达如何帮您捡漏？</text>
+          <text class="rgb-p">1. **添加航线**：在「愿望雷达」中添加您想乘坐的航线与出发日期；</text>
+          <text class="rgb-p">2. **毫秒级盯盘**：DirectAir 后台 24 小时直连航司官方底池，一旦有人退票或航司放锁，毫秒级捕获；</text>
+          <text class="rgb-p">3. **一键抢兑**：命中后直通航司官方渠道，0 中介加价、100% 官方原价拿下！</text>
+        </view>
+
+        <button class="handoff-cta-btn" bindtap="closeRadarGuideModal">
+          立即开始使用放票雷达
+        </button>
+
       </view>
     </view>
   </view>
