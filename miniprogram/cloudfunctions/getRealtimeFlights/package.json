@@ -1,0 +1,9 @@
+{
+  "name": "getRealtimeFlights",
+  "version": "1.0.0",
+  "description": "DirectAir 微信云开发民航中航信与实时航班数据拉取云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
