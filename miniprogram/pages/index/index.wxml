@@ -1,8 +1,8 @@
 <!-- pages/index/index.wxml -->
-<!-- 直航 DirectAir 100% 原生顶部聚光灯式城市检索与绝对防遮挡版 (v1.32) -->
+<!-- 直航 DirectAir 100% 原生顶部聚光灯式城市检索与无机场周边智能接驳版 (v1.35) -->
 <view class="container">
 
-  <!-- ==================== VIEW 1: TOP-ANCHORED SPOTLIGHT CITY SEARCH (顶部强固定·绝不沉底) ==================== -->
+  <!-- ==================== VIEW 1: FULLSCREEN CITY SEARCH (v1.35 智能接驳与全量航点) ==================== -->
   <view class="fullscreen-city-view" wx:if="{{currentView === 'city_search_fullscreen'}}">
     
     <!-- 1. Top Fixed Navigation Bar -->
@@ -19,48 +19,85 @@
       <!-- 2. Top Prominent Search Input Box -->
       <view class="fs-search-box-top">
         <text class="fs-search-icon">🔍</text>
-        <input class="fs-input-top" placeholder="输入城市名 / 拼音 / 三字码 (如: 上海 / SHA)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{true}}" confirm-type="search" adjust-position="{{false}}" />
+        <input class="fs-input-top" placeholder="输入城市 / 景点 / 拼音 / 三字码 (如: 苏州/大理/SHA)" value="{{citySearchQuery}}" bindinput="onCitySearchInput" focus="{{true}}" confirm-type="search" adjust-position="{{false}}" />
         <view class="fs-clear-btn" wx:if="{{citySearchQuery}}" bindtap="clearSearchQuery">✕</view>
       </view>
     </view>
 
-    <!-- 3. Top-Half Scroll Container (严格锁定在上半屏幕 45% 区域，绝不沉底被键盘遮挡) -->
+    <!-- 3. Full-Screen Scroll Container (100% 满屏沉浸流体体验) -->
     <scroll-view class="fs-top-scroll-container" scroll-y="true">
 
-      <!-- ================= SCENARIO A: ACTIVE MATCH RESULTS (顶部下拉匹配结果) ================= -->
+      <!-- ================= SCENARIO A: ACTIVE SEARCH RESULTS (实时检索或周边接驳方案) ================= -->
       <view class="top-match-group" wx:if="{{citySearchQuery.length > 0}}">
-        <view class="top-group-label-row">
-          <text class="top-group-label">🎯 匹配航点 (共 {{filteredMatchList.length}} 项)</text>
-          <text class="top-hint-label">点击直接选定</text>
+        
+        <!-- Case 1: Direct Airport Match Found -->
+        <view wx:if="{{filteredMatchList.length > 0}}">
+          <view class="top-group-label-row">
+            <text class="top-group-label">🎯 直达民航机场 (共 {{filteredMatchList.length}} 项)</text>
+            <text class="top-hint-label">点击直接选定</text>
+          </view>
+
+          <view class="top-compact-list">
+            <block wx:for="{{filteredMatchList}}" wx:key="code">
+              <view class="top-match-row" bindtap="selectCityItem" data-item="{{item}}">
+                <view class="tm-badge">{{item.code}}</view>
+                <view class="tm-info">
+                  <view class="tm-name-line">
+                    <text class="tm-city">{{item.city}}</text>
+                    <text class="tm-airport">{{item.airport}}</text>
+                  </view>
+                  <text class="tm-note">{{item.note}}</text>
+                </view>
+                <view class="tm-cta">选择 ></view>
+              </view>
+            </block>
+          </view>
         </view>
 
-        <view class="top-compact-list">
-          <block wx:for="{{filteredMatchList}}" wx:key="code">
-            <view class="top-match-row" bindtap="selectCityItem" data-item="{{item}}">
-              <view class="tm-badge">{{item.code}}</view>
-              <view class="tm-info">
-                <view class="tm-name-line">
-                  <text class="tm-city">{{item.city}}</text>
-                  <text class="tm-airport">{{item.airport}}</text>
-                </view>
-                <text class="tm-note">{{item.note}}</text>
-              </view>
-              <view class="tm-cta">选择 ></view>
+        <!-- Case 2: No Direct Airport -> Intelligent Nearby Transit Recommendations -->
+        <view class="no-airport-transit-box" wx:if="{{filteredMatchList.length === 0 && noDirectAirportInfo}}">
+          <view class="transit-banner-header">
+            <view class="transit-icon-badge">🚄✈️</view>
+            <view class="transit-title-col">
+              <text class="transit-main-title">“{{noDirectAirportInfo.queryName}}”暂无直达民航客运机场</text>
+              <text class="transit-sub-title">智能空铁联运 · 推荐直飞周边邻近枢纽：</text>
             </view>
-          </block>
+          </view>
 
-          <!-- Custom City Fallback -->
-          <view class="top-custom-row" wx:if="{{filteredMatchList.length === 0}}" bindtap="applyCustomSearchCity">
+          <view class="transit-reason-card">
+            <text class="tr-reason-text">{{noDirectAirportInfo.reason}}</text>
+          </view>
+
+          <!-- Nearby Clickable Airports List -->
+          <view class="nearby-hubs-list">
+            <block wx:for="{{noDirectAirportInfo.nearby}}" wx:key="code">
+              <view class="nearby-hub-card" bindtap="selectCityItem" data-item="{{item}}">
+                <view class="nh-badge">{{item.code}}</view>
+                <view class="nh-info">
+                  <view class="nh-name-line">
+                    <text class="nh-city">{{item.city}}</text>
+                    <text class="nh-port">{{item.airport}}</text>
+                  </view>
+                  <text class="nh-note">🚄 {{item.note}}</text>
+                </view>
+                <view class="nh-cta-btn">选此机场 ></view>
+              </view>
+            </block>
+          </view>
+
+          <!-- Custom Fallback Option -->
+          <view class="top-custom-row" bindtap="applyCustomSearchCity">
             <view class="tm-info">
-              <text class="tm-city">使用自定义输入：“{{citySearchQuery}}”</text>
-              <text class="tm-note">直接应用为此航段{{selectingType === 'origin' ? '出发' : '到达'}}地</text>
+              <text class="tm-city">仍使用自定义：“{{citySearchQuery}}”</text>
+              <text class="tm-note">应用为此航段{{selectingType === 'origin' ? '出发' : '到达'}}地</text>
             </view>
             <view class="tm-cta tm-cta-gold">确定应用</view>
           </view>
         </view>
+
       </view>
 
-      <!-- ================= SCENARIO B: DEFAULT TOP HOT HUBS (顶部高频商务微胶囊) ================= -->
+      <!-- ================= SCENARIO B: DEFAULT FULLSCREEN HUBS (默认未输入态全屏展示) ================= -->
       <view class="top-default-group" wx:if="{{!citySearchQuery}}">
         
         <!-- Quick Location Pin -->
@@ -298,7 +335,7 @@
           <view class="seg-btn {{tripType === 'DAY_RETURN' ? 'seg-active-gold' : ''}}" bindtap="setTripType" data-type="DAY_RETURN">当日往返</view>
         </view>
 
-        <!-- City Pair Capsule (点击唤起顶部聚光灯搜索) -->
+        <!-- City Pair Capsule (点击唤起全屏聚光灯搜索) -->
         <view class="city-pair-box">
           <view class="city-col city-left" bindtap="openCityPicker" data-type="origin">
             <text class="city-hint-label">出发城市 (可输入/选择)</text>
